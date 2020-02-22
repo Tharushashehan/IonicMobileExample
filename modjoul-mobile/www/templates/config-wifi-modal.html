@@ -1,0 +1,145 @@
+<ion-modal-view scroll="false">
+    <ion-header-bar class="bar bar-header bar-positive">
+        <h1 class="title">SmartBelt Setup</h1>
+        <button class="button button-clear button-primary" ng-click="modal.remove()">Cancel</button>
+    </ion-header-bar>
+    <ion-content class="padding" scroll="true">
+        <div ng-if="employeeSelection" class="rounded-black-box-wifi">
+            <div class="config-wifi-content selection">
+                <h3 class="text-center title-text">Select Employee</h3>
+                <div class="wifi-employee-list">
+                    <div ng-repeat="employee in employees" class="text-center row-selection clickable" ng-click="selectEmployee(employee)">
+                        {{employee.firstName}} {{employee.lastName}}
+                    </div>
+                </div>
+            </div>
+            <br><br>
+        </div>
+
+        <div ng-if="switchOnBelt" class="rounded-black-box-wifi">
+          <div>
+            <div class="config-wifi-content">
+                Put your SmartBelt in discovery mode by pressing the hotspot button using the enclosed pin
+            </div>
+              <br>
+            <div class="text-center" >
+              <img class="col-80"  src="img/belt-pin.png">
+            </div>
+          </div>
+
+          <div class="button-wifi">
+              <button class="button button-full button-positive button-blue" ng-if="isSupervisor" ng-click="wizardEmployeeSelection()">Back</button>
+           <button class="button button-full button-positive button-blue" ng-click="wizardSecondScreen()">Done</button>
+          </div>
+        </div>
+
+        <div ng-if="connectBelt" class="rounded-black-box-wifi">
+          <div>
+            <div class="config-wifi-content">
+                <p>Connect your pc/laptop to the Modjoul SmartBelts WiFi hotpot. The SSID for your Modjoul SmartBelt will be 'modjoul-{{ deviceInfo.deviceId || 'xxxxxx' }}'</p>
+                <p>Click "Done" once your PC/Laptop is connected.</p>
+            </div>
+            <div class="button-wifi-icon">
+              <img src="img/icons/wifi-1.png" width="80" height="80">
+            </div>
+          </div>
+            <div class="button-wifi">
+                <button class="button button-full button-positive button-blue" ng-click="wizardFirstScreen()">Back</button>
+                <button class="button button-full button-positive button-blue" ng-click="wizardThirdScreen()">Done
+                </button>
+            </div>
+        </div>
+
+        <div ng-if="beltConfigOptions" class="rounded-black-box-wifi">
+            <div class="config-wifi-content">
+                <p>To set up WiFi, press the "WiFi Configuration" button</p>
+                <p>To {{infoText}}, press the "{{factoryResetButtonText}}" button</p>
+            </div>
+            <div class="button-wifi">
+                <button class="button button-full button-positive button-blue" ng-click="wizardSecondScreen()">Back</button>
+                <button class="button button-full button-positive button-blue" ng-click="configureWifiSettings()">WiFi Configuration</button>
+                <button class="button button-full button-positive button-blue" ng-click="factoryReset()">{{factoryResetButtonText}}</button>
+            </div>
+        </div>
+
+        <div ng-if="wifiConfigDetails" class="rounded-black-box-wifi">
+
+            <div ng-if="isBeltAvailable">
+                <div class="config-wifi-content">
+                    <div>
+                        Please provide your WiFi connection details
+                    </div>
+                    <br>
+                    <div class="list">
+
+                        <label class="item item-input item-select">
+                            <div class="input-label">
+                                <div class="x">SSID</div>
+                            </div>
+                            <select ng-model="wifiPort.ssid" class="drop-down">
+                                <option ng-repeat="ssid in ssids" value="{{ssid}}">{{ssid}}</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div class="list">
+                        <label class="item item-input">
+                            <div class="input-label">
+                                <div class="x">Password</div>
+                            </div>
+                            <input class="text-right" ng-model="wifiPort.password" type="password" >
+                        </label>
+                    </div>
+                    <div class="list">
+                        <label class="item item-input item-select">
+                            <div class="input-label">
+                                <div class="x">Security Type</div>
+                            </div>
+                            <select ng-model="wifiPort.securityType" class="drop-down">
+                                <option value="WEP">WEP</option>
+                                <option value="WPA">WPA</option>
+                                <option value="WPA2">WPA2</option>
+                            </select>
+                        </label>
+                    </div>
+                </div>
+                <footer>
+                    <div class="button-wifi">
+                        <button class="button button-full button-positive button-blue" ng-click="wizardThirdScreen()">Back</button>
+                        <button class="button button-full button-positive button-blue" ng-click="configureWifi(wifiPort)">Configure Smart Belt for WiFi</button>
+                    </div>
+                </footer>
+            </div>
+
+            <div ng-if="!isBeltAvailable">
+                <div class="config-wifi-content">
+                    <div>
+                        No Belt found
+                    </div>
+                    <br>
+
+                </div>
+            </div>
+        </div>
+
+        <div ng-if="notificationScreen" class="rounded-black-box-wifi">
+
+            <div class="button-wifi-icon">
+                <img src="img/icons/led-indicator.png" width="80" height="80">
+            </div>
+            <div class="config-wifi-content">
+                <p>Your network credentials have been entered.</p>
+                <p>Your SmartBelt is restarting. Please wait 10-15 seconds, then check the SmartBelt LED indicator for status:</p>
+                <br>
+                <p>If LED is Green, the SmartBelt has successfully connected to WIFI</p>
+                <p>If LED remains Red, the SmartBelt failed to connect to WIFI. Please try the SmartBelt setup process again</p>
+            </div>
+
+            <footer>
+                <div class="button-wifi">
+                    <button class="button button-full button-positive button-blue" ng-click="modal.remove()">Ok</button>
+                </div>
+            </footer>
+
+        </div>
+    </ion-content>
+</ion-modal-view>

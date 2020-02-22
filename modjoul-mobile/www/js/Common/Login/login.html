@@ -1,0 +1,29 @@
+<ion-view view-title="Login" hide-nav-bar="true">
+    <ion-content scroll="true" class="bg-color-modjoul-black">
+        <img src="img/logo.png" class="logo-center" />
+        <form name="loginForm" ng-submit="doLogin()" class="login-form" novalidate>
+          <div class="login-form2">
+            <div class="list bg-color-modjoul-black">
+                <!--<div class="item login-item-input">-->
+                  <!--<div class="button button-full login-btn" style="color: #ffffff !important;" ng-click="promptRoles()">Quick Sign-in</div>-->
+                <!--</div>-->
+                <label class="item item-input login-item-input">
+                    <input id="loginUserName" type="email" name="username" ng-model="loginData.userName" placeholder="Email Address" class="login-input-field" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"> <!--ng-init="loginData.userName='thomas@modjoul.com'" -->
+                </label>
+                <!--<div class="padding" style="color: #ff0000;">-->
+                    <!--<p ng-show="loginForm.username.$invalid && !loginForm.username.$pristine">* Invalid email address</p>-->
+                <!--</div>-->
+                <label class="item item-input login-item-input">
+                    <input id="loginPassword" type="password" name="password" ng-model="loginData.password" placeholder="Password" class="login-input-field" > <!--ng-init="loginData.password='modjoul105'" -->
+                </label>
+                <label class="item login-item-input">
+                    <button id="loginBtn" class="button button-positive button-full login-btn" ng-disabled="loginForm.$invalid" type="submit">Log in</button>
+                </label>
+                <div align="center" ng-click="forgotPassword()">
+                    <a href="#"  class="forgot-pwd">Forgot your password?</a>
+                </div>
+            </div>
+          </div>
+        </form>
+    </ion-content>
+</ion-view>

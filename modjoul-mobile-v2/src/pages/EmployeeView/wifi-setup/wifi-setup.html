@@ -1,0 +1,272 @@
+<!--
+  Generated template for the WifiSetupPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Setup</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content style="background-color: white; color: black" padding>
+  <div *ngIf="showSetup" class="">
+    <div class="" style="font-size: 18px; text-align: center; font-weight: 500; margin-top: 20px;">Begin SmartBelt Setup</div>
+    <div class="" style="font-size: 16px; text-align: center; margin-top: 25px;">Let's get your SmartBelt connected to Wi-Fi so you can start using it</div>
+
+    <div class="button-wifi">
+      <button class="button button-full wifi-setup-main-button" ion-button (click)="continueWifiSetup()">CONTINUE</button> 
+      <button class="button button-full cancel-button" ion-button (click)="cancelSetup()">CANCEL SETUP</button> 
+    </div>    
+  </div>
+
+  <div *ngIf="switchOnBelt" class="rounded-black-box-wifi">
+    <div>
+      <div class="" style="font-size: 18px; text-align: center; font-weight: 500; margin-top: 20px;">
+          Press the SmartBelt Setup button
+      </div>
+        <br>
+      <div class="text-center">
+        <img class="col-80" style="height: 120px; width: 250px; margin: auto; display: block; margin-top: 10%;" src="assets/imgs/back-buckle.png">
+      </div>
+      <div class="config-wifi-content-small">
+        Back of Belt Buckle
+      </div>
+      <div class="" style="font-size: 16px; text-align: center; margin-top: 10%;">
+        To set up your SmartBelt, use a paperclip to press the Setup button. When the top light turns purple, tap Continue.
+      </div>
+    </div>
+
+    <button class="wifi-setup-link" (click)="showTroubleshootingGuide()">DON'T SEE THE PURPLE LIGHT?</button> 
+
+    <div class="" style ="width: 80%; height: 50% !important; margin: 0 auto; margin-top:2%">
+      <button class="button button-full wifi-setup-main-button" ion-button (click)="connectToHotspot()">CONTINUE</button> 
+      <button class="button button-full cancel-button" ion-button (click)="cancelSetup()">CANCEL SETUP</button> 
+    </div>    
+  </div>
+
+  <div *ngIf="connectPhoneToBelt" class="rounded-black-box-wifi">
+    <div>
+      <div class="" style="font-size: 18px; text-align: center; font-weight: 500; margin-top: 20px;">
+        Connect your {{devicePlatform}} to your SmartBelt
+      </div>
+        <br>
+      <div class="text-center">
+        <img class="col-80" src="assets/imgs/connect-to-belt-wifi.png">
+      </div>
+      <div class="" style="font-size: 17px; text-align: center; margin-top: 5%;">
+        Go to your Wi-Fi settings on this {{devicePlatform}} and select the modjoul-XXXX network. It may take up to a minute to display. 
+        <br>
+        Click "Done" once your phone is connected.
+      </div>
+    </div>
+
+    <button class="wifi-setup-link" (click)="showTroubleshootingGuideTwo()">DON'T SEE THE MODJOUL-XXXX NETWORK?</button> 
+
+    <div class="" style="width: 80%; height: 50% !important; margin: 0 auto; margin-top: 8%;">
+      <button class="button button-full wifi-setup-main-button" ion-button (click)="getSSIDList()">DONE</button> 
+      <button class="button button-full cancel-button" ion-button (click)="cancelSetup()">CANCEL SETUP</button> 
+    </div>    
+  </div>
+
+  <div *ngIf="connectionSuccess" class="rounded-black-box-wifi">
+    <div>
+      <div class="text-center">
+        <img class="col-80" style="height: 200px; width: 200px; margin: auto; display: block; margin-top: 15%;" src="assets/imgs/check-mark.png">
+      </div>
+      <div class="" style="font-size: 18px; text-align: center; margin-top: 10%; margin-bottom: 50%;">
+        Connected to your SmartBelt
+      </div>
+    </div>
+
+    <div class="button-wifi-second">
+      <button class="button button-full wifi-setup-main-button" ion-button (click)="showConnections()">CONTINUE</button>
+    </div>    
+  </div>
+
+  <div *ngIf="connectionFailed" class="rounded-black-box-wifi">
+    <div>
+      <div class="text-center">
+        <img class="col-80" style="height: 200px; width: 200px; margin: auto; display: block; margin-top: 15%;" src="assets/imgs/wrong-mark.png">
+      </div>
+      <div class="" style="font-size: 18px; text-align: center; font-weight: 500; margin-top: 20px;">
+        Unable to connect to your SmartBelt
+      </div>
+      <div class="config-wifi-content">
+        There appears to be an issue with SmartBelt connection. Please review the modjoul troubleshooting guide for more information.<br><br>
+        Error
+      </div>
+    </div>
+
+    <div class="" style="margin-top: 20%;">
+      <button class="button button-full wifi-setup-main-button" ion-button (click)="connectToHotspot()">BACK</button>
+      <button class="button button-full cancel-button" ion-button (click)="cancelSetup()">CANCEL SETUP</button> 
+    </div>    
+  </div>
+
+  <div *ngIf="moveCredentialsToBelt" class="rounded-black-box-wifi">
+    <div>
+      <div class="" style="font-size: 18px; text-align: center; font-weight: 500; margin-top: 20px;">
+          Move your network credentials to your SmartBelt
+      </div>    
+    </div>
+    <div class="" style="margin-top: 10%">
+      <ion-list class="wifi-items">
+        <ion-list-header class="wifi-items">
+          Saved Networks
+        </ion-list-header>
+        <ion-item class="wifi-items" ion-item *ngFor="let item of savedNetworks" (click)="connectToSavedNetwork(item)">
+          {{item.ssid}}
+        <ion-icon name="wifi" item-end></ion-icon>
+        </ion-item>
+      </ion-list>
+      <ion-list class="wifi-items">
+        <ion-list-header class="wifi-items">
+          Available Networks
+        </ion-list-header>
+        <ion-item class="wifi-items" ion-item *ngFor="let item of items" (click)="networkSelected(item)">
+            {{item}}
+          <ion-icon name="wifi" item-end></ion-icon>
+        </ion-item>
+      </ion-list>
+    </div>
+
+    <div class="">
+      <button class="button button-full cancel-button" ion-button (click)="connectBeltToWifi()">RESCAN</button> 
+      <button class="button button-full cancel-button" ion-button (click)="cancelSetup()">CANCEL SETUP</button> 
+    </div>    
+  </div>
+
+  <div *ngIf="setupComplete" class="">
+    <div class="" style="font-size: 18px; text-align: center; font-weight: 500; margin-top: 20px;">Setup Complete</div>
+    <div class="" style="font-size: 17px; text-align: center; margin-top: 25px;">Your SmartBelt is now connected to Wi-Fi. You can now start using your SmartBeltt</div>
+
+    <div class="button-wifi">
+      <button class="button button-full wifi-setup-main-button" ion-button>CONTINUE</button> 
+      <button class="button button-full cancel-button" ion-button>TEACH ME THE BASICS</button> 
+    </div>    
+  </div>
+
+  <div *ngIf="showConnectToNetwork" class="">
+    <div class="" style="font-size: 18px; margin-top: 25px; font-weight: 500; text-align: center;">Select your Wi-Fi network</div>    
+    <div style="font-size: 17px; margin-top: 25px;">
+      <label fixed class="item item-input login-item-input">
+          <input id="networkSSID" type="text" placeholder="Modjoul 4G" [(ngModel)]="SSIDName" class="login-input-field"> <!--ng-init="loginData.userName='thomas@modjoul.com'" -->
+      </label>  
+    <hr>   
+    <label class="item item-input login-item-input">
+        <input id="networkPassword" [type]="passwordType" placeholder="Password" [(ngModel)]="networkPassword" class="login-input-field">
+        <button class="show-password-link" (click)="hideShowPassword()">{{passwordLabel}}</button>
+    </label>  
+    <hr>  
+    </div> 
+    <div *ngIf="hideAdvancedOptions">
+        <button class="advanced-settings-link" (click)="showAdvanceSettings()">Show Advanced Options</button>          
+    </div>
+    <div *ngIf="showAdvancedOptions">
+        <button class="advanced-settings-link" (click)="hideAdvanceSettings()">Hide Advanced Options</button>
+        <ion-item class="wifi-items">
+            <ion-label>Security Type</ion-label>
+            <ion-select [(ngModel)]="selectedType">
+              <ion-option value="{{type}}" *ngFor="let type of securityTypes">{{type}}</ion-option>
+            </ion-select>
+        </ion-item>
+    </div> 
+    <div style="margin-top:40%">
+        <button class="button button-full wifi-setup-main-button" (click)="configureWifi()" ion-button>CONNECT</button> 
+        <button class="button button-full cancel-button" ion-button (click)="navigateBackToNetworkList()">CHOOSE A DIFFERENT NETWORK</button> 
+    </div>        
+  </div>
+
+  <div *ngIf="showLoading" class="">
+      <ion-spinner name="bubbles"></ion-spinner>
+  </div>
+
+  <div *ngIf="troubleshootingGuideScreenOne" class="rounded-black-box-wifi">
+    <div>
+        <div class="" style="font-size: 16px; text-align: justify; margin-top: 10%;">
+            In order to push the Setup button on the back of the SmartBelt buckle, an object similar to a paperclip is needed. The Setup button is recessed within the housing of the SmartBelt buckle.   
+          </div>
+          <div class="text-center">
+            <img class="col-80" style="height: 120px; width: 250px; margin: auto; display: block; margin-top: 10%;" src="assets/imgs/back-buckle.png">
+          </div>
+          <div class="config-wifi-content-small" style="margin-top: 10%;">
+            Back of Belt Buckle
+          </div>
+        </div>   
+        <div class="" style="font-size: 16px; text-align: justify; margin-top: 10%;">
+          When the Setup button is pushed on the back of the SmartBelt buckle, the top LED should turn to a purple color. 
+          If you do not see a purple LED on top of the SmartBelt buckle, try the following troubleshooting steps:
+        </div>   
+      <div class="troubleshoot-heading">
+        Ensure the SmartBelt is turned ON
+      </div>  
+      <div class="" style="font-size: 16px; text-align: justify;">
+        - Turn the slide switch on the bottom of the SmartBelt buckle to the ON position. 
+        The LED on the top of the SmartBelt buckle should illuminate.<br>
+        - If the LED on the top of the SmartBelt buckle does not illuminate, charge the SmartBelt.   
+      </div>
+      <div class="troubleshoot-heading">
+        Cycle power on the SmartBelt
+      </div>
+      <div class="" style="font-size: 16px; text-align: justify;">
+        - Power the SmartBelt OFF and then back ON.<br>        
+        - Wait 10 seconds and try pushing the setting button again.   
+      </div>
+      <div class="troubleshoot-heading">
+        Call Modjoul Support
+      </div>
+      <div class="" style="font-size: 16px; text-align: justify;">
+        - If you are still unable to succesfully push the Setup button, 
+        please contact a modjoul support representative by phone at 866-722-9760 or by email at support@modjoul.com
+      </div>  
+      <div class="">      
+        <button class="button button-full cancel-button" ion-button>CANCEL SETUP</button> 
+      </div>    
+  </div>
+
+  <div *ngIf="troubleshootingGuideScreenTwo" class="rounded-black-box-wifi">
+      <div>
+          <div class="" style="font-size: 16px; text-align: justify; margin-top: 10%;">
+            To connect your mobile device to the modjoul SmartBelt, you will need to navigate to your device settings and search for an available Wi-Fi network. 
+            If you do not see the modjoul-XXXXXXXX network listed, please follow the below troubleshooting steps:         
+          </div>
+          <div class="text-center">
+            <img class="col-80" src="assets/imgs/connect-to-belt-wifi.png">
+          </div>
+          <div class="troubleshoot-heading">
+            Try refreshing the available Wi-Fi list on your device 
+          </div>
+          <div class="" style="font-size: 16px; text-align: justify;">
+            -It may take up to a minute for your Smartbelt to show up in your mobile devices Wi-Fi list. Try refreshing the available network list.
+          </div>  
+        <div class="troubleshoot-heading">
+          Charge your SmartBelt
+        </div>  
+        <div class="" style="font-size: 16px; text-align: justify;">
+          - Sometimes low battery can prevent your Smartbelt from broadcasting its Wi-Fi network. Try plugging your SmartBelt in and restarting the setup process. 
+        </div>
+        <div class="troubleshoot-heading">
+          Cycle power on the SmartBelt
+        </div>
+        <div class="" style="font-size: 16px; text-align: justify;">
+          - Power the SmartBelt OFF and then back ON.<br>        
+          - Wait 10 seconds and try pushing the setting button again.   
+        </div>
+        <div class="troubleshoot-heading">
+          Call Modjoul Support
+        </div>
+        <div class="" style="font-size: 16px; text-align: justify;">
+          - If you are still unable to succesfully push the Setup button, 
+          please contact a modjoul support representative by phone at 866-722-9760 or by email at support@modjoul.com
+        </div>  
+        <div class="">      
+          <button class="button button-full cancel-button" ion-button>CANCEL SETUP</button> 
+        </div>    
+    </div>
+    </div>
+</ion-content>

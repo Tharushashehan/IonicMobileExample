@@ -1,0 +1,110 @@
+/* iPhone 6+ and iPhone 6S+ */
+@media only screen
+and (min-device-width : 414px)
+and (max-device-width : 736px)
+{
+  .map-filter .popup {
+    width: 400px !important;
+  }
+
+  .claim-info-box{
+    width: 320px !important;
+    margin-left: 16px !important;
+  }
+
+  .intro{
+    margin-left:43px !important;
+  }
+
+  .form-element-icon {
+    margin-left: 149px !important;
+  }
+
+  .icon-details {
+    margin-left: 110px !important;
+  }
+
+  .config-button{
+    margin-left: 37px !important;
+  }
+}
+
+/* iPhone 5 and iPhone 5S */
+@media screen
+and (min-device-width : 320px)
+and (max-device-width : 374px)
+and (orientation : portrait)
+{
+  /*Sample media
+  You dont have to duplicate all attributes, Just override the attributes you want to change
+  In here Im overriding the width of the login button*/
+
+  /*.login-btn {
+      width: 100px !important;
+    }*/
+
+  .login-form2{
+    margin-top: -40px !important;
+  }
+
+  .rounded-black-box-counts {
+     width: 140px !important;
+  }
+
+  .map-filter .popup {
+      width: 310px !important;
+  }
+
+  .modjoul-list .item-content {
+      padding-left: 20px !important;
+  }
+
+  .info-content {
+      margin-top: -52px;
+  }
+
+  .offer {
+     margin-right: -10px !important;
+     margin-left: -10px !important;
+  }
+
+  button.btn-activate-small {
+      width: 28% !important;
+  }
+
+  button.btn-suspend{
+      width: 28% !important;
+  }
+
+  .item-safety-title {
+      padding: 0px !important;
+  }
+
+  .claim-info-box{
+    width : 260px !important;
+    margin-left: 4px !important;
+  }
+
+  .x{
+    font-size: 14px !important;
+  }
+
+  .config-button{
+    width: 252px !important;
+    margin-left: 14px !important;
+  }
+
+  .intro{
+    margin-left:20px !important;
+  }
+
+  .form-element-icon {
+     margin-left: 100px !important;
+  }
+
+  .icon-details {
+      margin-left: 62px !important;
+  }
+}
+
+

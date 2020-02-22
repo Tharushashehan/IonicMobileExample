@@ -1,0 +1,109 @@
+<ion-side-menus enable-menu-with-back-views="true">
+    <ion-side-menu-content>
+        <ion-nav-bar class="bar-stable">
+            <ion-nav-buttons side="left">
+                <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+                </button>
+            </ion-nav-buttons>
+
+            <ion-nav-buttons side="secondary">
+                <calendar-selector></calendar-selector>
+            </ion-nav-buttons>
+        </ion-nav-bar>
+        <ion-nav-view name="default-view"></ion-nav-view>
+    </ion-side-menu-content>
+
+    <ion-side-menu side="left">
+
+        <ion-content class="menu-content">
+            <ion-refresher on-refresh="doRefresh()"></ion-refresher>
+            <img ng-if="profile.profilePhoto" data-ng-src="data:{{profile.profileMimeType}};base64,{{profile.profilePhoto}}" class="side-menu-pic"/>
+            <div class="sidebar-profile-name-initials text-center" ng-if="!profile.profilePhoto">
+                {{profile.firstName.charAt(0)}}{{profile.lastName.charAt(0)}}
+            </div>
+            <div align="center">
+                <a class="user-name">{{ profile.firstName }} {{ profile.lastName }}</a>
+            </div>
+            <div class="list card">
+                <a class="item item-dark item-icon-left" menu-close href="#/employee/productivity/worktime">
+                    <i class="icon ion-arrow-graph-up-right"></i> Work Time
+                </a>
+                <a class="item item-dark item-icon-left" menu-close href="#/employee/profile">
+                    <i class="icon ion-person"></i> Profile
+                </a>
+                <a class="item item-dark item-icon-left" menu-close href="#/employee/device">
+                    <i class="icon ion-radio-waves"></i> Device
+                </a>
+                <a class="item item-dark item-icon-left" menu-close ng-href='tel:{{callSupportTel}}'>
+                    <i class="icon ion-ios-telephone"></i> Call for Support
+                </a>
+                <a class="item item-dark item-icon-left" menu-close href="#/logout">
+                    <i class="icon ion-log-out"></i> Sign out
+                </a>
+
+            </div>
+
+            <div class="row">
+                <div class="col-10">
+                    <div class="temp-title">
+                        <i class="icons ion-thermometer"></i>
+                    </div>
+                </div>
+                <div class="col-30">
+                    <div class="temp-value" ng-if="temperature.temperature">
+                        {{temperature.temperature.AmbientTemperature.toFixed(0)}}{{temperatureUnits.temperature.AmbientTemperature ? '&#176;' + temperatureUnits.temperature.AmbientTemperature : ''}}
+                    </div>
+                    <div class="temp-value" ng-if="!temperature.temperature">
+                        -
+                    </div>
+                </div>
+                <div class="col-25">
+                    <div class="humidity-title">
+                        <img src="img/icons/humidity.png"/>
+                    </div>
+                </div>
+                <div class="col-30">
+                    <div class="humidity-value" ng-if="temperature.humidity">
+                        {{temperature.humidity.AmbientHumidity.toFixed(0)}}{{temperatureUnits.humidity.AmbientHumidity}}
+                    </div>
+                    <div class="humidity-value" ng-if="!temperature.humidity">
+                        -
+                    </div>
+                </div>
+            </div>
+            <br>
+          
+
+        </ion-content>
+    </ion-side-menu>
+</ion-side-menus>
+
+
+<ion-footer-bar ng-hide="tabHide" align-title="center" class="side-bar-footer">
+
+    <ion-tabs class="tabs-positive tabs-icon-top main-bottom-tab">
+
+        <ion-tab href="#/employee/productivity/worktime" ng-click="navProductivity()" title="Work Time"
+                 icon-on="ion-arrow-graph-up-right selected-ionic-tab-icon"
+                 icon-off="ion-arrow-graph-up-right deselected-ionic-tab-icon">
+        </ion-tab>
+
+        <ion-tab href="#/employee/safety" ng-click="navSafety()" title="Safety"
+                 icon-on="ion-medkit selected-ionic-tab-icon"
+                 icon-off="ion-medkit deselected-ionic-tab-icon">
+        </ion-tab>
+
+        <ion-tab href="#/employee/breadcrumb" title="Breadcrumb" icon-on="ion-android-walk selected-ionic-tab-icon"
+                 icon-off="ion-android-walk deselected-ionic-tab-icon">
+        </ion-tab>
+
+        <ion-tab href="#/employee/scorecard" title="Scorecard" icon-on="ion-stats-bars selected-ionic-tab-icon"
+                 icon-off="ion-stats-bars deselected-ionic-tab-icon">
+        </ion-tab>
+
+    </ion-tabs>
+
+</ion-footer-bar>
+
+
+

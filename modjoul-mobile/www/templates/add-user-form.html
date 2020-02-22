@@ -1,0 +1,115 @@
+<ion-modal-view>
+    <ion-header-bar>
+        <h1 class="title">Add User</h1>
+        <button class="button button-clear button-primary cancel-button" ng-click="modal.remove()">Cancel</button>
+    </ion-header-bar>
+    <ion-content>
+        <form name="formAddEmployee" class="form">
+            <div class="list">
+
+                <label class="item item-input">
+                    <div class="input-label">
+                        Email
+                    </div>
+                    <input type="email" ng-model="employeeData.email" maxlength="100" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"/>
+                </label>
+
+            </div>
+
+            <div class="list">
+
+                <label class="item item-input">
+                    <div class="input-label">
+                        First Name
+                    </div>
+                    <input type="text" ng-model="employeeData.firstName" maxlength="50" />
+                </label>
+
+            </div>
+
+            <div class="list">
+
+                <label class="item item-input">
+                    <div class="input-label">
+                        Last Name
+                    </div>
+                    <input type="text" ng-model="employeeData.lastName" maxlength="50" />
+                </label>
+
+            </div>
+
+            <div class="list">
+
+                <label class="item item-input">
+                    <div class="input-label">
+                        Employee ID
+                    </div>
+                    <input type="text" ng-model="employeeData.employeeId" maxlength="50" />
+                </label>
+
+            </div>
+
+            <div class="list">
+
+                <label class="item item-input">
+                    <div class="input-label">
+                        Designation
+                    </div>
+                    <input type="text" ng-model="employeeData.job" maxlength="50" />
+                </label>
+
+            </div>
+
+            <div class="list">
+
+                <label class="item item-input item-select">
+                    <div class="input-label">
+                        Job Function
+                    </div>
+                    <select class = "drop-down" ng-model="employeeData.jobFunction" >
+                        <option value="{{jobFunction}}" ng-repeat="jobFunction in jobFunctions ">{{jobFunction}}</option>
+                    </select>
+                </label>
+
+            </div>
+
+
+            <div class="list">
+                <div class="metrics-heading">Location</div>
+
+                <div class="pill-section">
+                    <span class="pill-tag" ng-class="{ 'pill-selected': selectedOption == 'name' }" ng-click="optionSelection('name')">By Name</span>
+                    <span class="pill-tag" ng-class="{ 'pill-selected': selectedOption == 'code' }" ng-click="optionSelection('code')">By Code</span>
+
+                </div>
+                <label class="item item-input item-select" ng-if="selectedOption == 'name'">
+                    <div class="input-label">
+                        Name
+                    </div>
+                    <select class = "drop-down" ng-model="employeeData.location" >
+                        <option value="{{location.locationId}}" ng-repeat="location in locationNameIdMapping ">{{location.locationName}}</option>
+                    </select>
+                </label>
+
+
+
+                <label class="item item-input item-select" ng-if="selectedOption == 'code'">
+                    <div class="input-label">
+                        Code
+                    </div>
+                    <select class = "drop-down" ng-model="employeeData.location" >
+                        <option value="{{location.locationId}}" ng-repeat="location in locationNameIdMapping ">{{location.locationCode}}</option>
+                    </select>
+                </label>
+
+            </div>
+
+
+            <div class="form-element">
+                <button class="button btn btn-info" ng-click="addUser()">Add Employee</button>
+            </div>
+
+            <br><br><br><br>
+        </form>
+    </ion-content>
+</ion-modal-view>

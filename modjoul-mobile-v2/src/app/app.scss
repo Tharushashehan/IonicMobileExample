@@ -1,0 +1,76 @@
+// http://ionicframework.com/docs/theming/
+
+
+// App Global Sass
+// --------------------------------------------------
+// Put style rules here that you want to apply globally. These
+// styles are for the entire app and not just one component.
+// Additionally, this file can be also used as an entry point
+// to import other Sass files to be included in the output CSS.
+//
+// Shared Sass variables, which can be used to adjust Ionic's
+// default Sass variables, belong in "theme/variables.scss".
+//
+// To declare rules for a specific mode, create a child rule
+// for the .md, .ios, or .wp mode classes. The mode class is
+// automatically applied to the <body> element in the app.
+
+@import "app-variables";
+
+.bg-color-modjoul-black {
+  background-color: #262626 !important;
+}
+
+.logo-center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50px;
+  width: 180px;
+  height: 188px;
+}
+
+// Custom icons
+// Overriding the ion-icon behavior
+// All custom icons will start with "modjoul-" prefix
+ion-icon {
+  &[class*="modjoul-"] {
+      // Instead of using the font-based icons
+      // We're applying SVG masks
+      mask-size: contain;
+      mask-position: 50% 50%;
+      mask-repeat: no-repeat;
+      background: currentColor;
+      width: 1em;
+      height: 1em;
+  }
+  // custom icons
+  &[class*="modjoul-dashboard-ico"] {
+      mask-image: url(../assets/icon/ico_modjoul_dashboard_white.png);
+  }
+  &[class*="modjoul-goals-ico"] {
+      mask-image: url(../assets/icon/ico_modjoul_goals_white.png);
+  }
+  &[class*="modjoul-more-ico"] {
+    mask-image: url(../assets/icon/ico_modjoul_more_white.png);
+  }
+  &[class*="modjoul-notification-ico"] {
+    mask-image: url(../assets/icon/ico_modjoul_notification_white.png);
+  }
+  &[class*="modjoul-share-ico"] {
+    mask-image: url(../assets/icon/ico_modjoul_share_white.png);
+  }
+}
+
+.today-date {
+  color: orange;
+  border-radius: 100%;
+  padding: 5px;
+}
+
+.selected-date {
+  background-color: orange;
+  color: white;
+  border-radius: 100%;
+  padding: 5px;
+}

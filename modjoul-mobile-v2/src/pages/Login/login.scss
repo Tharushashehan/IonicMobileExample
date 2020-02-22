@@ -1,0 +1,121 @@
+.page-home {
+}
+
+.forgot-passWord {
+    color: $modjoul-orange;
+    vertical-align: middle;
+    align-content: center!important;
+    align-items: center!important;
+};
+.item-inner {
+    padding: 0px!important;
+ };
+ .hr {
+    border-bottom: 1px solid rgb(201, 208, 212);
+    margin: 0px;
+    width: 100%;
+  };
+  ion-item:first-child {
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+  }
+ 
+  .sso-input {
+    border: none !important;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }
+  .login-user-name-input{
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+  }
+  .login-user-password-input{
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }
+  .compact-details{
+      padding: 8%
+  }
+  .item {
+    min-height: 3rem; /* <- this can be whatever you need */
+    
+}
+.input{
+    
+    max-height: 3rem;
+    font: size 5px;
+    border: none;
+    position: relative;
+    
+    background-color: transparent;
+    
+}
+.button{
+    max-height: 3rem;
+}
+.item-inner {
+    padding-top: 0px!important;
+ }
+
+ .ion-login-modal-controller {
+        width: 70%; 
+        height: 25%;
+        position: absolute;
+        overflow: hidden;
+        max-width: 320px;
+        border-radius: 10px;
+        text-align: center;
+        // width: 90vw;
+        // height: 50vh !important;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        border: 0;
+        box-shadow: 0 16px 20px rgb(53, 51, 50);
+        background-color: #fafafa;
+        overflow-y: hidden;
+}
+
+.warning-img{
+    
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    border: 0;
+    position: absolute;
+    overflow: hidden;
+    max-width: 29px;
+    border-radius: 10px;
+    text-align: center;
+    font-size:2rem !important;
+    position: top !important;
+    //top: 20px !important;
+    margin: 0 auto !important;
+    // background-color: #D5792E;
+    color: $modjoul-yellow //#D5792E
+ }
+
+.password-icon{
+    //font-size:2rem !important;
+    position: bottom !important;
+    top: 20px !important;
+    margin: 0 auto !important;
+    // background-color: #D5792E;
+    color: $modjoul-dark-orange //#D5792E
+ }
+
+ ion-loading.loading-class {
+    .loading-wrapper {
+    //   background: transparent;
+    //   box-shadow: none;
+    .spinner-crescent circle {
+        stroke-width: 8px;
+      }    
+    }
+  }

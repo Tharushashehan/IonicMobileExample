@@ -1,0 +1,51 @@
+<ion-view view-title="User Management">
+    <ion-nav-buttons side="right">
+        <button class="button button-icon button-clear" ng-click="setupWiFiWizard()">
+            <i class="fa fa-wifi" aria-hidden="true"></i>
+        </button>
+        <button class="button button-icon button-clear" ng-click="openAddUser()">
+            <i class="fa fa-user-plus" aria-hidden="true"></i>
+        </button>
+    </ion-nav-buttons>
+
+    <ion-content class="main-background">
+        <ion-refresher on-refresh="doRefresh()"></ion-refresher>
+
+        <div class="search-bar">
+            <label class="item-input-wrapper search">
+                <i class="icon ion-search placeholder-icon"></i>
+                <input placeholder="Search Employee" type="text" maxlength="100" ng-model="searchQuery.first"
+                       class="search-text-box">
+            </label>
+        </div>
+        <div class="modjoul-list">
+            <ion-list can-swipe="listCanSwipe">
+                <div>
+                    <ion-item ng-repeat="user in users  | filter : filterEmployee">
+                        <div>
+                            <div class="user-fullname2">{{user.firstName}} {{user.lastName}}</div>
+                            <div class="user-details">Role: {{user.role ? user.role.charAt(0).toUpperCase() + user.role.substring(1) : ''}}</div>
+                            <div class="shiftTime-value">
+                                <span class="shiftTime-value">Shift Time: {{user.shift.startTime ? user.shift.startTime : user.shift.shiftStart }} - {{user.shift.endTime ? user.shift.endTime : user.shift.shiftEnd }}</span>
+                            
+                            </div>
+                            <div style="white-space: normal" ng-show="user.userUpdate.updaterName">Last updated by {{user.userUpdate.updaterName}} on {{user.userUpdate.updateTimestamp | date: "yyyy-MM-dd 'at' h:mma"}}</div>
+                            <br>
+                            <div>
+                                <button class="shiftTime-button" ng-click="changeShiftClicked(user)">Change Shift</button>
+                                <button class="shiftTime-button" ng-click="changeSupervisor(user)">Change Supervisor</button>
+                            </div>
+                            <br>
+                            <div>
+                                <button class="shiftTime-button" ng-click="vibrateBelt(user)">Vibrate Belt</button>
+                            </div>
+                        </div>
+                    </ion-item>
+                </div>
+            </ion-list>
+        </div>
+
+        <br>
+    </ion-content>
+</ion-view>
+

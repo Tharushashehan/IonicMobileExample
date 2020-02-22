@@ -1,0 +1,44 @@
+<ion-view view-title="Receive Devices">
+
+  <ion-content class="main-background">
+    <ion-refresher on-refresh="doRefresh()"></ion-refresher>
+
+    <div class="device-search-bar" ng-if="!devices.length == 0">
+    <label class="item-input-wrapper search">
+      <i class="icon ion-search placeholder-icon"></i>
+      <input placeholder="Search Device" type="text" maxlength="100" ng-model="searchQuery.query"
+             class="search-text-box">
+    </label>
+    </div>
+
+    <div class="modjoul-list">
+    <ion-list can-swipe="listCanSwipe">
+      <div>
+        <ion-item class="no-border-top" ng-repeat="device in devices | orderBy :'isDelivered' | filter : filterDevice" ng-model="device">
+          <div>
+
+            <div class="user-details">Device Serial Number: {{device.deviceId}}</div>
+            <div class="user-details">Registered: {{device.registration.date ?
+              (device.registration.date | amDateFormat:'YYYY-MM-DD hh:mm:ss') : "" }}
+            </div>
+            <div class="user-details">Is Available: {{device.isDelivered ? "YES" : "NO"}}</div>
+
+
+            <ion-option-button ng-if="!device.isDelivered" class="button-receive"
+                               ng-click="ConfirmActivation(device)">Receive
+            </ion-option-button>
+
+
+            <ion-option-button class="button-assertive"
+                               ng-click="confirmDeletion(device)">
+              Delete
+            </ion-option-button>
+            <br>
+          </div>
+        </ion-item>
+
+      </div>
+    </ion-list>
+    </div>
+  </ion-content>
+</ion-view>

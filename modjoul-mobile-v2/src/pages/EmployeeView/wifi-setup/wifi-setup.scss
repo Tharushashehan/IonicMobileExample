@@ -1,0 +1,143 @@
+page-wifi-setup {
+    
+}
+
+.button-wifi {
+    width: 80%;
+    height: 50% !important;
+    margin: 0 auto;
+    margin-top: 110%;
+}
+
+.wifi-setup-main-button {
+    background-color: $modjoul-orange !important;
+    max-height: 30% !important;
+}
+
+.button-wifi-second{
+    width: 80%;
+    margin: 0 auto;
+}
+
+.cancel-button{
+    color: $modjoul-orange !important;
+    background-color: $main-white !important;
+    max-height: 30% !important;
+}
+
+.wifi-setup-link{
+    background-color: #FFFFFF;
+    color: #F99D1C;
+    font-size: 15px;
+    margin: 0 auto;
+    padding-bottom: 18%;
+    padding-top: 18%;
+    display: block;
+    text-align: center;
+}
+
+.wifi-network-item{
+    border-bottom: 1px solid #bdbdbd;
+    font-size: 17px;
+    padding-bottom: 15px;
+    padding-top: 15px;
+}
+
+.login-item-input {
+    padding: 6px 16px 5px 16px !important;
+    border-width: 0px !important;
+    background-color: white !important;
+}
+
+.config-wifi-content-small {
+    font-size: 15px; 
+    text-align: center; 
+    margin-top: 5%;
+}
+
+.config-wifi-content {
+    font-size: 16px; 
+    text-align: center; 
+    margin-top: 10%;
+}
+
+.troubleshoot-heading {
+    font-size: 15px; 
+    margin-top: 10%;
+    font-weight: 600;
+}
+
+.advanced-settings-link{
+    background-color: #FFFFFF;
+    color: #F99D1C;
+    font-size: 17px;
+    margin: 0 auto;
+    padding-bottom: 15%;
+    padding-top: 15%;
+}
+
+.wifi-items.item-ios{
+    background-color: white !important;
+    color: #424242 !important;
+}
+
+.wifi-items.list-header-ios{
+    background-color: #a9a4a491 !important;
+}
+
+.wifi-items.item-md{
+    background-color: white !important;
+    color: #424242 !important;
+}
+
+.wifi-items.list-header-md{
+    background-color: #a9a4a491 !important;
+}
+
+.wifi-items.list-md{
+    margin: -1px 0 40px !important;
+}
+
+.wifi-items.item-block:first-child {
+    border-top: 0.55px solid white !important;
+}
+
+.wifi-items.item-block:last-child,
+.wifi-items.item-wrapper:last-child .item-block {
+  border-bottom: 0.55px solid white !important;
+}
+
+.wifi-items.item-block .item-inner{
+    border-bottom: 0.55px solid #9c9090 !important;
+}
+// .wifi-items.item-block.item-inner{
+//     border-bottom: 0.55px solid red !important;
+// }
+
+.wifi-items.list-header-ios{
+    font-size: 1.4rem !important;
+}
+
+.wifi-setup-link-basic{
+    background-color: #FFFFFF;
+    color: #F99D1C;
+    font-size: 17px;
+    margin: 0 auto;
+    padding-bottom: 15%;
+}
+
+.show-password-link{
+    background-color: #FFFFFF;
+    color: #F99D1C;
+    font-size: 17px;
+    margin: 0 auto;
+    margin-left:20%;
+}
+
+.wifi-items.list-header-ios{
+    border-bottom: 0.55px solid #FFFFFF !important;
+}
+
+.setup-cancel-button{
+    position: sticky;
+}

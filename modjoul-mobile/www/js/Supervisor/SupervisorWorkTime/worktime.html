@@ -1,0 +1,251 @@
+<ion-view view-title="Work Time">
+    <ion-nav-bar class="bar-positive">
+        <ion-nav-back-button>
+        </ion-nav-back-button>
+        <ion-nav-buttons side="secondary">
+            <calendar-selector></calendar-selector>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-content class="main-background">
+        <ion-refresher on-refresh="doRefresh()"></ion-refresher>
+        <br>
+        <last-activity-time trigger="triggerValue"></last-activity-time>
+
+        <!--<div align="center" class="period-segment-group">-->
+            <!--<div class="frequency-tab">-->
+                <!--<ti-segmented-control on-select="segmentClicked($index)">-->
+                    <!--<ti-segmented-control-button class="period-segment" title="'Daily'"-->
+                                                 <!--selected></ti-segmented-control-button>-->
+                    <!--<ti-segmented-control-button class="period-segment-nosideborders"-->
+                                                 <!--title="'Weekly'"></ti-segmented-control-button>-->
+                    <!--<ti-segmented-control-button class="period-segment" title="'Monthly'"></ti-segmented-control-button>-->
+                <!--</ti-segmented-control>-->
+            <!--</div>-->
+        <!--</div>-->
+
+        <div class="row">
+            <div id="work-time-chart" style="width: 100%"></div>
+        </div>
+
+        <!--<div class="row">-->
+            <!--<div align="center" class="col">-->
+                <!--<div class="rounded-black-box-rates-flex2">-->
+                    <!--<div class="item-heights-title-narrow">-->
+                        <!--<div class="idletime-title uppercase">WORK TIME</div>-->
+                    <!--</div>-->
+                    <!--<div class="dialGroup" id="empWorkTime">-->
+                        <!--<div class="dialValueMetric">-->
+                            <!--<duration-format duration="workTimes.summary.WorkTime | timeFormatFilter: workUnits.summary.WorkTime || '0:0:0'" is-formatted="true"></duration-format>-->
+                        <!--</div>-->
+                        <!--<div class="dialUnit">&nbsp;</div>-->
+                        <!--&lt;!&ndash;<div class="dialValueRate">{{workTimes.summary.WorkTimePercentage}}{{workUnits.summary.WorkTimePercentage}}</div>&ndash;&gt;-->
+
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+
+        <!--</div>-->
+
+
+        <!--<div class="metrics-heading uppercase"> Work Outside Vehicle</div>-->
+
+        <div ng-if="orgConfigData.workTime.walking">
+            <div class="metric-group">
+                <div class="metric-type-title">Walking</div>
+                <div class="border-box">
+
+                    <div class="dialset-scorecard-items" align="center">
+                        <div align="center" class="col card-element-left" id="empWalkingSteps">
+                            <div class="attribute-lbl">Steps</div>
+                            <div class="attribute-value">{{workTimes.walking.HowManySteps || 0 }}</div>
+                            <div class="attribute-lbl margin-top-5">{{workUnits.walking.HowManySteps}}
+                            </div>
+                        </div>
+
+                        <div align="center" class="col card-element-right" id="empWalkingDistance">
+                            <div class="attribute-lbl">Distance</div>
+                            <div class="attribute-value">{{workTimes.walking.HowFar || 0 }}</div>
+                            <div class="attribute-lbl margin-top-5">{{workUnits.walking.HowFar}}</div>
+                            <div img ng-if="!workUnits.walking.HowFar" class="dialUnit">miles</div>
+                        </div>
+
+                    </div>
+
+                    <div class="dialset-scorecard-items" align="center">
+                        <div align="center" class="col card-element-left" id="empWalkingDuration">
+                            <div class="attribute-lbl">Duration</div>
+                            <div class="attribute-value time-text">
+                                <duration-format duration="workTimes.walking.HowLong | timeFormatFilter: workUnits.walking.HowLong || '0:0:0'" is-formatted="true"></duration-format>
+                            </div>
+                            <!--<div class="attribute-lbl margin-top-5">HH:MM:SS</div>-->
+                            <!--<div class="dialValueRate">{{workTimes.walking.WalkingTimePercentage ||-->
+                                <!--0}}{{workUnits.walking.WalkingTimePercentage}}-->
+                            <!--</div>-->
+
+                        </div>
+
+                        <div align="center" class="col card-element-right" id="empWalkingSpeed">
+                            <div class="attribute-lbl">Speed</div>
+                            <div class="attribute-value">{{workTimes.walking.WalkingSpeed.toFixed(2) || 0}}</div>
+                            <div class="attribute-lbl margin-top-5">{{workUnits.walking.WalkingSpeed}}</div>
+                            <br>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+
+        <div ng-if="orgConfigData.workTime.bending">
+            <div class="metric-type-title">BENDING</div>
+            <div class="border-box">
+                <div class="dialset-scorecard-items" align="center">
+                    <div align="center" class="col card-element-left" id="empBendsCount">
+                        <div class="attribute-lbl">Total Bends</div>
+                        <div class="attribute-value">{{workTimes["bending"].HowMany || '0' }}</div>
+                        <div class="attribute-lbl margin-top-5">{{workUnits["bending"].HowMany }}</div>
+                    </div>
+
+                    <div align="center" class="col card-element-left" id="empBendsDuration">
+                        <div class="attribute-lbl">Duration</div>
+
+                        <div class="attribute-value time-text">
+                            <duration-format duration="workTimes['bending'].HowLong | timeFormatFilter: workUnits['bending'].HowLong || '0:0:0'" is-formatted="true"></duration-format>
+                        </div>
+                        <!--<div class="attribute-lbl margin-top-5">HH:MM:SS</div>-->
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div ng-if="orgConfigData.workTime.twisting">
+            <div class="metric-type-title">TWISTING</div>
+            <div class="border-box">
+                <div class="dialset-scorecard-items" align="center">
+
+                    <div align="center" class="col card-element-left" id="empTwistingCount">
+                        <div class="attribute-lbl">Total Twists</div>
+                        <div class="attribute-value">{{workTimes["twisting"].HowMany || '0' }}</div>
+                        <div class="attribute-lbl margin-top-5">{{workUnits["twisting"].HowMany }}</div>
+                    </div>
+
+                    <div align="center" class="col card-element-left" id="empTwistingDuration">
+                        <div class="attribute-lbl">Duration</div>
+                        <div class="attribute-value time-text">
+                            <duration-format duration="workTimes['twisting'].HowLong | timeFormatFilter: workUnits['twisting'].HowLong || '0:0:0'" is-formatted="true"></duration-format>
+                        </div>
+                        <!--<div class="attribute-lbl margin-top-5"> HH:MM:SS-->
+                        <!--</div>-->
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <!--<div ng-if="orgConfigData.workTime.sitting">-->
+            <!--<div class="metric-type-title">RECLINED SITTING</div>-->
+            <!--<div class="border-box">-->
+                <!--<div class="dialset-scorecard-items" align="center">-->
+
+                    <!--<div align="center" class="col card-element-left" id="empSittingCount">-->
+                        <!--<div class="attribute-lbl">Duration</div>-->
+                        <!--<div class="attribute-value time-text">-->
+                            <!--<duration-format duration="workTimes['idle-time'].IdleTimeSitting | timeFormatFilter: workUnits['idle-time'].IdleTimeSitting || '0:0:0'" is-formatted="true"></duration-format>-->
+                         <!--</div>-->
+                        <!--&lt;!&ndash;<div class="attribute-lbl margin-top-5">HH:MM:SS</div>&ndash;&gt;-->
+                    <!--</div>-->
+
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+
+
+        <div ng-if="orgConfigData.workTime.standing">
+            <div class="metric-type-title">STATIONARY</div>
+            <div class="border-box">
+                <div class="dialset-scorecard-items" align="center">
+
+                    <div align="center" class="col card-element-left" id="empStanding">
+                        <div class="attribute-lbl">Duration</div>
+                        <div class="attribute-value time-text">
+                            <duration-format duration="workTimes['idle-time'].IdleTimeStanding | timeFormatFilter: workUnits['idle-time'].IdleTimeStanding || '0:0:0'" is-formatted="true"></duration-format>
+                           </div>
+                        <!--<div class="attribute-lbl margin-top-5">HH:MM:SS</div>-->
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div ng-if="orgConfigData.workTime.other">
+            <div class="metric-type-title">OTHER</div>
+            <div class="border-box">
+                <div class="dialset-scorecard-items" align="center">
+                    <div align="center" class="col card-element-left" id="empOther">
+                        <div class="attribute-lbl">Duration</div>
+                        <div class="attribute-value time-text">
+                            <duration-format duration="workTimes['others'].HowLong | timeFormatFilter: workUnits['others'].HowLong || '0:0:0'" is-formatted="true"></duration-format>
+                        </div>
+                        <!--<div class="attribute-lbl margin-top-5">HH:MM:SS</div>-->
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <div ng-if="orgConfigData.idleTime.idleTime">
+            <div class="metric-type-title">Belt Lying On Table</div>
+            <div class="border-box">
+                <div class="dialset-scorecard-items" align="center">
+                    <div align="center" class="col card-element-left">
+                        <div class="attribute-lbl">Duration</div>
+                        <div class="attribute-value time-text">
+                            <duration-format duration="workTimes['idle-time'].IdleTimeLaying | timeFormatFilter: workUnits['idle-time'].IdleTimeLaying || '0:0:0'" is-formatted="true"></duration-format>
+
+                        </div>
+                        <!--<div class="attribute-lbl margin-top-5">HH:MM:SS</div>-->
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <!--<div class="metrics-heading uppercase"> Work Inside Vehicle</div>-->
+
+        <div ng-if="orgConfigData.workTime.driving">
+            <div class="metric-type-title">DRIVING</div>
+            <div class="border-box">
+                <div class="dialset-scorecard-items" align="center">
+
+                    <div align="center" class="col card-element-left" id="empDrivingDistance">
+                        <div class="attribute-lbl">Distance</div>
+                        <div class="attribute-value">{{workTimes["driving"].DrivingDistance || 0 }}</div>
+                        <div class="attribute-lbl margin-top-5">{{workUnits["driving"].DrivingDistance }}</div>
+                    </div>
+
+                    <div align="center" class="col card-element-right" id="empDriveTime">
+                        <div class="attribute-lbl">Duration</div>
+                        <div class="attribute-value time-text">
+                            <duration-format duration="workTimes['driving'].DrivingTime | timeFormatFilter: workUnits['driving'].DrivingTime  || '0:0:0'" is-formatted="true"></duration-format>
+                            </div>
+                        <!--<div class="attribute-lbl margin-top-5">HH:MM:SS</div>-->
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <br><br>
+
+    </ion-content>
+</ion-view>

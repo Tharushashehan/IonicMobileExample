@@ -1,0 +1,46 @@
+<ion-view view-title="Supevisors">
+    <ion-nav-bar class="bar-positive">
+        <ion-nav-back-button>
+        </ion-nav-back-button>
+    </ion-nav-bar>>
+    <ion-content class="main-background">
+        <ion-refresher on-refresh="doRefresh()"></ion-refresher>
+
+        <div class="device-search-bar" ng-if="!users.length == 0">
+            <label class="item-input-wrapper search">
+                <i class="icon ion-search placeholder-icon"></i>
+                <input placeholder="Search Supervisors" type="text" maxlength="100" ng-model="searchQuery.query"
+                       class="search-text-box">
+            </label>
+        </div>
+
+        <div ng-if="users && users.length == 0" class="user-item" align="center">{{messages.NO_DATA_AVAILABLE}}</div>
+        <div class="modjoul-list">
+            <ion-list can-swipe="listCanSwipe">
+                <div>
+
+                    <ion-item class="no-border-top" ng-repeat="user in users | filter : filterEmployee">
+                        <div>
+                            <div class="user-fullname2">{{user.firstName}} {{user.lastName}}</div>
+                            <div class="user-details">Designation: {{user.job}}</div>
+
+                            <br>
+                            <button class="shiftTime-button" ng-click="openOtherSupervisors(user)">Demote Supervisor
+                            </button>
+                            <ion-option-button class="button-assertive"
+                                               ng-click="showDeleteConfirmation(user)">
+                                Delete
+                            </ion-option-button>
+                        </div>
+                    </ion-item>
+                </div>
+            </ion-list>
+            <ion-infinite-scroll ng-if="moreEmployeeDataCanbeLoaded"
+                                 on-infinite="getMoreUsers()"
+                                 distance="1%">
+            </ion-infinite-scroll>
+        </div>
+        <br>
+    </ion-content>
+</ion-view>
+

@@ -1,0 +1,36 @@
+<div class="overlay-panel">
+
+    <div class="popup-heading">
+        Device Details
+    </div>
+
+    <div class="popup-description">
+        There is no device currently assigned to this employee
+    </div>
+
+
+    <div class="list">
+        <label class="item item-input">
+            <div class="input-label">
+                Serial Number
+            </div>
+            <input type="text" value="{{availableDevices[0].deviceId}}" ng-model="deviceId" maxlength="50"/>
+        </label>
+
+    </div>
+
+    <br>
+
+    <div class="list text-center">
+        <div>
+            <button class="btn btn-generateId" ng-click="getAvailableDevice()"> Generate Id</button>
+        </div>
+    </div>
+
+    <div class="list">
+        <div ng-click="assignADevice(deviceId)">
+            <button class="btn btn-assign"> Assign</button>
+        </div>
+    </div>
+</div>
+

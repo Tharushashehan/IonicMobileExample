@@ -1,0 +1,85 @@
+<!--
+  Generated template for the DashboardPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  
+  <!-- <component-dashboard-calendar>
+
+    </component-dashboard-calendar> -->
+    <ion-navbar primary>
+        <ion-buttons left>
+            <button ion-button icon-only (click)="openCalendar()">
+                <ion-icon name="arrow-back"></ion-icon>
+                <span>{{selectedMonth}}</span>
+            </button>
+        </ion-buttons>
+
+        <ion-title></ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content padding>
+    <ion-row>
+        <ion-col text-center class="col">M</ion-col>
+        <ion-col text-center class="col">T</ion-col>
+        <ion-col text-center class="col">W</ion-col>
+        <ion-col text-center class="col">T</ion-col>
+        <ion-col text-center class="col">F</ion-col>
+        <ion-col text-center class="col">S</ion-col>
+        <ion-col text-center class="col">S</ion-col>
+    </ion-row>
+
+    <ion-row>
+        <ion-slides #weekSlider speed="500" (ionSlideNextEnd)="loadNext()" (ionSlidePrevEnd)="loadPrev()"
+                    [initialSlide]="1" (ionSlideDidChange)="slideChangeEnded()"
+                    (ionSlideWillChange)="slideChangeStarting()">
+            <ion-slide *ngFor="let week of weeks">
+                <div style="display: flex;">
+                    <ion-col text-center class="col" *ngFor="let dateValue of week.dates"
+                             (click)="setSelectedDate(dateValue)">
+            <span [ngClass]="{'today-date': dateValue.format('YYYY-MM-DD') == todayDate.format('YYYY-MM-DD'),
+            'selected-date': dateValue.format('YYYY-MM-DD') == selectedDate.format('YYYY-MM-DD')}">
+                {{dateValue.format('DD')}}
+            </span>
+                    </ion-col>
+                </div>
+            </ion-slide>
+        </ion-slides>
+
+        <br>
+        <br>
+        <div class="hr"> </div>  
+        <br>
+        <br>
+
+    </ion-row>
+        <div class="card" >
+            <div class="item item-text-wrap">
+
+              <!--Dashboard card view starts here-->
+              <!--START-->
+              <ion-label *ngIf="workTime.length == 0;">
+                  Selected date does not contain any data
+              </ion-label>
+              <ion-list *ngFor="let WorkTimeItem of workTime; let i = index">
+                <ion-card (click)="loadSecondaryDashboard(i, WorkTimeItem)" class="dashboard-card-item" >
+
+                  <ion-card-header>
+                    <h2 style="color:white">{{WorkTimeItem.itemName | termRegulation}}</h2>
+                    <h1 style="color:white; float:right;">{{WorkTimeItem.topRight}}</h1>
+                  </ion-card-header>
+                
+                  <ion-card-content>
+                    <h1 style="color:whitesmoke; float:right;">{{WorkTimeItem.bottomRight}}</h1>
+                  </ion-card-content>
+                
+                </ion-card>
+               </ion-list>
+              
+          <!--END-->
+            </div>
+        </div>
+
+</ion-content>

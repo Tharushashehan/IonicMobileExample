@@ -1,0 +1,104 @@
+<ion-view view-title="Safety">
+    <ion-content class="main-background">
+        <div class="view-title-dev" align="center">
+            <div class="row1">
+                <div ng-if="userConfigData.bend.bending" class="col">
+                    <div>
+                        <div align="center" class="col rounded-box_card_buttons" ng-click="navSafetyBends()">
+                            <div class="button_card_icon_slips"><img src="img/icons/bending-icon2.png" width="70"
+                                                                     height="70"/></div>
+                            <div class="item-cardButton item-cardButton-text-wrap">
+                                <span class="aggressive-title_safetyButtons">Bending</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div ng-if="userConfigData.twist.twisting" class="col">
+                    <div>
+                        <div align="center" class="col rounded-box_card_buttons" ng-click="navSafetyTwist()">
+                            <div class="button_card_icon_slips"><img src="img/icons/twisting.png" width="70"
+                                                                     height="70"/></div>
+                            <div class="item-cardButton item-cardButton-text-wrap">
+                                <span class="aggressive-title_safetyButtons">Twisting</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row1">
+                <div ng-if="userConfigData.aggressiveEvents.hardAcceleration || userConfigData.aggressiveEvents.hardBrake ||
+        userConfigData.aggressiveEvents.hardCorner ||
+        userConfigData.aggressiveEvents.swerve" class="col">
+                    <div>
+                        <div align="center" class="col rounded-box_card_buttons" ng-click="navSafetyDriving()">
+                            <div class="button_card_icon"><img src="img/icons/steering-wheel.png" width="70"
+                                                               height="70"/></div>
+                            <div class="item-cardButton item-cardButton-text-wrap">
+                                <span class="aggressive-title_buttons">{{strings.AGGRESSIVE_DRIVING_EVENTS}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--Trips and falls has temporally been removed from the system till further notice-->
+                <!--therefore bellow Indoor driving has been upgraded to this row-->
+
+                <!-- <div ng-if="userConfigData.nearMissEvents.falling || userConfigData.nearMissEvents.slipping ||
+        userConfigData.nearMissEvents.tripping" class="col">
+                    <div>
+                        <div align="center" class="col rounded-box_card_buttons" ng-click="navSafetyWork()">
+                            <div class="button_card_icon_slips"><img src="img/icons/tripping.png" width="70"
+                                                                     height="70"/></div>
+                            <div class="item-cardButton item-cardButton-text-wrap">
+                                <span class="aggressive-title_safetyButtons">{{strings.NEAR_MISS_EVENTS}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+
+                <div ng-if="userConfigData.indoorDriving.indoorDriving" class="col">
+                        <div align="center" class="col rounded-box_card_buttons" ng-click="navIndoorDriving()">
+                            <div class="button_card_icon_slips"><img src="img/icons/folk-lift.png" width="70"
+                                                                     height="70"/></div>
+                            <div class="item-cardButton item-cardButton-text-wrap">
+                                <span class="aggressive-title_safetyButtons">{{strings.INDOOR_DRIVING}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+            </div>
+
+            <!-- <div class="row1">
+                <div ng-if="userConfigData.indoorDriving.indoorDriving" class="col">
+                    <div align="center" class="col rounded-box_card_buttons" ng-click="navIndoorDriving()">
+                        <div class="button_card_icon_slips"><img src="img/icons/folk-lift.png" width="70"
+                                                                 height="70"/></div>
+                        <div class="item-cardButton item-cardButton-text-wrap">
+                            <span class="aggressive-title_safetyButtons">{{strings.INDOOR_DRIVING}}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div ng-if="userConfigData.workingFromHeights.workingFromHeights" class="col">
+                    <div>
+                        <div align="center" class="col rounded-box_card_buttons" ng-click="navWorkingOnHeights()">
+                            <div class="button_card_icon_slips"><img src="img/icons/ladder.png" width="70" height="70"/>
+                            </div>
+                            <div class="item-cardButton item-cardButton-text-wrap">
+                                <span class="aggressive-title_safetyButtons">Working from Heights</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div> -->
+
+
+            <div class="menu-container"></div>
+            <div class="idleTImeArea"></div>
+        </div>
+    </ion-content>
+</ion-view>

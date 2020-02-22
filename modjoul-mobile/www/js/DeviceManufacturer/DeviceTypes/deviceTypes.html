@@ -1,0 +1,26 @@
+<ion-view view-title="Device Types">
+
+  <ion-nav-buttons side="right">
+    <button class="button button-icon button-clear" ng-click="openAddDeviceType()">
+      <img src="img/icons/device-type-icon.png" width="20" height="20" />
+    </button>
+  </ion-nav-buttons>
+
+  <ion-content class="main-background">
+    <ion-refresher on-refresh="doRefresh()"></ion-refresher>
+    <div class="form-element">
+      <select class="drop-down" ng-model="selectedOrg" ng-change ="changeDeviceTypes(selectedOrg)">
+        <option value="">Select oraganization</option>
+        <option value="{{org.orgId}}" ng-repeat="org in orgs">{{org.orgName}}</option>
+      </select>
+    </div>
+
+    <div class="modjoul-list">
+      <div class="user-item" ng-repeat="deviceType in dataTypesList">
+        <div class="user-details" ng-click="openDeviceTypes(deviceType)">{{deviceType.title}} </div>
+      </div>
+
+    </div>
+    <br>
+  </ion-content>
+</ion-view>

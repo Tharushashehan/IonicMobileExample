@@ -1,0 +1,89 @@
+<ion-modal-view>
+  <ion-header-bar>
+    <h1 class="title">Add Device</h1>
+    <button class="button button-clear button-primary cancel-button" ng-click="modal.hide()">Close</button>
+  </ion-header-bar>
+  <ion-content>
+    <div class="form modjoul-form">
+
+      <div class="list">
+
+        <label class="item item-input item-select">
+          <div class="input-label">
+            <div class ="x">Organization</div>
+          </div>
+          <select class="drop-down" ng-model="selectedOrg.orgId" ng-change="changeDeviceTypes(selectedOrg.orgId)">
+            <option value="{{org.orgId}}" ng-repeat="org in orgs" >{{org.orgName}}</option>
+          </select>
+        </label>
+
+      </div>
+
+      <div class="list">
+
+        <label class="item item-input item-select">
+          <div class="input-label">
+            <div class="x">Device Type</div>
+          </div>
+          <select class="drop-down" ng-model="selectedDeviceType.deviceType">
+            <option value="{{deviceType.deviceType}}" ng-repeat="deviceType in deviceTypes">{{deviceType.deviceType}}</option>
+          </select>
+        </label>
+
+      </div>
+
+      <div class="list">
+        <div class="add-device-list-item">
+          <button class="button btn btn-info" ng-click="showAddDeviceTypePopup()">Add new device type</button>
+        </div>
+      </div>
+
+      <div class="list">
+
+        <label class="item item-input">
+          <div class="input-label">
+            <div class="x">Device Serial Number</div>
+          </div>
+          <input type="text" ng-model="newDeviceId.deviceId" ng-trim="false" maxlength="100" />
+        </label>
+
+      </div>
+
+      <div class="list">
+        <div class="add-device-list-item">
+          <button class="button btn btn-info" ng-click="generateId(selectedOrg.orgId)">Generate Device Serial Number</button>
+        </div>
+      </div>
+
+      <ul class="list">
+
+        <li class="item item-toggle">
+          Metadata
+          <label class="toggle toggle-energized">
+            <input type="checkbox" ng-model="isMetadata">
+            <div class="track">
+              <div class="handle"></div>
+            </div>
+          </label>
+        </li>
+
+      </ul>
+      <div ng-show="isMetadata">
+        <div data-ng-repeat="field in fields">
+          <input type="text" class="metadata-key" placeholder="Key" ng-model="field.key" maxlength="50" />
+          <input type="text" class="metadata-value" placeholder="Value" ng-model="field.value" maxlength="50" />
+          <button class="remove" ng-show="$last" ng-click="removeField()">-</button>
+        </div>
+
+        <div class="form-element">
+          <button class="button btn btn-info" ng-click="addField()">Add metadata field</button>
+        </div>
+      </div>
+      <br>
+      <div class="form-element">
+        <button class="button btn btn-info" ng-click="addDevice(newDeviceId.deviceId,selectedDeviceType.deviceType,selectedOrg.orgId,isMetadata)">Add Device</button>
+      </div>
+      <br><br>
+    </div>
+  </ion-content>
+</ion-modal-view>

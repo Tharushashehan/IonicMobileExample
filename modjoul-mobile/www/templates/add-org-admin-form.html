@@ -1,0 +1,27 @@
+<ion-modal-view>
+  <ion-header-bar>
+    <h1 class="title">Add Organization Admin</h1>
+    <button class="button button-clear button-primary cancel-button" ng-click="modal.hide()">Close</button>
+  </ion-header-bar>
+  <ion-content>
+    <div class="form">
+      <div class="form-element">
+        <input type="email" placeholder="Admin's Email Address" ng-model="adminEmail" maxlength="100" />
+      </div>
+
+      <div class="form-element">
+        <input type="text" placeholder="Admin's First Name" ng-model="adminFirstName" maxlength="50" />
+      </div>
+
+      <div class="form-element">
+        <input type="text" placeholder="Admin's Last Name" ng-model="adminLastName" maxlength="50" />
+      </div>
+
+      <div class="form-element">
+        <button class="button btn btn-info" ng-click="addorgAdmin(adminEmail,adminFirstName,adminLastName)">ADD</button>
+      </div>
+
+    </div>
+  </ion-content>
+</ion-modal-view>
+

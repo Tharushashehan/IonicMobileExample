@@ -1,0 +1,19 @@
+<ion-view view-title="Notifications">
+    <ion-content class="main-background">
+      <ion-refresher on-refresh="doRefresh()"></ion-refresher>
+
+        <div>
+          <div ng-if="isNoData" class="info-message" align="center"><h2>No Data</h2></div>
+            <div class="feed-item" ng-repeat="feedItem in feedList">
+                <div class="user-details">{{feedItem.name}} {{feedItem.message}}</div>
+                <div class="user-details"><i class="fa fa-clock-o" aria-hidden="true"></i> {{feedItem.time}}</div>
+                <div class="user-details" ng-if="feedItem.activity === 'Fall_Sideways'
+                                || feedItem.activity === 'Fall_Forward' || feedItem.activity === 'Fall_Backwards'">
+                    <button class="claim-button">Initiate Claim</button>
+                </div>
+            </div>
+
+        </div>
+
+    </ion-content>
+</ion-view>

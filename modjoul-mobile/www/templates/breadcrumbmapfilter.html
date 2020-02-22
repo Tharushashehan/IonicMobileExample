@@ -1,0 +1,30 @@
+<div class="overlay-panel">
+  <div class="checkbox-button">
+    <ion-toggle ng-model="showDrivingHistory" ng-change="drivingFilterChanged(showDrivingHistory)" class="toggle-no-background" >
+      {{strings.BREADCRUMB_FILTER_TITLES.DRIVING}}
+    </ion-toggle>
+  </div>
+
+  <div class="checkbox-button">
+    <ion-toggle ng-model="showLocationsHistory" ng-change="locationsFilterChanged(showLocationsHistory)" class="toggle-no-background">
+      {{strings.BREADCRUMB_FILTER_TITLES.LOCATIONS}}
+    </ion-toggle>
+  </div>
+
+  <div class="checkbox-button">
+    <div class="legend-item2"><span id="optimalRoute">●●●</span><label for="optimalRoute">Optimal Route</label></div>
+    <div class="legend-item2"><span id="actualRoute"><div class="line"><hr size="3" /></div></span><label for="actualRoute">Actual Route</label>
+    </div>
+    <!--<div>-->
+      <!--<div class="speed-button" ng-class="{'selected-speed': speedLevel === 1}" ng-click="changeSpeed(1)">-->
+        <!--1<img src="img/icons/fast-forward-black.png" width="20" height="20"/></div>-->
+      <!--<div class="speed-button" ng-class="{'selected-speed': speedLevel === 2}" ng-click="changeSpeed(2)">-->
+        <!--2<img src="img/icons/fast-forward-black.png" width="20" height="20"/></div>-->
+      <!--<div class="speed-button" ng-class="{'selected-speed': speedLevel === 4}" ng-click="changeSpeed(4)">-->
+        <!--4<img src="img/icons/fast-forward-black.png" width="20" height="20"/></div>-->
+    <!--</div>-->
+
+  </div>
+
+</div>
+

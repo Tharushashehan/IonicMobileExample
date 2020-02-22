@@ -1,0 +1,27 @@
+<div class="deviceType-form">
+
+      <div class="addDeviceType-element">
+        <h4 style="color:#ffffff;">Organization : {{selectedOrgName}}</h4>
+      </div>
+      <div class="addDeviceType-element">
+        <input type="text" placeholder="Device Type" ng-model="deviceTypeName.name" maxlength="100" />
+      </div>
+
+      <div class="addDeviceType-element">
+         <h4 style="color:#ffffff;">Metadata</h4>
+      </div>
+
+      <div  data-ng-repeat="field in typeFields">
+
+          <input type="text" class="metadata-key" placeholder="Key" ng-model="typeField.key" maxlength="50" />
+          <input type="text" class="metadata-value" placeholder="Value" ng-model="typeField.value" maxlength="50" />
+
+          <button class="remove" ng-show="$last" ng-click="removeDeviceTypeField()">-</button>
+      </div>
+
+      <div class="form-element">
+          <button class="button btn btn-info" ng-click="addDeviceTypeField()">Add metadata field</button>
+      </div>
+      <br>
+</div>
+

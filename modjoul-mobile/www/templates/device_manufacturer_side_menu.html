@@ -1,0 +1,62 @@
+<ion-side-menus enable-menu-with-back-views="true">
+    <ion-side-menu-content>
+        <ion-nav-bar class="bar-stable">
+            <ion-nav-buttons side="left">
+                <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+        </button>
+            </ion-nav-buttons>
+
+
+        </ion-nav-bar>
+        <ion-nav-view name="default-view"></ion-nav-view>
+    </ion-side-menu-content>
+
+    <ion-side-menu side="left">
+
+        <ion-content class="menu-content">
+          <ion-refresher on-refresh="doRefresh()"></ion-refresher>
+            <img ng-if="profile.profilePhoto" data-ng-src="data:{{profile.profileMimeType}};base64,{{profile.profilePhoto}}" class="side-menu-pic"/>
+            <div class="sidebar-profile-name-initials text-center" ng-if="!profile.profilePhoto">
+                {{profile.firstName.charAt(0)}}{{profile.lastName.charAt(0)}}
+            </div>
+            <div align="center">
+                <a class="user-name">{{ profile.firstName }} {{ profile.lastName }}</a>
+            </div>
+            <div class="list card">
+                <a class="item item-dark item-icon-left" menu-close href="#/device-manufacturer/dashboard">
+                    <i class="icon ion-stats-bars"></i>Dashboard
+                </a>
+                <a class="item item-dark item-icon-left" menu-close href="#/device-manufacturer/profile">
+                    <i class="icon ion-person"></i> Profile
+                </a>
+                <a class="item item-dark item-icon-left" menu-close href="tel:{{callSupportTel}}">
+                  <i class="icon ion-ios-telephone"></i> Call for Support
+                </a>
+                <a class="item item-dark item-icon-left" menu-close href="#/logout">
+                    <i class="icon ion-log-out"></i> Sign out
+                </a>
+            </div>
+
+
+        </ion-content>
+    </ion-side-menu>
+</ion-side-menus>
+
+<ion-footer-bar ng-hide="tabHide" align-title="center" class="side-bar-footer">
+
+    <ion-tabs class="tabs-positive tabs-icon-top main-bottom-tab">
+
+    <ion-tab href="#/device-manufacturer/dashboard" title="Dashboard"
+             icon-on="icon ion-stats-bars selected-ionic-tab-icon" icon-off="icon ion-stats-bars deselected-ionic-tab-icon">
+    </ion-tab>
+    <ion-tab href="#/device-manufacturer/administration" title="Manage Subscription"
+             icon-on="ion-gear-b selected-ionic-tab-icon" icon-off="ion-gear-b deselected-ionic-tab-icon">
+    </ion-tab>
+
+
+    </ion-tabs>
+
+</ion-footer-bar>
+
+
+

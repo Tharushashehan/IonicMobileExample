@@ -1,0 +1,124 @@
+<ion-modal-view>
+  <ion-header-bar>
+    <h1 class="title">Add User</h1>
+    <button class="button button-clear button-primary cancel-button" ng-click="modal.remove()">Close</button>
+  </ion-header-bar>
+  <ion-content>
+    <div class="form">
+      <div class="list">
+
+        <label class="item item-input">
+          <div class="input-label">
+            Email
+          </div>
+          <input type="text" ng-model="userEmailAddress" maxlength="100" />
+        </label>
+
+      </div>
+
+      <div class="list">
+
+        <label class="item item-input">
+          <div class="input-label">
+            First Name
+          </div>
+          <input type="text" ng-model="userFirstName" maxlength="50" />
+        </label>
+
+      </div>
+
+      <div class="list">
+
+        <label class="item item-input">
+          <div class="input-label">
+            Last Name
+          </div>
+          <input type="text" ng-model="userLastName" maxlength="50" />
+        </label>
+
+      </div>
+
+      <div class="list">
+
+        <label class="item item-input">
+          <div class="input-label">
+            Designation
+          </div>
+          <input type="text" ng-model="userJob" maxlength="50" />
+        </label>
+
+      </div>
+
+      <div class="list">
+
+        <label class="item item-input item-select">
+          <div class="input-label">
+            Role
+          </div>
+          <select class="drop-down" ng-model="selectedRole" >
+            <option value="{{role.id}}" ng-repeat="role in strings.ROLES">{{role.prettyName}}</option>
+          </select>
+        </label>
+
+      </div>
+
+      <div class="list">
+
+        <label class="item item-input">
+          <div class="input-label">
+            Supervisor Name
+          </div>
+          <input type="text" ng-model="supervisorName" maxlength="50" />
+        </label>
+
+      </div>
+
+
+      <div class="list">
+
+        <label class="item item-input item-select">
+          <div class="input-label">
+            Location
+          </div>
+          <select class = "drop-down" ng-model="selectedLocation" >
+            <option value="{{location.locationId}}" ng-repeat="location in locationNameIdMapping ">{{location.locationName}}</option>
+          </select>
+        </label>
+
+      </div>
+
+
+      <div class="list" ng-show="selectedRole == strings.ROLES[0].id">
+
+        <label class="item item-input item-select">
+          <div class="input-label">
+           Work Type
+          </div>
+          <select class = "drop-down" ng-model="selectedWorkType" >
+            <option value="{{workType.id}}" ng-repeat="workType in strings.WORK_TYPES ">{{workType.prettyName}}</option>
+          </select>
+        </label>
+
+      </div>
+
+      <div class="list">
+
+        <label class="item item-input">
+          <div class="input-label">
+            Device Serial Number
+          </div>
+          <input type="text" ng-model="device" maxlength="50" />
+        </label>
+
+      </div>
+
+
+      <div class="form-element">
+        <button class="button btn btn-info" ng-click="adduser(userEmailAddress,userFirstName,userLastName,userJob,selectedRole,supervisorName,device,selectedLocation,selectedWorkType)">Add Employee</button>
+      </div>
+
+      <br><br>
+    </div>
+  </ion-content>
+</ion-modal-view>
+

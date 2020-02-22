@@ -1,0 +1,178 @@
+<ion-side-menus enable-menu-with-back-views="true">
+    <ion-side-menu-content>
+        <ion-nav-bar class="bar-stable">
+            <ion-nav-buttons side="left">
+                <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+                </button>
+            </ion-nav-buttons>
+
+
+            <ion-nav-buttons side="secondary">
+                <button class="button button-icon button-clear" menu-toggle="right">
+                    <i class="fa fa-users" aria-hidden="true"></i>
+                </button>
+            </ion-nav-buttons>
+
+            <ion-nav-buttons side="right">
+                <button class="button button-icon button-clear" ng-click="openCalendar()">
+                    <i class="fa fa-calendar" aria-hidden="true"></i>
+                </button>
+            </ion-nav-buttons>
+
+        </ion-nav-bar>
+
+        <ion-nav-view name="default-view"></ion-nav-view>
+    </ion-side-menu-content>
+
+    <ion-side-menu side="left">
+
+        <ion-content class="menu-content">
+            <img ng-if="profile.profilePhoto" data-ng-src="data:{{profile.profileMimeType}};base64,{{profile.profilePhoto}}" class="side-menu-pic"/>
+            <div class="sidebar-profile-name-initials text-center" ng-if="!profile.profilePhoto">
+                {{profile.firstName.charAt(0)}}{{profile.lastName.charAt(0)}}
+            </div>
+            <div align="center">
+                <a class="user-name">{{ profile.firstName }} {{ profile.lastName }}</a>
+            </div>
+            <div class="list card">
+                <a class="item item-dark item-icon-left" menu-close href="#/supervisor/productivity">
+                    <i class="icon ion-stats-bars"></i> Employee Overview
+                </a>
+                <a class="item item-dark item-icon-left" menu-close href="#/supervisor/supervisor-profile">
+                    <i class="icon ion-person"></i> Profile
+                </a>
+                <a class="item item-dark item-icon-left" menu-close href="#/supervisor/user-management">
+                    <i class="icon ion-person-stalker"></i> Users
+                </a>
+                <!--<a class="item item-dark item-icon-left" menu-close href="#/supervisor/statistics">-->
+                    <!--<i class="icon ion-ios-pie"></i> Statistics-->
+                <!--</a>-->
+                <!--<a class="item item-dark item-icon-left" menu-close href="#/employee/settings">-->
+                <!--<i class="icon ion-gear-b"></i> Settings-->
+                <!--</a>-->
+                <!--<a class="item item-dark item-icon-left" menu-close href="#/supervisor/notifications">-->
+                <!--<i class="icon ion-android-notifications"></i> Notifications-->
+                <!--</a>-->
+                <a class="item item-dark item-icon-left" menu-close href="tel:{{callSupportTel}}">
+                  <i class="icon ion-ios-telephone"></i> Call for Support
+                </a>
+                <a class="item item-dark item-icon-left" menu-close href="#/logout">
+                    <i class="icon ion-log-out"></i> Sign out
+                </a>
+            </div>
+        </ion-content>
+    </ion-side-menu>
+
+
+    <ion-side-menu side="right" ng-controller="SupervisorEmployeeSelectionController">
+        <ion-content class="menu-content " scroll="false">
+            <div align="center" class="navigation-bar">
+                <!--<div align="center" class="navigation-title-item">-->
+                <a class="navigation-bar-title-text">Select Employee</a>
+                <!--</div>-->
+            </div>
+
+            <div class="selectEmployeeArea">
+
+
+                <div class="selectedEmp">
+                    <div class="row1 selectedEmployeeRow">
+                        <div class="selectedEmployeeImage">
+                            <div class="supervisor-sidebar-selected-employee-profile-name-initials text-center" ng-if="!selectedEmployee.profilePhoto && selectedEmployee.userId!='all'">
+                                {{selectedEmployee.firstName.charAt(0).toUpperCase()}} {{selectedEmployee.lastName.charAt(0).toUpperCase()}}
+                            </div>
+                            <img ng-if="!selectedEmployee.profilePhoto && selectedEmployee.userId=='all'"
+                                 src="img/icons/fa_users.png" class="select-employee-pic"/>
+                            <img ng-if="selectedEmployee.profilePhoto"
+                                 data-ng-src="data:{{selectedEmployee.profileMimeType}};base64,{{selectedEmployee.profilePhoto}}"
+                                 class="selected-employee-pic"/>
+
+                        </div>
+                        <div class="selectedEmployeeTitle">
+                            <a class="user-name">{{ selectedEmployee.firstName }} {{ selectedEmployee.lastName
+                                }}</a><br>
+                            <a class="user-designation">{{selectedEmployee.job}}</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="search-bar">
+                    <label class="item-input-wrapper search">
+                        <i class="icon ion-search placeholder-icon"></i>
+                        <input placeholder="Search Employee" type="text" maxlength="100" ng-model="searchQuery.first"
+                               class="search-text-box">
+                    </label>
+                </div>
+
+                <ion-scroll direction="y" class="modjoul-right-sidebar-scroll">
+                    <div menu-close class="row1 employeeListRow"
+                         ng-repeat="employee in employees | filter : filterEmployee"
+                         ng-click="selectEmployee(employee);"
+                         ng-class="{employeeListRowSelected: employee.id === selectedEmp}">
+                        <div class="selectedEmployeeImage">
+                            <img ng-if="employee.userId=='all'" src="img/icons/fa_users.png"
+                                 class="select-employee-pic"/>
+                            <div class="supervisor-sidebar-employee-profile-name-initials text-center" ng-if="!employee.profilePhoto && employee.userId!='all'">
+                                {{employee.firstName.charAt(0).toUpperCase()}} {{employee.lastName.charAt(0).toUpperCase()}}
+                            </div>
+                            <img ng-if="employee.profilePhoto"
+                                 data-ng-src="data:{{employee.profileMimeType}};base64,{{employee.profilePhoto}}"
+                                 class="select-employee-pic"/>
+                        </div>
+                        <div class="selectedEmployeeTitle">
+                            <a class="employee-name"> {{employee.firstName}} {{employee.lastName}} </a>
+                            <div class="dialTitle" ng-if="beltStatus && employee.userId !== 'all'">
+                                Belt Status
+                                <span class="beltStatus" ng-class="isStatusAvailable(employee) ? 'status-green' : 'status-red'"><i class="fa fa-circle" aria-hidden="true"></i></span>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </ion-scroll>
+
+
+            </div>
+        </ion-content>
+    </ion-side-menu>
+</ion-side-menus>
+
+
+<ion-footer-bar ng-hide="tabHide" align-title="center" class="side-bar-footer">
+    <ion-tabs ng-hide="tabHide" class="tabs-positive tabs-icon-top main-bottom-tab">
+
+        <ion-tab href="#/supervisor/productivity" ng-click="navProductivity()" title="Employee Overview"
+                 icon-on="ion-person-stalker selected-ionic-tab-icon"
+                 icon-off="ion-person-stalker deselected-ionic-tab-icon">
+        </ion-tab>
+
+        <!--<ion-tab href="#/supervisor/now" ng-click="navNow()" title="Now"-->
+                 <!--icon-on="ion-stats-bars selected-ionic-tab-icon"-->
+                 <!--icon-off="ion-stats-bars deselected-ionic-tab-icon">-->
+        <!--</ion-tab>-->
+
+        <ion-tab href="#/supervisor/statistics" title="Statistics"
+                 icon-on="ion-pie-graph selected-ionic-tab-icon"
+                 icon-off="ion-pie-graph deselected-ionic-tab-icon">
+        </ion-tab>
+
+        <ion-tab href="#/supervisor/supervisor-feed" title="Feed"
+                 icon-on="ion-ios-paper selected-ionic-tab-icon"
+                 icon-off="ion-ios-paper deselected-ionic-tab-icon">
+        </ion-tab>
+
+
+
+        <!--<ion-tab href="#/supervisor/safety" ng-click="navSafety()" title="Safety Rankings"-->
+                 <!--icon-on="ion-medkit selected-ionic-tab-icon"-->
+                 <!--icon-off="ion-medkit deselected-ionic-tab-icon">-->
+        <!--</ion-tab>-->
+
+        <!--<ion-tab href="#/supervisor/supervisor-breadcrumb" title="Breadcrumb"-->
+                 <!--icon-on="ion-android-walk selected-ionic-tab-icon"-->
+                 <!--icon-off="ion-android-walk deselected-ionic-tab-icon">-->
+        <!--</ion-tab>-->
+
+    </ion-tabs>
+</ion-footer-bar>

@@ -1,0 +1,118 @@
+<ion-view view-title="Safety Rankings">
+  <ion-content class="main-background">
+    <ion-refresher on-refresh="doRefresh()"></ion-refresher>
+
+
+    <div class="accordionTitle" ng-click="toggleGroup('card1')">Rankings
+      <span><i class="fa fa-angle-down" aria-hidden="true" ng-show="!isAccordionShown('card1')"></i>
+                <i class="fa fa-angle-up" aria-hidden="true" ng-show="isAccordionShown('card1')"></i>
+            </span>
+    </div>
+
+    <div class="leaderboard accordion-body" ng-show="isAccordionShown('card1')">
+
+      <div align="center" class="period-segment-group">
+        <div class="frequency-tab">
+          <ti-segmented-control on-select="rankingSegmentClicked($index)">
+            <ti-segmented-control-button class="period-segment" title="'Near miss'"
+                                         selected></ti-segmented-control-button>
+            <ti-segmented-control-button class="period-segment"
+                                         title="'Aggressive'"></ti-segmented-control-button>
+          </ti-segmented-control>
+        </div>
+      </div>
+
+      <div class="leaderboard-rankings" ng-if="selectedRankType == 'nearmiss'">
+        <!--<div ng-if="leaderboardAggressiveEvents" class="employee-ranking-header">Aggressive Events Rankings</div>-->
+        <div class="feed-item" ng-repeat="feedItem in leaderboardAggressiveEvents">
+          <div class="leaderboard-photo">
+            <img class="timeline-profile-photo" width="50" height="50"
+                 data-ng-src="data:{{feedItem.profileMimeType}};base64,{{feedItem.profilePhoto}}"/>
+          </div>
+          <div class="user-details">{{feedItem.name}}</div>
+          <div class="user-details leaderboard-rank-value">{{feedItem.value.toFixed(2)}}</div>
+          <div class="leaderboard-rank">{{feedItem.rank}}</div>
+        </div>
+      </div>
+      <div class="leaderboard-rankings" ng-if="selectedRankType == 'aggressive'">
+        <!--<div ng-if="leaderboardNearMissEvents" class="employee-ranking-header">Near Miss Events Rankings</div>-->
+        <div class="feed-item" ng-repeat="feedItem in leaderboardNearMissEvents">
+          <div class="leaderboard-photo">
+            <img class="timeline-profile-photo" width="50" height="50"
+                 data-ng-src="data:{{feedItem.profileMimeType}};base64,{{feedItem.profilePhoto}}"/>
+          </div>
+          <div class="user-details">{{feedItem.name}}</div>
+          <div class="user-details leaderboard-rank-value">{{feedItem.value.toFixed(2)}}</div>
+          <div class="leaderboard-rank">{{feedItem.rank}}</div>
+        </div>
+      </div>
+    </div>
+    <br>
+
+    <div class="accordionTitle" ng-click="toggleGroup('card2')">Metrics
+      <span>
+            <i class="fa fa-angle-down" aria-hidden="true" ng-show="!isAccordionShown('card2')"></i>
+            <i class="fa fa-angle-up" aria-hidden="true" ng-show="isAccordionShown('card2')"></i>
+            </span>
+    </div>
+    <div class="leaderboard accordion-body" ng-show="isAccordionShown('card2')">
+
+      <div align="center" class="period-segment-group">
+        <div class="frequency-tab">
+          <ti-segmented-control on-select="segmentClicked($index)">
+            <ti-segmented-control-button class="period-segment" title="'Daily'"
+                                         selected></ti-segmented-control-button>
+            <ti-segmented-control-button class="period-segment-nosideborders"
+                                         title="'Weekly'"></ti-segmented-control-button>
+            <ti-segmented-control-button class="period-segment"
+                                         title="'Monthly'"></ti-segmented-control-button>
+          </ti-segmented-control>
+        </div>
+      </div>
+
+      <div class="row" align="center">
+
+        <div ng-if="orgConfigs.nearMissEvents.falling || orgConfigs.nearMissEvents.slipping || orgConfigs.nearMissEvents.tripping"
+             class="col rounded-black-box-rates-big-flex graph-tip" ng-click="showNearMissEventsGraph()" >
+          <div class="item-prod-title-narrow">
+            <div class="idletime-title text-uppercase">Near Misses</div>
+            <div>
+              <div class="dialGroup">
+                <div class="dialValueMetric">{{safetyEmployeeRankingNearMissEvents.NearMissWork || 0}}</div>
+                <div class="dialUnit">{{safetyEmployeeRankingNearMissEventsUnits.NearMissWork}}</div>
+                <div img ng-if="!safetyEmployeeRankingNearMissEventsUnits.NearMissWork" class="dialSteps">per hour</div>
+                <!--<div class="dialValueRateWithUnit">{{safetyEmployeeRankingNearMissEvents.NearMissWorkRate || 0}} <br>{{safetyEmployeeRankingNearMissEventsUnits.NearMissWorkRate}}</div>-->
+                <!--<div class="dialUnit">{{safetyEmployeeRankingNearMissEventsUnits.NearMissWorkRate}}</div>-->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row" align="center">
+        <div ng-if="orgConfigs.aggressiveEvents.hardAcceleration || orgConfigs.aggressiveEvents.hardBrake ||
+        orgConfigs.aggressiveEvents.hardCorner || orgConfigs.aggressiveEvents.overSpeedLimit ||
+        orgConfigs.aggressiveEvents.swerve"
+             class="col rounded-black-box-rates-big-flex graph-tip" ng-click="showAggressiveDriveTimeGraph()" >
+          <div class="item-prod-title-narrow">
+            <div class="idletime-title">AGGRESSIVE EVENTS</div>
+            <div>
+              <div class="dialGroup">
+                <div class="dialValueMetric">{{safetyEmployeeRankingAggressiveEventsDrive.AggressiveEventsCount || 0}}</div>
+                <div class="dialUnit">{{safetyEmployeeRankingAggressiveEventsDriveUnits.AggressiveEventsCount}}</div>
+                <div img ng-if="!safetyEmployeeRankingAggressiveEventsDriveUnits.AggressiveEventsCount" class="dialSteps"></div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+    <br>
+    <br>
+
+  </ion-content>
+</ion-view>

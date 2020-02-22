@@ -1,0 +1,19 @@
+<ion-view view-title="Profile">
+    <ion-content>
+        <ion-refresher on-refresh="doRefresh()"></ion-refresher>
+        <ion-item class="profile-img-item">
+            <img ng-if="profile.user.profilePhoto" data-ng-src="data:{{profile.user.profileMimeType}};base64,{{profile.user.profilePhoto}}"
+                 alt="{{profile.user.orgName}}" class="profile-img-circle" ng-click="editProfilePicture()" />
+            <div class="profile-name-initials" ng-if="!profile.user.profilePhoto">
+                {{profile.user.firstName.charAt(0)}}{{profile.user.lastName.charAt(0)}}
+            </div>
+        </ion-item>
+        <div class="bg-color-modjoul-black" align="center">
+            <a class="profile-user-name">{{profile.user.firstName }} {{ profile.user.lastName }}</a>
+        </div>
+        <div class="profile-details">
+            <ul class="list">
+            </ul>
+        </div>
+    </ion-content>
+</ion-view>

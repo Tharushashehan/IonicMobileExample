@@ -1,0 +1,168 @@
+<ion-view view-title="Drive">
+    <ion-content class="main-background">
+
+        <ion-refresher on-refresh="doRefresh()"></ion-refresher>
+
+        <!--<div align="center" class="period-segment-group">-->
+            <!--<div class="frequency-tab">-->
+                <!--<ti-segmented-control on-select="segmentClicked($index)">-->
+                    <!--<ti-segmented-control-button class="period-segment" title="'Daily'"-->
+                                                 <!--selected></ti-segmented-control-button>-->
+                    <!--<ti-segmented-control-button class="period-segment-nosideborders"-->
+                                                 <!--title="'Trend Analysis'"></ti-segmented-control-button>-->
+
+                <!--</ti-segmented-control>-->
+            <!--</div>-->
+        <!--</div>-->
+
+        <!--<div ng-if="selectedType == strings.RISKMANAGERTREND[0]">-->
+
+            <!--<div class="metrics-heading"> FOUNDATIONS</div>-->
+
+            <!--<div class="row">-->
+
+                <!--<div class="col" align="center">-->
+
+                    <!--<div class="rounded-black-box-rates-flex2 graph-tip" ng-click="showDriveGraph('driving distance')">-->
+                        <!--<div class="item-heights-title-narrow">-->
+                            <!--<div class="idletime-title">TOTAL MILES DRIVEN</div>-->
+                        <!--</div>-->
+                        <!--<div class="dialValueSafety">{{driveSummary['drive-time'].driving.DrivingDistance || 0}}</div>-->
+                        <!--<div class="dialUnit"> {{driveSummaryUnits['drive-time'].driving.DrivingDistance}}&nbsp;</div>-->
+
+                    <!--</div>-->
+
+                <!--</div>-->
+
+
+                <!--<div class="col" align="center">-->
+
+                    <!--<div class="rounded-black-box-rates-flex2 graph-tip" ng-click="showDriveGraph('driving time')">-->
+                        <!--<div class="item-heights-title-narrow">-->
+                            <!--<div class="idletime-title">TOTAL TIME DRIVING</div>-->
+                        <!--</div>-->
+                        <!--<div class="dialValueSafety time-text">-->
+                            <!--<duration-format duration="driveSummary['drive-time'].driving.DrivingTime | timeFormatFilter:driveSummaryUnits['drive-time'].driving.DrivingTime || '0:0:0'" is-formatted="true"></duration-format>-->
+
+                        <!--</div>-->
+                        <!--<div class="dialUnit">&nbsp;</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+
+
+            <!--</div>-->
+
+
+            <!--<div class="metrics-heading"> METRICS</div>-->
+
+            <!--<div class="row">-->
+                <!--<div class="col" align="center">-->
+
+                    <!--<div class="rounded-black-box-rates-flex2 graph-tip" ng-click="showDriveGraph('aggressive events')">-->
+                        <!--<div class="item-heights-title-narrow">-->
+                            <!--<div class="idletime-title uppercase">{{strings.AGGRESSIVE_DRIVING_EVENTS}} Events</div>-->
+                        <!--</div>-->
+                        <!--<div class="dialValueSafety">{{driveSummary['aggressive-events'].summary.AggressiveEventsCount-->
+                            <!--||-->
+                            <!--0}}-->
+                        <!--</div>-->
+                        <!--<div class="dialUnit"> {{driveSummaryUnits['aggressive-events'].summary.AggressiveEventsCount}}-->
+                        <!--</div>-->
+
+                    <!--</div>-->
+
+                <!--</div>-->
+            <!--</div>-->
+
+
+            <!--<div class="metrics-heading"> COUNTS</div>-->
+
+            <!--<div class="row">-->
+                <!--<div class="col" align="center">-->
+
+                    <!--<div class="rounded-black-box-rates-flex2 graph-tip" ng-click="showDriveGraph('acceleration')">-->
+                        <!--<div class="item-heights-title-narrow">-->
+                            <!--<div class="idletime-title uppercase">Hard Acceleration</div>-->
+                        <!--</div>-->
+                        <!--<div class="dialValueSafety">-->
+                            <!--{{driveSummary['aggressive-events']['hard-acceleration'].HardAccelerationCount || 0}}-->
+                        <!--</div>-->
+                        <!--<div class="dialUnit">-->
+                            <!--{{driveSummaryUnits['aggressive-events']['hard-acceleration'].HardAccelerationCount}}-->
+                        <!--</div>-->
+                    <!--</div>-->
+
+                <!--</div>-->
+
+                <!--<div class="col" align="center">-->
+                    <!--<div class="rounded-black-box-rates-flex2 graph-tip" ng-click="showDriveGraph('brakes')">-->
+                        <!--<div class="item-heights-title-narrow">-->
+                            <!--<div class="idletime-title uppercase">Hard Braking</div>-->
+                        <!--</div>-->
+                        <!--<div class="dialValueSafety">{{driveSummary['aggressive-events']['hard-brake'].BrakeCount || 0}}-->
+                        <!--</div>-->
+                        <!--<div class="dialUnit">{{driveSummaryUnits['aggressive-events']['hard-brake'].BrakeCount}}</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+
+            <!--</div>-->
+
+            <!--<div class="row">-->
+                <!--<div class="col" align="center">-->
+
+                    <!--<div class="rounded-black-box-rates-flex2 graph-tip" ng-click="showDriveGraph('hard corners')">-->
+                        <!--<div class="item-heights-title-narrow">-->
+                            <!--<div class="idletime-title uppercase">Hard Cornering</div>-->
+                        <!--</div>-->
+                        <!--<div class="dialValueSafety">{{driveSummary['aggressive-events']['hard-corner'].HardCornersCount-->
+                            <!--||-->
+                            <!--0}}-->
+                        <!--</div>-->
+                        <!--<div class="dialUnit">-->
+                            <!--{{driveSummaryUnits['aggressive-events']['hard-corner'].HardCornersCount}}-->
+                        <!--</div>-->
+
+                    <!--</div>-->
+
+                <!--</div>-->
+
+
+                <!--<div class="col" align="center">-->
+
+                    <!--<div class="rounded-black-box-rates-flex2 graph-tip" ng-click="showDriveGraph('swerves')">-->
+                        <!--<div class="item-heights-title-narrow">-->
+                            <!--<div class="idletime-title uppercase">Hard Swerving</div>-->
+                        <!--</div>-->
+                        <!--<div class="dialValueSafety">{{driveSummary['aggressive-events'].swerve.SwervesCount || 0}}-->
+                        <!--</div>-->
+                        <!--<div class="dialUnit">{{driveSummaryUnits['aggressive-events'].swerve.SwervesCount}}</div>-->
+                    <!--</div>-->
+
+                <!--</div>-->
+
+
+            <!--</div>-->
+        <!--</div>-->
+
+
+        <div class="trendAnlysisArea">
+
+            <br><br>
+
+
+            <input type="text" name="startDate" ng-model="startDateText" ng-readonly="true" placeholder="Start Date"
+                   ng-click="selectStartDate()"/>
+            <input type="text" name="endDate" ng-model="endDateText" ng-readonly="true" placeholder="End Date"
+                   ng-click="selectEndDate()"/>
+
+            <br> <br>
+            <button class="button button-full button-positive-orange" ng-click="getTrendAnalysis()">View Trend</button>
+
+            <div class="metrics-heading uppercase">Driving Safety Events</div>
+            <br><br>
+            <div id="drive-trend-chart"></div>
+        </div>
+
+        <br>
+    </ion-content>
+</ion-view>

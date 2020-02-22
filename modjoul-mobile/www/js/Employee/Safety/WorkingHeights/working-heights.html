@@ -1,0 +1,74 @@
+<ion-view view-title="Working from heights">
+    <ion-nav-bar class="bar-positive">
+        <ion-nav-back-button>
+        </ion-nav-back-button>
+        <ion-nav-buttons side="secondary">
+            <calendar-selector></calendar-selector>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-content class="main-background">
+        <ion-refresher on-refresh="doRefresh()"></ion-refresher>
+        <br>
+        <last-activity-time trigger="triggerValue"></last-activity-time>
+        <div align="center" class="period-segment-group">
+            <div class="frequency-tab">
+                <ti-segmented-control on-select="segmentClicked($index)">
+                    <ti-segmented-control-button class="period-segment" title="'Daily'"
+                                                 selected></ti-segmented-control-button>
+                    <ti-segmented-control-button class="period-segment-nosideborders"
+                                                 title="'Weekly'"></ti-segmented-control-button>
+                    <ti-segmented-control-button class="period-segment" title="'Monthly'"></ti-segmented-control-button>
+                </ti-segmented-control>
+            </div>
+        </div>
+
+        <div class="dialset-heights1-items" align="center">
+            <div class="rounded-black-box-heights1" id="empMaxHeight">
+                <div class="item-heights-title-narrow">
+                    <div class="idletime-title">MAXIMUM HEIGHT</div>
+                </div>
+                <div class="dialValueSafety">{{workingHeightsSummary[strings.ACTIVITIES_MAPPING.WORK_FROM_HEIGHTS_PARENT][strings.ACTIVITIES_MAPPING.ALTITUDE_MAX] || 0}}</div>
+                <div class="dialUnit">{{workingHeightsSummaryUnits[strings.ACTIVITIES_MAPPING.WORK_FROM_HEIGHTS_PARENT][strings.ACTIVITIES_MAPPING.ALTITUDE_MAX]}}&nbsp;</div>
+            </div>
+            <div class="rounded-black-box-heights2" id="empHeightDuration">
+                <div class="item-heights-title-narrow">
+                    <div class="idletime-title">DURATION</div>
+                </div>
+                <div class="dialValueSafety time-text">
+                    <duration-format duration="workingHeightsSummary[strings.ACTIVITIES_MAPPING.WORK_FROM_HEIGHTS_PARENT][strings.ACTIVITIES_MAPPING.WORKING_HEIGHT_TIME] | timeFormatFilter:workingHeightsSummaryUnits[strings.ACTIVITIES_MAPPING.WORK_FROM_HEIGHTS_PARENT][strings.ACTIVITIES_MAPPING.WORKING_HEIGHT_TIME] || 0:0:0" is-formatted="true"></duration-format>
+
+                </div>
+                <div class="dialUnit">&nbsp;</div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div align="center" class="col card-safety-element">
+                <div>
+                    <div align="center" class="col rounded-black-box" id="empClimbingLadder">
+                        <div class="item-safety-title item_safety-text-wrap">
+                            <span class="idletime-title uppercase">Climbing Up/Down Ladder</span>
+                        </div>
+                        <div class="item-safety-value item_safety-divider">
+                            <span class="attribute-driveValue">{{workingHeightsSummary[strings.ACTIVITIES_MAPPING.WORK_FROM_HEIGHTS_PARENT][strings.ACTIVITIES_MAPPING.WORKING_HEIGHT_COUNT] || 0}}</span>
+                        </div>
+                        <div class="dialUnit">{{workingHeightsSummaryUnits[strings.ACTIVITIES_MAPPING.WORK_FROM_HEIGHTS_PARENT][strings.ACTIVITIES_MAPPING.WORKING_HEIGHT_COUNT] }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div align="center">
+            <columns-chart ng-if="aggregateChartData"
+                           options="aggregateGraphOptions"
+                           data="aggregateChartData">
+            </columns-chart>
+        </div>
+
+
+        <br>
+
+    </ion-content>
+</ion-view>

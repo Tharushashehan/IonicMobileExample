@@ -1,0 +1,37 @@
+<ion-view view-title="Breadcrumb">
+    <ion-content scroll="false" class="main-background">
+        <div class="map-area">
+
+            <div class="breadcrumb-button-panel">
+                <div class="map-overlay-button" ng-click="filterBreadcrumb()"><i class="fa fa-filter"
+                                                                                 aria-hidden="true"></i></div>
+                <div class="map-overlay-button" ng-show="isDataLoaded" ng-click="showStreetview(showingStreetview)"><i class="fa fa-street-view"
+                                                                                                aria-hidden="true"></i>
+                </div>
+            </div>
+
+            <!--<div class="breadcrumb-button-panel"  ng-show="isDataLoaded">-->
+                <!--<button class="map-overlay-button2 no-border" ng-class="{'map-unselected-button': !isAnimationStarted }" ng-disabled="!isAnimationStarted" ng-click="playButtonClick()">-->
+                    <!--<i class="fa fa-stop" aria-hidden="true"></i>-->
+                <!--</button>-->
+
+                <!--<button class="map-overlay-button2 no-border" ng-class="{'map-unselected-button': !isResumed }" ng-disabled="!isResumed" ng-click="pauseButtonClick()">-->
+                    <!--<i class="fa fa-pause" aria-hidden="true"></i>-->
+                <!--</button>-->
+
+                <!--<button class="map-overlay-button2 no-border" ng-class="{'map-unselected-button': isResumed }" ng-disabled="isResumed" ng-click="startAnimation()">-->
+                    <!--<i class="fa fa-play" aria-hidden="true"></i>-->
+                <!--</button>-->
+
+            <!--</div>-->
+
+            <div class="breadcrumb-slider-panel" ng-show="isDataLoaded">
+                <rzslider rz-slider-model="animationSlider" rz-slider-options="animationSliderOptions"></rzslider>
+            </div>
+
+            <div id="map-breadcrumb" class="gMaps" data-tap-disabled="true"></div>
+            <div class="pano" ng-show="showingStreetview" id="pano" ></div>
+
+        </div>
+    </ion-content>
+</ion-view>

@@ -1,0 +1,580 @@
+<ion-view view-title="Scorecard">
+    <ion-nav-buttons side="right">
+        <button class="button button-icon button-clear" ng-click="configureScorecard()">
+            <i class="fa fa-cog" aria-hidden="true"></i>
+        </button>
+    </ion-nav-buttons>
+
+    <ion-content class="main-background">
+        <ion-refresher on-refresh="doRefresh()"></ion-refresher>
+        <br>
+        <last-activity-time trigger="triggerValue"></last-activity-time>
+
+        <div class="scorecard-category" ng-if="selected[strings.ORG_CONFIG.ACTUAL.workTime][strings.ORG_CONFIG.ACTUAL .walking] ||
+             selected[strings.ORG_CONFIG.ACTUAL.workTime][strings.ORG_CONFIG.ACTUAL.bending] ||
+             selected[strings.ORG_CONFIG.ACTUAL.workTime][strings.ORG_CONFIG.ACTUAL.sitting] ||
+             selected[strings.ORG_CONFIG.ACTUAL.workTime][strings.ORG_CONFIG.ACTUAL.standing] ||
+             selected[strings.ORG_CONFIG.ACTUAL.workTime][strings.ORG_CONFIG.ACTUAL.driving] ||
+             selected[strings.ORG_CONFIG.ACTUAL.workTime][strings.ORG_CONFIG.ACTUAL.other] ||
+             selected[strings.ORG_CONFIG.ACTUAL.workTime][strings.ORG_CONFIG.ACTUAL.twisting]">
+            <div class="category-heading-section" id="empScWork">
+                <div class="category-heading-title">Work</div>
+                <div class="category-heading-values total-value">
+                    <duration-format duration="scorecardMetrics.work_time.summary.WorkTime | timeFormatFilter: scorecardMetricsUnits.work_time.summary.WorkTime || '0:0:0'" is-formatted="true"></duration-format>
+                    </div>
+                <!--<div class="rate-value">HH:MM:SS</div>-->
+                <div class="rate-value">
+                    <span class="dialValueRate2">{{scorecardMetrics.work_time.summary.WorkTimePercentage || 0 }}{{scorecardMetricsUnits.work_time.summary.WorkTimePercentage || "%" }} of shift time</span>
+                </div>
+            </div>
+
+            <div class="category-body-section">
+                <!--<div class="row card-row">-->
+                <!--<div align="center" class="col card-element-single">-->
+                <!--<div class="attribute-lbl">Work</div>-->
+                <!--<div class="attribute-value">{{scoreCardWorkTimes.summary.WorkTimePercentage || 0}}%</div>-->
+                <!--<br>-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--<div class="row card-row">-->
+                <!--<div align="center" class="col card-element-left">-->
+                <!--<div class="attribute-lbl">Distance</div>-->
+                <!--<div class="attribute-value">{{scoreCardWorkTimes.summary.HowFar || 0}}</div>-->
+                <!--<div class="attribute-lbl margin-top-5">{{scoreCardWorkUnits.summary.HowFar}}</div>-->
+
+                <!--</div>-->
+                <!--<div align="center" class="col card-element-right">-->
+                <!--<div class="attribute-lbl">Speed</div>-->
+                <!--<div class="attribute-value">{{scoreCardWorkTimes.summary.HowFast || 0}}</div>-->
+                <!--<div class="attribute-lbl margin-top-5">{{scoreCardWorkUnits.summary.HowFast}}</div>-->
+                <!--<br>-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--<div class="row card-row">-->
+                <!--<div align="center" class="col card-element-left">-->
+                <!--<div class="attribute-lbl">Duration</div>-->
+                <!--<div class="attribute-value">{{scoreCardWorkTimes.summary.HowLong || 0}}</div>-->
+                <!--<div class="attribute-lbl margin-top-5">{{scoreCardWorkUnits.summary.HowLong}}</div>-->
+                <!--</div>-->
+                <!--<div align="center" class="col card-element-right">-->
+                <!--<div class="attribute-lbl">How Many Steps</div>-->
+                <!--<div class="attribute-value">{{scoreCardWorkTimes.summary.HowManySteps || 0}}</div>-->
+                <!--<div class="attribute-lbl margin-top-5">{{scoreCardWorkUnits.summary.HowManySteps}}</div>-->
+                <!--</div>-->
+                <!--</div>-->
+
+                <div class="metric-group"
+                     ng-if="selected[strings.ORG_CONFIG.ACTUAL.workTime][strings.ORG_CONFIG.ACTUAL.walking]">
+                    <div class="metric-type-title">Walking</div>
+                    <div class="border-box">
+
+                        <div class="dialset-scorecard-items" align="center">
+                            <div align="center" class="col card-element-left" id="empScWalkingSteps">
+                                <div class="attribute-lbl">Steps</div>
+                                <div class="attribute-value">{{scorecardMetrics.work_time.walking.TotalWalkingSteps || 0 }}</div>
+                                <div class="attribute-lbl margin-top-5">{{scorecardMetricsUnits.work_time.walking.TotalWalkingSteps}}
+                                </div>
+                            </div>
+
+                            <div align="center" class="col card-element-right" id="empScWalkingDistance">
+                                <div class="attribute-lbl">Distance</div>
+                                <div class="attribute-value">{{scorecardMetrics.work_time.walking.TotalWalkingDistance || 0 }}</div>
+                                <div class="attribute-lbl margin-top-5">{{scorecardMetricsUnits.work_time.walking.TotalWalkingDistance}}</div>
+                                <div img ng-if="!scorecardMetricsUnits.work_time.walking.TotalWalkingDistance" class="dialUnit">miles</div>
+                            </div>
+
+                        </div>
+
+                        <div class="dialset-scorecard-items" align="center">
+                            <div align="center" class="col card-element-left" id="empScWalkingTime">
+                                <div class="attribute-lbl">Duration</div>
+                                <div class="attribute-value time-text">
+                                    <duration-format duration="scorecardMetrics.work_time.walking.TotalWalkingTime | timeFormatFilter: scorecardMetricsUnits.work_time.walking.TotalWalkingTime || '0:0:0'" is-formatted="true"></duration-format>
+                                    </div>
+                                <!--<div class="attribute-lbl margin-top-5">HH:MM:SS</div>-->
+                                <div class="dialValueRate">{{scorecardMetrics.work_time.walking.WalkingTimePercentage ||
+                                    0}}{{scorecardMetricsUnits.work_time.walking.WalkingTimePercentage}}
+                                </div>
+
+                            </div>
+
+                            <div align="center" class="col card-element-right" id="empScWalkingSpeed">
+                                <div class="attribute-lbl">Speed</div>
+                                <div class="attribute-value">{{scorecardMetrics.work_time.walking.WalkingSpeed.toFixed(2) || 0}}</div>
+                                <div class="attribute-lbl margin-top-5">{{scorecardMetricsUnits.work_time.walking.WalkingSpeed}}</div>
+                                <br>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div ng-if="selected[strings.ORG_CONFIG.ACTUAL.workTime][strings.ORG_CONFIG.ACTUAL.bending]">
+                    <div class="metric-type-title">BENDING</div>
+                    <div class="border-box">
+                        <div class="dialset-scorecard-items" align="center">
+                            <div align="center" class="col card-element-left" id="empScBendCount">
+                                <div class="attribute-lbl">Total Bends</div>
+                                <div class="attribute-value">{{scorecardMetrics.work_time.bending.TotalBendingCount || 0 }}</div>
+                                <div class="attribute-lbl margin-top-5">{{scorecardMetricsUnits.work_time.bending.TotalBendingCount }}</div>
+                            </div>
+
+                            <div align="center" class="col card-element-left" id="empScBendTime">
+                                <div class="attribute-lbl">Duration</div>
+                                <div class="attribute-value time-text">
+                                    <duration-format duration="scorecardMetrics.work_time.bending.TotalBendingTime | timeFormatFilter: scorecardMetricsUnits.work_time.bending.TotalBendingTime || '0:0:0'" is-formatted="true"></duration-format>
+                                 </div>
+                                <!--<div class="attribute-lbl margin-top-5">HH:MM:SS</div>-->
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div ng-if="selected[strings.ORG_CONFIG.ACTUAL.workTime][strings.ORG_CONFIG.ACTUAL.twisting]">
+                    <div class="metric-type-title">TWISTING</div>
+                    <div class="border-box">
+                        <div class="dialset-scorecard-items" align="center">
+
+                            <div align="center" class="col card-element-left" id="empScTwistCount">
+                                <div class="attribute-lbl">Total Twists</div>
+                                <div class="attribute-value">{{scorecardMetrics.work_time.twisting.TotalTwistingCount || 0 }}</div>
+                                <div class="attribute-lbl margin-top-5">{{scorecardMetricsUnits.work_time.twisting.TotalTwistingCount }}
+                                </div>
+                            </div>
+
+                            <div align="center" class="col card-element-left" id="empScTwistTime">
+                                <div class="attribute-lbl">Duration</div>
+                                <div class="attribute-value time-text">
+                                    <duration-format duration="scorecardMetrics.work_time.twisting.TotalTwistingTime | timeFormatFilter: scorecardMetricsUnits.work_time.twisting.TotalTwistingTime || '0:0:0'" is-formatted="true"></duration-format>
+                                </div>
+                                <!--<div class="attribute-lbl margin-top-5">HH:MM:SS</div>-->
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div ng-if="userConfigData.workTime.driving">
+                    <div class="metric-type-title">DRIVING</div>
+                    <div class="border-box">
+                        <div class="dialset-scorecard-items" align="center">
+
+                            <div align="center" class="col card-element-left" id="empScDriveDistance">
+                                <div class="attribute-lbl">Distance</div>
+                                <div class="attribute-value">{{scorecardMetrics.work_time.driving.DrivingDistance || 0 }}
+                                </div>
+                                <div class="attribute-lbl margin-top-5">{{scorecardMetricsUnits.work_time.driving.DrivingDistance }}
+                                </div>
+                            </div>
+
+                            <div align="center" class="col card-element-right" id="empScDriveTime">
+                                <div class="attribute-lbl">Duration</div>
+                                <div class="attribute-value time-text">
+                                    <duration-format duration="scorecardMetrics.work_time.driving.DrivingTime | timeFormatFilter: scorecardMetricsUnits.work_time.driving.DrivingTime || '0:0:0'" is-formatted="true"></duration-format>
+                                </div>
+                                <!--<div class="attribute-lbl margin-top-5">HH:MM:SS</div>-->
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div ng-if="userConfigData.workTime.indoorDriving">
+                    <div class="metric-type-title">INDOOR DRIVING</div>
+                    <div class="border-box">
+                        <div class="dialset-scorecard-items" align="center">
+
+                            <div align="center" class="col card-element-right">
+                                <div class="attribute-lbl">Duration</div>
+                                <div class="attribute-value time-text">
+                                    <duration-format duration="scorecardMetrics.work_time.indoor_driving.IndoorDrivingTime | timeFormatFilter: scorecardMetricsUnits.work_time.indoor_driving.IndoorDrivingTime || '0:0:0'" is-formatted="true"></duration-format>
+                                </div>
+                                <!--<div class="attribute-lbl margin-top-5">HH:MM:SS</div>-->
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <div ng-if="userConfigData.workTime.standing">
+                    <div class="metric-type-title">SITTING/STANDING</div>
+                    <div class="border-box">
+                        <div class="dialset-scorecard-items" align="center">
+
+                            <div align="center" class="col card-element-left" id="empScStandingTime">
+                                <div class="attribute-lbl">Duration</div>
+                                <div class="attribute-value time-text">
+                                    <duration-format duration="scorecardMetrics.work_time.sitting_standing.SittingStandingTime | timeFormatFilter: scorecardMetricsUnits.work_time.sitting_standing.SittingStandingTime || '0:0:0'" is-formatted="true"></duration-format>
+                                </div>
+                                <!--<div class="attribute-lbl margin-top-5">HH:MM:SS</div>-->
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <div ng-if="userConfigData.workTime.other">
+                    <div class="metric-type-title">OTHER</div>
+                    <div class="border-box">
+                        <div class="dialset-scorecard-items" align="center" id="empScOther">
+                            <div align="center" class="col card-element-left">
+                                <div class="attribute-lbl">Duration</div>
+                                <div class="attribute-value time-text">
+                                    <duration-format duration="scorecardMetrics.work_time.others.TotalOthersTime | timeFormatFilter: scorecardMetricsUnits.work_time.others.TotalOthersTime || '0:0:0'" is-formatted="true"></duration-format>
+
+                                </div>
+                                <!--<div class="attribute-lbl margin-top-5">HH:MM:SS</div>-->
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <div ng-if="userConfigData.idleTime.idleTime">
+                    <div class="metric-type-title uppercase">Belt Lying On Table</div>
+                    <div class="border-box">
+                        <div class="dialset-scorecard-items" align="center">
+                            <div align="center" class="col card-element-left">
+                                <div class="attribute-lbl">Duration</div>
+                                <div class="attribute-value time-text">
+                                    <duration-format duration="scorecardMetrics.work_time.laying.TotalIdleTime | timeFormatFilter: scorecardMetricsUnits.work_time.laying.TotalIdleTime || '0:0:0'" is-formatted="true"></duration-format>
+
+                                </div>
+                                <!--<div class="attribute-lbl margin-top-5">HH:MM:SS</div>-->
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+      <!--<div class="scorecard-category" ng-if="userConfigData.idleTime.idleTime">-->
+        <!--<div class="category-heading-section">-->
+          <!--<div ng-class="{'category-heading-title': false }">Belt Lying On Table</div>-->
+            <!--<br>-->
+          <!--<div class="category-heading-values total-value" >{{scorecardMetrics['work-time']['idle-time'].TotalIdleTime | timeFormatFilter: scorecardMetricsUnits['work-time'].lifting.HowLong || '0:0:0'}}</div>-->
+          <!--<div class="rate-value">HH:MM:SS</div>-->
+          <!--<div ng-if="scorecardMetrics['work-time']['idle-time'].TotalIdleTimePercentage" class="rate-value">-->
+          <!--<span class="dialValueRate2">{{scorecardMetrics['work-time']['idle-time'].TotalIdleTimePercentage}}{{scoreCardIdleUnits['work-time']['idle-time'].TotalIdleTimePercentage}}% of shift time</span>-->
+          <!--</div>-->
+        <!--</div>-->
+
+        <!--<div class="category-body-section">-->
+          <!--&lt;!&ndash;<div class="row card-row">&ndash;&gt;-->
+          <!--&lt;!&ndash;<div align="center" class="col card-element-left"&ndash;&gt;-->
+          <!--&lt;!&ndash;ng-if="selected[strings.ORG_CONFIG.ACTUAL.idleTime][strings.ORG_CONFIG.ACTUAL.sitting]">&ndash;&gt;-->
+          <!--&lt;!&ndash;<div class="attribute-lbl">Sitting</div>&ndash;&gt;-->
+          <!--&lt;!&ndash;<div class="attribute-value">{{scoreCardIdleTimes.sitting.IdleTimeSitting || 0}}</div>&ndash;&gt;-->
+          <!--&lt;!&ndash;<div class="attribute-lbl margin-top-5">{{scoreCardIdleUnits.sitting.IdleTimeSitting}}</div>&ndash;&gt;-->
+          <!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+          <!--&lt;!&ndash;<div align="center" class="col card-element"&ndash;&gt;-->
+          <!--&lt;!&ndash;ng-if="selected[strings.ORG_CONFIG.ACTUAL.idleTime][strings.ORG_CONFIG.ACTUAL.standing]">&ndash;&gt;-->
+          <!--&lt;!&ndash;<div class="attribute-lbl">Standing</div>&ndash;&gt;-->
+          <!--&lt;!&ndash;<div class="attribute-value">{{scoreCardIdleTimes.standing.IdleTimeStanding || 0}}</div>&ndash;&gt;-->
+          <!--&lt;!&ndash;<div class="attribute-lbl margin-top-5">{{scoreCardIdleUnits.standing.IdleTimeStanding}}</div>&ndash;&gt;-->
+          <!--&lt;!&ndash;<br>&ndash;&gt;-->
+          <!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+          <!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+          <!--&lt;!&ndash;<div class="row card-row">&ndash;&gt;-->
+          <!--&lt;!&ndash;<div align="center" class="col card-element"&ndash;&gt;-->
+          <!--&lt;!&ndash;ng-if="selected[strings.ORG_CONFIG.ACTUAL.idleTime][strings.ORG_CONFIG.ACTUAL.idleDriving]">&ndash;&gt;-->
+          <!--&lt;!&ndash;<div class="attribute-lbl">Stuck In Traffic</div>&ndash;&gt;-->
+          <!--&lt;!&ndash;<div class="attribute-value">{{scoreCardIdleTimes.driving.IdleTimeDriving || 0}}</div>&ndash;&gt;-->
+          <!--&lt;!&ndash;<div class="attribute-lbl margin-top-5">{{scoreCardIdleUnits.driving.IdleTimeDriving}}</div>&ndash;&gt;-->
+          <!--&lt;!&ndash;</div>&ndash;&gt;-->
+          <!--&lt;!&ndash;<div align="center" class="col card-element"&ndash;&gt;-->
+          <!--&lt;!&ndash;ng-if="selected[strings.ORG_CONFIG.ACTUAL.idleTime][strings.ORG_CONFIG.ACTUAL.timeToExitVehicle]">&ndash;&gt;-->
+          <!--&lt;!&ndash;<div class="attribute-lbl">Exit From Vehicle</div>&ndash;&gt;-->
+          <!--&lt;!&ndash;<div class="attribute-value">{{scoreCardIdleTimes.exitVehicle.TimeToExitVehicle || 0}}</div>&ndash;&gt;-->
+          <!--&lt;!&ndash;<div class="attribute-lbl margin-top-5">{{scoreCardIdleUnits.exitVehicle.TimeToExitVehicle}}&ndash;&gt;-->
+          <!--&lt;!&ndash;</div>&ndash;&gt;-->
+          <!--&lt;!&ndash;</div>&ndash;&gt;-->
+          <!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+          <!--&lt;!&ndash;<div class="row card-row">&ndash;&gt;-->
+            <!--&lt;!&ndash;<div align="center" class="col card-element" id="empScLaying">&ndash;&gt;-->
+              <!--&lt;!&ndash;<div class="attribute-lbl">{{strings.ORG_CONFIG.PRETTY.lying}}</div>&ndash;&gt;-->
+              <!--&lt;!&ndash;<div class="attribute-value time-text">{{scorecardMetrics['work-time']['idle-time'].IdleTimeLaying | timeFormatFilter: scorecardMetricsUnits['work-time']['idle-time'].IdleTimeLaying || '0:0:0'}}</div>&ndash;&gt;-->
+              <!--&lt;!&ndash;<div class="attribute-lbl margin-top-5">{{scorecardMetricsUnits['work-time']['idle-time'].IdleTimeLaying}}</div>&ndash;&gt;-->
+            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+          <!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+
+
+        <!--</div>-->
+      <!--</div>-->
+
+        <div class="scorecard-category"
+             ng-if="selected[strings.ORG_CONFIG.ACTUAL.aggressiveEvents][strings.ORG_CONFIG.ACTUAL.hardAcceleration] ||
+             selected[strings.ORG_CONFIG.ACTUAL.aggressiveEvents][strings.ORG_CONFIG.ACTUAL.hardCorner] ||
+             selected[strings.ORG_CONFIG.ACTUAL.aggressiveEvents][strings.ORG_CONFIG.ACTUAL.hardBrake] ||
+             selected[strings.ORG_CONFIG.ACTUAL.aggressiveEvents][strings.ORG_CONFIG.ACTUAL.swerve]">
+            <div class="category-heading-section" id="empScAggEvents">
+                <div class="category-heading-title">{{strings.AGGRESSIVE_DRIVING_EVENTS}}</div>
+                <div class="category-heading-values total-value">
+                    {{scorecardMetrics.work_time.driving.AggressiveEventsCount || 0}}
+                </div>
+                <div class="rate-value"></div>
+                <div class="rate-value">
+                    <span class="dialValueRate2" ng-if="scorecardMetrics.work_time.driving.AggressiveEventsCount">{{scorecardMetrics.work_time.driving.AggressiveEventsCount }} {{scorecardMetricsUnits.work_time.driving.AggressiveEventsCount }}</span>
+                </div>
+            </div>
+
+            <div class="category-body-section">
+                <div class="row margin-top-20 card-row">
+                    <div align="center" class="col card-element-left" id="empScHardAccels"
+                         ng-if="selected[strings.ORG_CONFIG.ACTUAL.aggressiveEvents][strings.ORG_CONFIG.ACTUAL.hardAcceleration]">
+                        <span class="attribute-lbl">Hard Acceleration</span>
+                        <br>
+                        <span class="attribute-value">{{scorecardMetrics.work_time.driving.HardAccelerationCount || 0}}</span>
+                        <br>
+                        <span class="attribute-lbl">{{}}</span><br>
+
+
+                    </div>
+                    <div align="center" class="col card-element-right" id="empScHardBrakes"
+                         ng-if="selected[strings.ORG_CONFIG.ACTUAL.aggressiveEvents][strings.ORG_CONFIG.ACTUAL.hardBrake]">
+                        <span class="attribute-lbl">Hard Braking</span>
+                        <br>
+                        <span class="attribute-value">{{scorecardMetrics.work_time.driving.BrakeCount || 0}}</span>
+                        <br>
+                        <span class="attribute-lbl">{{}}</span><br>
+
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="row card-row">
+                <div align="center" class="col card-element-left" id="empScHardCorners"
+                     ng-if="selected[strings.ORG_CONFIG.ACTUAL.aggressiveEvents][strings.ORG_CONFIG.ACTUAL.hardCorner]">
+                    <span class="attribute-lbl">Hard Cornering</span>
+                    <br>
+                    <span class="attribute-value">{{scorecardMetrics.work_time.driving.HardCornersCount || 0}}</span>
+                    <br>
+                    <span class="attribute-lbl">{{}}</span><br>
+                </div>
+                <div align="center" class="col card-element-right" id="empScHardSwerves"
+                     ng-if="selected[strings.ORG_CONFIG.ACTUAL.aggressiveEvents][strings.ORG_CONFIG.ACTUAL.swerve]">
+                    <span class="attribute-lbl">Hard Swerving</span>
+                    <br>
+                    <span class="attribute-value">{{scorecardMetrics.work_time.driving.SwervesCount || 0}}</span>
+                    <br>
+                    <span class="attribute-lbl">{{}}</span><br>
+                </div>
+
+            </div>
+
+            <!-- <div class="row card-row">
+                <div align="center" class="col card-element-left" id="empScOverSpeedLimit">
+                    <span class="attribute-lbl">Time over Speed Limit</span>
+                    <br>
+                    <span class="attribute-value">{{scorecardMetrics.work_time.driving.DrivingSpeedLimitPercentage || 0}}</span>
+                    <br>
+                    <span class="attribute-lbl">{{}}</span><br>
+                </div>
+
+
+            </div> -->
+
+
+        </div>
+
+
+        <div class="scorecard-category"
+             ng-if="selected[strings.ORG_CONFIG.ACTUAL.nearMissEvents][strings.ORG_CONFIG.ACTUAL.tripping] ||
+             selected[strings.ORG_CONFIG.ACTUAL.nearMissEvents][strings.ORG_CONFIG.ACTUAL.falling]">
+
+            <div class="category-heading-section">
+                <div class="category-heading-title">{{strings.NEAR_MISS_EVENTS}}</div>
+                <div class="category-heading-values total-value" id="empScNearMissCount">{{scorecardMetrics.trips_falls.fall.FallsCount +
+                  scorecardMetrics.trips_falls.trip.TripsCount }} <!--Here slips has been removed in the system-->
+                </div>
+                <div class="rate-value"></div>
+                <div class="rate-value" id="empScNearMissRate">
+                    <span class="dialValueRate2" ng-if="scorecardMetrics.trips_falls.summary.TotalTripsFallsCount">{{scorecardMetrics.trips_falls.summary.TotalTripsFallsCount }} {{scorecardMetricsUnits.trips_falls.summary.TotalTripsFallsCount }}</span>
+                </div>
+            </div>
+
+            <div class="category-body-section">
+
+                <div class="row margin-top-20 card-row">
+                    <!--<div align="center" class="col card-element-left" id="empScSlips"-->
+                         <!--ng-if="selected[strings.ORG_CONFIG.ACTUAL.nearMissEvents][strings.ORG_CONFIG.ACTUAL.slipping]">-->
+                        <!--<span class="attribute-lbl">Slips</span>-->
+                        <!--<br>-->
+                        <!--<span class="attribute-value">{{scorecardMetrics['near-miss-events'].slip.SlipsCount || 0}}</span>-->
+                        <!--<br>-->
+                        <!--<span class="attribute-lbl">{{scorecardMetrics['near-miss-events'].slip.SlipRate}}{{scorecardMetricsUnits['near-miss-events'].slip.SlipRate}}</span><br>-->
+
+                    <!--</div>-->
+                    <div align="center" class="col card-element" id="empScTrips"
+                         ng-if="selected[strings.ORG_CONFIG.ACTUAL.nearMissEvents][strings.ORG_CONFIG.ACTUAL.tripping]">
+                        <span class="attribute-lbl">Trips</span>
+                        <br>
+                        <span class="attribute-value">{{scorecardMetrics.trips_falls.trip.TripsCount || 0}}</span>
+                        <br>
+                        <!-- <span class="attribute-lbl">{{scorecardMetrics['near-miss-events'].trip.TripRate}}{{scorecardMetricsUnits['near-miss-events'].trip.TripRate}}</span><br> -->
+
+                    </div>
+                    <!--<div align="center" class="col card-element-right"-->
+                    <!--ng-if="selected[strings.ORG_CONFIG.ACTUAL.nearMissEvents][strings.ORG_CONFIG.ACTUAL.falling]">-->
+                    <!--<span class="attribute-lbl">Falls</span>-->
+                    <!--<br>-->
+                    <!--<span class="attribute-value">{{FallCount  || 0}}</span>-->
+                    <!--<br>-->
+                    <!--<span class="attribute-lbl">{{}}</span><br>-->
+
+                    <!--</div>-->
+
+
+                </div>
+
+                <div class="row margin-top-20 card-row">
+                    <!-- <div align="center" class="col card-element-left"
+                         ng-if="selected[strings.ORG_CONFIG.ACTUAL.nearMissEvents][strings.ORG_CONFIG.ACTUAL.falling]">
+                        <span class="attribute-lbl">{{strings.FALL_FORWARDS}}</span>
+                        <br>
+                        <span class="attribute-value">{{scorecardMetrics['near-miss-events'].fall.FallForwardsCount || 0}}</span>
+                        <br>
+                        <span class="attribute-lbl">{{}}</span><br>
+
+                    </div>
+
+                    <div align="center" class="col card-element-right"
+                         ng-if="selected[strings.ORG_CONFIG.ACTUAL.nearMissEvents][strings.ORG_CONFIG.ACTUAL.falling]">
+                        <span class="attribute-lbl">{{strings.FALL_BACKWARDS}}</span>
+                        <br>
+                        <span class="attribute-value">{{scorecardMetrics['near-miss-events'].fall.FallBackwardsCount || 0}}</span>
+                        <br>
+                        <span class="attribute-lbl">{{}}</span><br>
+
+                    </div> -->
+
+                    <div align="center" class="col card-element" id="empScTrips"
+                         ng-if="selected[strings.ORG_CONFIG.ACTUAL.nearMissEvents][strings.ORG_CONFIG.ACTUAL.falling]">
+                        <span class="attribute-lbl">Falls</span>
+                        <br>
+                        <span class="attribute-value">{{scorecardMetrics.trips_falls.fall.FallsCount || 0}}</span>
+                        <br>
+                    </div>
+
+                </div>
+
+                <!--<div class="row margin-top-20 card-row">-->
+                    <!--<div align="center" class="col card-element-left"-->
+                         <!--ng-if="selected[strings.ORG_CONFIG.ACTUAL.nearMissEvents][strings.ORG_CONFIG.ACTUAL.falling]">-->
+                        <!--<span class="attribute-lbl">{{strings.FALL_LEFT}}</span>-->
+                        <!--<br>-->
+                        <!--<span class="attribute-value">{{scorecardMetrics['near-miss-events'].fall.FallLeftCount || 0}}</span>-->
+                        <!--<br>-->
+                        <!--<span class="attribute-lbl">{{}}</span><br>-->
+
+                    <!--</div>-->
+
+                    <!--<div align="center" class="col card-element-right"-->
+                         <!--ng-if="selected[strings.ORG_CONFIG.ACTUAL.nearMissEvents][strings.ORG_CONFIG.ACTUAL.falling]">-->
+                        <!--<span class="attribute-lbl">{{strings.FALL_RIGHT}}</span>-->
+                        <!--<br>-->
+                        <!--<span class="attribute-value">{{scorecardMetrics['near-miss-events'].fall.FallRightCount || 0}}</span>-->
+                        <!--<br>-->
+                        <!--<span class="attribute-lbl">{{}}</span><br>-->
+
+                    <!--</div>-->
+                <!--</div>-->
+
+            </div>
+
+        </div>
+
+
+        <!-- <div class="scorecard-category"
+             ng-if="selected[strings.ORG_CONFIG.ACTUAL.workingFromHeights][strings.ORG_CONFIG.ACTUAL.workingFromHeights]">
+            <div class="category-heading-section" id="empScHeights">
+                <div class="category-heading-title">Working From Heights</div>
+                <div class="category-heading-values total-value">{{scorecardMetrics['working-from-heights'].workingFromHeights.AltitudeMax || 0}}</div>
+                <div class="rate-value">{{scorecardMetricsUnits['working-from-heights'].workingFromHeights.AltitudeMax}}</div>
+
+            </div>
+
+            <div class="category-body-section">
+
+
+                <div class="row card-row">
+                    <div align="center" class="col card-element-left" id="empScHeightsTime">
+                        <div class="attribute-lbl">Duration</div>
+                        <div class="attribute-value time-text">
+                            <duration-format duration="scorecardMetrics['working-from-heights'].workingFromHeights.WorkingHeightTime | timeFormatFilter: scorecardMetricsUnits['working-from-heights'].workingFromHeights.WorkingHeightTime || '0:0:0'" is-formatted="true"></duration-format>
+
+                        </div>
+                        
+                    </div>
+
+                    <div align="center" class="col card-element-right" id="empScHeightsCount">
+                        <div class="attribute-lbl">Count</div>
+                        <div class="attribute-value">{{scorecardMetrics['working-from-heights'].workingFromHeights.WorkingHeightCount ||
+                            0}}
+                        </div>
+                        <div class="attribute-lbl margin-top-5">
+                            {{scorecardMetricsUnits['working-from-heights'].workingFromHeights.WorkingHeightCount}}
+                        </div>
+                        <br>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div> -->
+        <!--<div class="scorecard-category"-->
+        <!--ng-if="selected[strings.ORG_CONFIG.ACTUAL.driveTime][strings.ORG_CONFIG.ACTUAL.driving]">-->
+        <!--<div class="category-heading-section">-->
+        <!--<div class="category-heading-title">Drive Time</div>-->
+        <!--<div class="category-heading-values total-value">{{scoreCardDriveTime.driving.DrivingTime || 0}}</div>-->
+        <!--<div class="rate-value">{{scoreCardDriveTimeUnit.driving.DrivingTime}}</div>-->
+        <!--<div class="rate-value">-->
+        <!--<span class="dialValueRate2">{{scoreCardDriveTime.summary.DrivingTimePercentage || 0 }}% of shift time</span>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--<div class="category-body-section">-->
+        <!--<div class="row card-row">-->
+        <!--<div align="center" class="col card-element-left">-->
+        <!--<div class="attribute-lbl">Distance</div>-->
+        <!--<div class="attribute-value">{{scoreCardDriveTime.driving.DrivingDistance || 0}}</div>-->
+        <!--<div class="attribute-lbl margin-top-5">{{scoreCardDriveTimeUnit.driving.DrivingDistance}}</div>-->
+
+        <!--</div>-->
+        <!--<div align="center" class="col card-element-right">-->
+        <!--<div class="attribute-lbl">Duration</div>-->
+        <!--<div class="attribute-value">{{scoreCardDriveTime.driving.DrivingTime || 0}}</div>-->
+        <!--<div class="attribute-lbl margin-top-5">{{scoreCardDriveTimeUnit.driving.DrivingTime}}</div>-->
+        <!--<br>-->
+        <!--</div>-->
+        <!--</div>-->
+
+        <!--</div>-->
+
+        <!--</div>-->
+
+
+        <br>
+    </ion-content>
+</ion-view>

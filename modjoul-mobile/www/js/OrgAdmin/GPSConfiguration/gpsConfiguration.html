@@ -1,0 +1,56 @@
+<ion-view view-title="GPS Configuration">
+    <ion-content class="main-background">
+        <ion-refresher on-refresh="doRefresh(orgId)"></ion-refresher>
+
+
+
+        <div class="device-active" >
+            <button class="button btn btn-activate" ng-show="devices.length!=0" ng-click="changeOrgGPSStatus('on')">
+                Switch On GPS For All Devices
+            </button>
+        </div>
+
+        <div class="device-suspend" >
+            <button class="button btn btn-info" ng-show="devices.length!=0" ng-click="changeOrgGPSStatus('off')">
+                Switch Off GPS For All Devices
+            </button>
+        </div>
+
+        <!--<div class="device-search-bar" ng-if="!devices.length == 0">-->
+        <!--<label class="item-input-wrapper search">-->
+        <!--<i class="icon ion-search placeholder-icon"></i>-->
+        <!--<input placeholder="Search Device" type="text" maxlength="100" ng-model="searchQuery.query"-->
+        <!--class="search-text-box">-->
+        <!--</label>-->
+        <!--</div>-->
+
+        <br>
+        <div class="modjoul-list">
+            <ion-list can-swipe="listCanSwipe">
+                <div>
+
+                    <ion-item class="no-border-top" ng-repeat="device in devices">
+                        <div>
+                            <div class="user-details">Device Serial Number: {{device.deviceId}}</div>
+
+                            <button class="button btn-activate-small left-align"
+                                    ng-click="changeDeviceGPSStatus('on', device.deviceId)">Switch On GPS
+                            </button>
+                            <button class="button btn-suspend left-align"
+                                    ng-click="changeDeviceGPSStatus('off', device.deviceId)">Switch Off GPS
+                            </button>
+                        </div>
+                    </ion-item>
+                </div>
+            </ion-list>
+
+            <ion-infinite-scroll ng-if="moreDataCanBeLoaded"
+                                 on-infinite="getMoreDevices()"
+                                 immediate-check="false"
+                                 distance="1%">
+            </ion-infinite-scroll>
+        </div>
+
+        <br>
+    </ion-content>
+</ion-view>

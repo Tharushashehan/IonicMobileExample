@@ -1,0 +1,23 @@
+
+
+  <!-- <mbsc-form>
+    <mbsc-form-group>
+        
+        <mbsc-calendar [(ngModel)]="calendarOneWeek" display="inline" weeks="1"  (onSet)="withAdditionalEvent($event, 'myAddition')"></mbsc-calendar>
+    </mbsc-form-group>
+  <mbsc-form-group>
+        <mbsc-form-group-title>Two week view</mbsc-form-group-title>
+        <mbsc-calendar [(ngModel)]="calendarTwoWeek" display="inline" weeks="2"></mbsc-calendar>
+    </mbsc-form-group>
+    <mbsc-form-group>
+        <mbsc-form-group-title>Three week view</mbsc-form-group-title>
+        <mbsc-calendar [(ngModel)]="calendarTreeWeek" display="inline" weeks="3"></mbsc-calendar>
+    </mbsc-form-group>
+</mbsc-form>
+-->
+<ion-calendar [(ngModel)]="date"
+              (onChange)="onChange($event)"
+              [options]="canBackwardsSelected"
+              [type]="type"
+              [format]="'YYYY-MM-DD'">
+</ion-calendar>

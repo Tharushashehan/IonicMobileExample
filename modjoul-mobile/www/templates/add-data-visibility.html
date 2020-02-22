@@ -1,0 +1,38 @@
+<ion-modal-view>
+  <ion-header-bar>
+    <h1 class="title">Add Data Visibility</h1>
+    <button class="button button-clear button-primary cancel-button" ng-click="modal.hide()">Close</button>
+  </ion-header-bar>
+  <ion-content>
+    <div class="form">
+      <div class="intro">Data Consumer can view details of Data Originator.
+        The reverse is not implied.</div>
+
+      <div class="form-element">
+        <select class="device-drop-down" ng-model="selectedOriginator" ng-change ="checkConsumers(selectedOriginator)">
+          <option value="">Data Originator</option>
+          <option value="{{organization}}" ng-repeat="organization in organizations">{{organization.orgName ? organization.orgName : organization.name}}</option>
+        </select>
+      </div>
+
+      <div class="icon-details">details can be viewed by </div>
+
+      <div class="form-element-icon">
+        <img src="img/icons/down-arrow.png" width="80" height="80"/>
+      </div>
+
+      <div class="form-element">
+        <select class="device-drop-down" ng-model="selectedConsumer">
+          <option value="">Data Consumer</option>
+          <option value="{{consumer.orgId}}" ng-repeat="consumer in consumers | filter:{ orgName: '!' + selectedOrgName}">{{consumer.orgName ? consumer.orgName : consumer.name}}</option>
+        </select>
+      </div>
+
+      <div class="form-element">
+        <button class="button btn btn-info" ng-click="addConnection(selectedOriginator,selectedConsumer)">Add Connection</button>
+      </div>
+
+    </div>
+  </ion-content>
+</ion-modal-view>
+

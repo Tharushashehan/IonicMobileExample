@@ -1,0 +1,132 @@
+<ion-side-menus enable-menu-with-back-views="true">
+  <ion-side-menu-content>
+    <ion-nav-bar class="bar-stable">
+      <ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+        </button>
+      </ion-nav-buttons>
+
+      <ion-nav-buttons side="secondary">
+        <button class="button button-clear button-primary location-sidemenu" menu-toggle="right">
+          <img src="img/icons/warehouse-filled-icon.png" width="20" height="20" />
+        </button>
+      </ion-nav-buttons>
+
+      <ion-nav-buttons side="right">
+        <button class="button button-icon button-clear" ng-click="openCalandar()">
+          <i class="fa fa-calendar" aria-hidden="true"></i>
+        </button>
+      </ion-nav-buttons>
+
+    </ion-nav-bar>
+    <ion-nav-view name="default-view"></ion-nav-view>
+  </ion-side-menu-content>
+
+  <ion-side-menu side="left">
+
+    <ion-content class="menu-content">
+      <img ng-if="profile.profilePhoto" data-ng-src="data:{{profile.profileMimeType}};base64,{{profile.profilePhoto}}" class="side-menu-pic"/>
+      <div class="sidebar-profile-name-initials text-center" ng-if="!profile.profilePhoto">
+        {{profile.firstName.charAt(0)}}{{profile.lastName.charAt(0)}}
+      </div>
+      <div align="center">
+        <a class="user-name">{{ profile.firstName }} {{ profile.lastName }}</a>
+      </div>
+      <div class="list card">
+        <a class="item item-dark item-icon-left" menu-close href="#/risk-manager/dashboard">
+          <i class="icon ion-stats-bars"></i> Dashboard
+        </a>
+        <a class="item item-dark item-icon-left" menu-close href="#/risk-manager/profile">
+          <i class="icon ion-person"></i> Profile
+        </a>
+        <a class="item item-dark item-icon-left" menu-close href="#/risk-manager/statistics">
+          <i class="icon ion-ios-pie"></i> Statistics
+        </a>
+        <!--<a class="item item-dark item-icon-left" menu-close href="#/risk-manager/notifications">-->
+          <!--<i class="icon ion-android-notifications"></i> Notifications-->
+        <!--</a>-->
+        <a class="item item-dark item-icon-left" menu-close href="tel:{{callSupportTel}}">
+          <i class="icon ion-ios-telephone"></i> Call for Support
+        </a>
+        <a class="item item-dark item-icon-left" menu-close href="#/logout">
+          <i class="icon ion-log-out"></i> Sign out
+        </a>
+      </div>
+    </ion-content>
+  </ion-side-menu>
+
+
+  <ion-side-menu side="right" ng-controller="LocationSelectionController">
+    <ion-content class="menu-content" scroll="false">
+      <div align="center" class="navigation-bar">
+
+        <a class="navigation-bar-title-text">Select Location</a>
+
+      </div>
+
+      <div class="selectLocationArea">
+
+        <div class ="selectedEmp">
+          <div class="row1 selectedEmployeeRow">
+
+            <div class="selectedEmployeeTitle">
+              <a class="user-name">{{ selectedLocation.locationName }}</a></br>
+              <a class="user-designation">{{selectedLocation.address.city}}</a>
+            </div>
+          </div>
+        </div>
+
+
+
+        <div class ="search-bar">
+          <label class="item-input-wrapper search">
+            <i class="icon ion-search placeholder-icon"></i>
+            <input placeholder="Search Location" type="text" maxlength="100" ng-model="location" class="search-text-box">
+          </label>
+        </div>
+
+
+        <ion-scroll direction="y" class="modjoul-right-sidebar-scroll">
+          <div menu-close class="row1 employeeListRow" ng-repeat="location in locations | filter : location" ng-click="selectLocation(location);"
+
+               ng-class="{employeeListRowSelected: location.locationId === selectedLocation.locationId}">
+
+            <div class="selectedEmployeeTitle">
+              <a class="employee-name"> {{location.locationName}}</a>
+              <a class="user-designation">{{location.address.city}}</a>
+            </div>
+          </div>
+        </ion-scroll>
+
+      </div>
+    </ion-content>
+  </ion-side-menu>
+
+
+</ion-side-menus>
+
+
+
+
+
+<ion-footer-bar ng-hide="tabHide" align-title="center" class="side-bar-footer">
+    <ion-tabs ng-hide="tabHide" class="tabs-positive tabs-icon-top main-bottom-tab">
+
+            <ion-tab href="#/risk-manager/dashboard" ng-click="navDashboard()" title="Dashboard" icon-on="ion-stats-bars selected-ionic-tab-icon"
+                     icon-off="ion-stats-bars deselected-ionic-tab-icon">
+            </ion-tab>
+
+            <ion-tab href="#/risk-manager/work" ng-click="navWork()" title="Work"
+                     icon-on="ion-android-walk selected-ionic-tab-icon" icon-off="ion-android-walk deselected-ionic-tab-icon">
+            </ion-tab>
+
+            <ion-tab href="#/risk-manager/drive" ng-click="navDrive()" title="Drive" icon-on="ion-android-car selected-ionic-tab-icon"
+                     icon-off="ion-android-car deselected-ionic-tab-icon">
+            </ion-tab>
+
+            <ion-tab href="#/risk-manager/claims" title="Blackbox Events" icon-on="ion-alert-circled selected-ionic-tab-icon"
+                     icon-off="ion-alert-circled deselected-ionic-tab-icon">
+            </ion-tab>
+
+    </ion-tabs>
+</ion-footer-bar>

@@ -1,0 +1,176 @@
+<!--Here the change of the variables were done according to the API reply and only relevent parts have been updated-->
+<!--Updated By Tharusha-->
+
+<ion-view view-title="Bending">
+    <ion-nav-bar class="bar-positive">
+        <ion-nav-back-button>
+        </ion-nav-back-button>
+        <ion-nav-buttons side="secondary">
+            <calendar-selector></calendar-selector>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-content class="main-background">
+        <ion-refresher on-refresh="doRefresh()"></ion-refresher>
+        <br>
+        <last-activity-time trigger="triggerValue"></last-activity-time>
+        <div align="center" class="period-segment-group">
+            <div class="frequency-tab">
+                <ti-segmented-control on-select="segmentClicked($index)">
+                    <ti-segmented-control-button class="period-segment" title="'Daily'"
+                                                 selected></ti-segmented-control-button>
+                    <ti-segmented-control-button class="period-segment-nosideborders"
+                                                 title="'Weekly'"></ti-segmented-control-button>
+                    <ti-segmented-control-button class="period-segment" title="'Monthly'"></ti-segmented-control-button>
+                </ti-segmented-control>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col" align="center">
+                <div class="rounded-black-box-rates-flex2" id="empBendCount">
+                    <div class="item-heights-title-narrow">
+                        <div class="idletime-title uppercase">TOTAL BENDS</div>
+                    </div>
+                    <div class="dialValueSafety">{{bendsSummary.bending.TotalBendingCount || 0}}
+                    </div>
+                    <div class="dialUnit"> {{bendsSummaryUnits.bending.TotalBendingCount}}&nbsp;</div>
+                </div>
+
+            </div>
+
+            <br>
+
+            <div class="col" align="center">
+
+                <div class="rounded-black-box-rates-flex2" >
+                    <div class="item-heights-title-narrow">
+                        <div class="idletime-title uppercase">DURATION</div>
+                    </div>
+                    <div class="dialValueSafety time-text">
+                        <duration-format duration="bendsSummary.bending.TotalBendingTime | timeFormatFilter: bendsSummaryUnits.bending.TotalBendingTime || '0:0:0'" is-formatted="true"></duration-format>
+                    </div>
+                    <div class="dialUnit">&nbsp;</div>
+
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="row">
+            <div class="col" align="center">
+                <div class="rounded-black-box-rates-flex2" >
+                    <div class="item-heights-title-narrow">
+                        <div class="idletime-title uppercase">Bends Only</div>
+                    </div>
+                    <div class="dialValueSafety">{{bendsOnly || 0}}</div>
+                    <div class="dialUnit"></div>
+                </div>
+
+            </div>
+
+            <br>
+
+            <div class="col" align="center">
+
+                <div class="rounded-black-box-rates-flex2" >
+                    <div class="item-heights-title-narrow">
+                        <div class="idletime-title uppercase">Bends with Twists</div>
+                    </div>
+                    <div class="dialValueSafety">{{bendsTwists || 0}}</div>
+                    <div class="dialUnit"></div>
+
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="row">
+            <div class="col" align="center">
+                <div class="rounded-black-box-rates-flex2">
+                    <div class="item-heights-title-narrow">
+                        <div class="idletime-title uppercase">Bends with Acceleration</div>
+                    </div>
+                    <div class="dialValueSafety">{{bendsAccell || 0}}</div>
+                    <div class="dialUnit"></div>
+                </div>
+
+            </div>
+
+            <br>
+
+            <div class="col" align="center">
+
+                <div class="rounded-black-box-rates-flex2" id="empBendDuration">
+                    <div class="item-heights-title-narrow">
+                        <div class="idletime-title uppercase">with Twists &amp; Acceleration</div>
+                    </div>
+                    <div class="dialValueSafety">{{bendsTwistsAccell || 0}}</div>
+                    <div class="dialUnit"></div>
+
+                </div>
+            </div>
+
+        </div>
+
+        <!--<div class="metrics-heading uppercase">Bending angle</div>-->
+
+        <!--<div class="">-->
+            <!--<table class="bendingTable">-->
+                <!--<thead>-->
+                <!--<tr>-->
+                    <!--<th>Bend <br>Rate</th>-->
+                    <!--<th>Angle</th>-->
+                    <!--<th>Force <br>Pressure</th>-->
+                    <!--<th>Bend <br>Count</th>-->
+                <!--</tr>-->
+
+                <!--</thead>-->
+                <!--<tbody>-->
+                <!--<tr ng-repeat="item in bendsSummary.classification">-->
+                    <!--<td>{{item.BendingRate}}</td>-->
+                    <!--<td>{{item.BendingDegreeMean}}</td>-->
+                    <!--<td>{{item.BendingPressureMean}}</td>-->
+                    <!--<td>{{item.BendingCount}}</td>-->
+                <!--</tr>-->
+
+                <!--<tr>-->
+                    <!--<td ng-if="!bendsSummary.classification" colspan="4">No Data</td>-->
+                <!--</tr>-->
+
+                <!--</tbody>-->
+            <!--</table>-->
+        <!--</div>-->
+
+        <br>
+        <br>
+
+        <div align="center">
+           <div id="bending-mix-counts"></div>
+        </div>
+
+        <br>
+
+        <div align="center">
+            <columns-chart ng-if="angleRangesChartData"
+                           options="angleRangesGraphOptions"
+                           data="angleRangesChartData">
+            </columns-chart>
+        </div>
+
+
+        <br>
+
+        <div align="center">
+            <columns-chart ng-if='chartData && (selectedTypeForBendsSeries == "daily")'
+                           options="graphOptions"
+                           data="chartData">
+            </columns-chart>
+        </div>
+
+
+        <br>
+
+    </ion-content>
+</ion-view>

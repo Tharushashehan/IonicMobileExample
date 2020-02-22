@@ -1,0 +1,215 @@
+<!--Changing the UI according to the newly created APIs-->
+<!--by tharusha-->
+<!--Here the variable name Bend wasn't replaced by the variable name twisting.-->
+
+<ion-view view-title="{{strings.TWISTING}}">
+    <ion-nav-bar class="bar-positive">
+        <ion-nav-back-button>
+        </ion-nav-back-button>
+        <ion-nav-buttons side="secondary">
+            <calendar-selector></calendar-selector>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-content class="main-background">
+        <ion-refresher on-refresh="doRefresh()"></ion-refresher>
+        <br>
+        <last-activity-time trigger="triggerValue"></last-activity-time>
+        <div class="view-title-dev" align="center">
+        </div>
+        <div align="center" class="period-segment-group">
+            <div class="frequency-tab">
+                <ti-segmented-control on-select="segmentClicked($index)">
+                    <ti-segmented-control-button class="period-segment" title="'Daily'"
+                                                 selected></ti-segmented-control-button>
+                    <ti-segmented-control-button class="period-segment-nosideborders"
+                                                 title="'Weekly'"></ti-segmented-control-button>
+                    <ti-segmented-control-button class="period-segment" title="'Monthly'"></ti-segmented-control-button>
+                </ti-segmented-control>
+            </div>
+        </div>
+        <div>
+
+            <div class="row" align="center">
+
+                <div class="col" align="center">
+
+                    <div class="rounded-black-box-rates-flex2" >
+                        <div class="item-heights-title-narrow">
+                            <div class="idletime-title uppercase">Twisting Duration Less than 45°</div>
+                        </div>
+                        <div class="dialValueSafety">
+                            <duration-format duration="twisting.twisting_degrees.TwistBelow45Time | timeFormatFilter: twistingUnits.twisting_degrees.TwistBelow45Time || '0:0:0'" is-formatted="true"></duration-format>
+                        </div>
+                        <div class="dialUnit">
+
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="row" align="center">
+
+                <div class="col" align="center">
+
+                    <div class="rounded-black-box-rates-flex2" >
+                        <div class="item-heights-title-narrow">
+                            <div class="idletime-title uppercase">Twisting Duration Greater than 45°</div>
+                        </div>
+                        <div class="dialValueSafety">
+                            <duration-format duration="twisting.twisting_degrees.TwistAbove45Time | timeFormatFilter: twistingUnits.twisting_degrees.TwistAbove45Time || '0:0:0'" is-formatted="true"></duration-format>
+                        </div>
+                        <div class="dialUnit">
+
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div class="row" align="center">
+
+                <div class="col" align="center">
+
+                    <div class="rounded-black-box-rates-flex2" id="empDriveEvents">
+                        <div class="item-heights-title-narrow">
+                            <div class="idletime-title uppercase">Twisting Count Less than 45°</div>
+                        </div>
+                        <div class="dialValueSafety">
+                            {{twisting.twisting_degrees.TwistBelow45Count  || 0}}
+                        </div>
+                        <div class="dialUnit">
+
+
+                        </div>
+                        <div class="row">
+                            <div class="col">
+
+                                <div class="rounded-black-box-rates-flex2">
+                                    <div class="item-heights-title-narrow">
+                                        <div class="idletime-title uppercase">w/o Acceleration</div>
+                                    </div>
+                                    <div class="dialValueSafety">
+                                        {{twisting.twisting_degrees.TwistBelow45Count -
+                                        twisting.twisting_degrees.TwistBelow45WithAccelerationCount || 0}}
+                                    </div>
+                                    <div class="dialUnit">
+
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col">
+
+                                <div class="rounded-black-box-rates-flex2">
+                                    <div class="item-heights-title-narrow">
+                                        <div class="idletime-title uppercase">w/ Acceleration</div>
+                                    </div>
+                                    <div class="dialValueSafety">
+                                        {{twisting.twisting_degrees.TwistBelow45WithAccelerationCount || 0}}
+                                    </div>
+                                    <div class="dialUnit">
+
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <!--Commented to make a single raw value-->
+                    <!-- <div class="col" align="center">
+
+                        <div class="rounded-black-box-rates-flex2" >
+                            <div class="item-heights-title-narrow">
+                                <div class="idletime-title uppercase">Between 30 &amp; 60</div>
+                            </div>
+                            <div class="dialValueSafety">
+                                {{twisting[strings.ACTIVITIES_MAPPING.TWISTING30_60] || 0}}
+                            </div>
+                            <div class="dialUnit">
+                                {{  }}
+                            </div>
+
+                        </div>
+
+                    </div> -->
+
+
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col" align="center">
+
+                    <div class="rounded-black-box-rates-flex2">
+                        <div class="item-heights-title-narrow">
+                            <div class="idletime-title uppercase">Twisting Count Greater than 45°</div>
+                        </div>
+                        <div class="dialValueSafety">
+                            {{twisting.twisting_degrees.TwistAbove45Count || 0}}
+                        </div>
+                        <div class="dialUnit">
+                            {{ }}&nbsp;
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+
+                                <div class="rounded-black-box-rates-flex2">
+                                    <div class="item-heights-title-narrow">
+                                        <div class="idletime-title uppercase">w/o Acceleration</div>
+                                    </div>
+                                    <div class="dialValueSafety">
+                                        {{twisting.twisting_degrees.TwistAbove45Count -
+                                        twisting.twisting_degrees.TwistAbove45WithAccelerationCount || 0}}
+                                    </div>
+                                    <div class="dialUnit">
+
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col">
+
+                                <div class="rounded-black-box-rates-flex2">
+                                    <div class="item-heights-title-narrow">
+                                        <div class="idletime-title uppercase">w/ Acceleration</div>
+                                    </div>
+                                    <div class="dialValueSafety">
+                                        {{twisting.twisting_degrees.TwistAbove45WithAccelerationCount || 0}}
+                                    </div>
+                                    <div class="dialUnit">
+
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <br>
+    </ion-content>
+</ion-view>

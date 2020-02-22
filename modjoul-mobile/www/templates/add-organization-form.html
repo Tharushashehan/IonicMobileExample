@@ -1,0 +1,142 @@
+<ion-modal-view>
+  <ion-header-bar>
+    <h1 class="title">Add Organization </h1>
+    <button class="button button-clear button-primary cancel-button" ng-click="modal.hide()">Close</button>
+  </ion-header-bar>
+  <ion-content>
+    <div class="form">
+
+      <div class="list">
+        <label class="item item-input">
+          <div class="input-label">
+            Name
+          </div>
+          <input type="text" ng-model="orgName" maxlength="100" />
+        </label>
+      </div>
+
+      <div class="list">
+        <label class="item item-input">
+          <div class="input-label">
+            Admin's Email
+          </div>
+          <input type="text" ng-model="adminEmail" maxlength="100" />
+        </label>
+      </div>
+
+      <div class="list">
+        <label class="item item-input">
+          <div class="input-label">
+            Admin's First Name
+          </div>
+          <input type="text" ng-model="adminFirstName" maxlength="100" />
+        </label>
+      </div>
+
+      <div class="list">
+        <label class="item item-input">
+          <div class="input-label">
+            Admin's Last Name
+          </div>
+          <input type="text" ng-model="adminLastName" maxlength="100" />
+        </label>
+      </div>
+
+      <div class="list">
+        <label class="item item-input">
+          <div class="input-label">
+            Street Name
+          </div>
+          <input type="text" ng-model="orgStreetName" maxlength="100" />
+        </label>
+      </div>
+
+
+
+      <div class="list">
+        <label class="item item-input">
+          <div class="input-label">
+            City
+          </div>
+          <input type="text" ng-model="orgCity" maxlength="100" />
+        </label>
+      </div>
+
+      <div class="list">
+        <label class="item item-input">
+          <div class="input-label">
+            State
+          </div>
+          <input type="text" ng-model="orgState" maxlength="100" />
+        </label>
+      </div>
+
+      <div class="list">
+        <label class="item item-input">
+          <div class="input-label">
+            Postal Code
+          </div>
+          <input type="text" ng-model="orgPostalCode" maxlength="100" />
+        </label>
+      </div>
+
+      <div class="list">
+        <label class="item item-input">
+          <div class="input-label">
+            Phone No
+          </div>
+          <input type="tel" ng-model="phone" />
+        </label>
+      </div>
+
+      <div class="title2">Job Function</div>
+
+      <br>
+
+
+
+      <div class="list">
+
+        <div >
+          <div class="preview-selction" ng-show="showEditPrompt">
+            <div class="row">
+              <div class="col col-75 text-center" ng-click="closePrompt()">
+                <div>{{currentSelection}}</div>
+              </div>
+              <div class="col col-25 text-center" ng-click="removeJobFunction()">
+                <div class="close-area">X</div>
+              </div>
+            </div>
+          </div>
+          <span class="pill-tag pill-selected" ng-repeat="item in enteredJobfunctions" ng-click="editJobFunction(item)" >{{item}}</span>
+        </div>
+
+
+
+      </div>
+
+      <div class="list">
+        <input type="text" ng-keydown="keyDown($event)" placeholder='Type job function at a time and press "Enter/Go"' ng-model="jobFunctionField" />
+      </div>
+
+      <!--<md-chips collection='myCol' ng-model='returnedValues' md-title='name' md-thumbnail='url' md-subtitle='email' md-item='list'/>-->
+      <!---->
+
+
+      <div class="form-element">
+        <button class="button btn btn-image" ng-click="upload()">Select organization logo</button>
+      </div>
+
+
+      <!--<div class="form-element">-->
+          <!--<input type="file" name="orgImage" id="orgImage" ng-model="orgImage" accept="image/*" base-sixty-four-input>-->
+      <!--</div>-->
+
+    <div class="form-element">
+        <button class="button btn btn-info" ng-click="addOrganization(orgName,adminEmail,adminFirstName,adminLastName, orgStreetName, orgCity, orgState, orgPostalCode,phone)">ADD</button>
+      </div>
+    </div>
+    <div><br><br><br><br></div>
+  </ion-content>
+</ion-modal-view>
+

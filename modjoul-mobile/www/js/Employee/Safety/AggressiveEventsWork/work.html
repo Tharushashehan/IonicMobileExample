@@ -1,0 +1,128 @@
+<!--this has been removed from the system-->
+<!--All bellow will be neglected afterwords-->
+
+<ion-view view-title="{{strings.NEAR_MISS_EVENTS}}">
+  <ion-nav-bar class="bar-positive">
+    <ion-nav-back-button>
+    </ion-nav-back-button>
+    <ion-nav-buttons side="secondary">
+      <calendar-selector></calendar-selector>
+    </ion-nav-buttons>
+  </ion-nav-bar>
+    <ion-content class="main-background">
+        <ion-refresher on-refresh="doRefresh()"></ion-refresher>
+      <br>
+      <last-activity-time trigger="triggerValue"></last-activity-time>
+        <div align="center" class="period-segment-group">
+          <div class="frequency-tab">
+            <ti-segmented-control on-select="segmentClicked($index)">
+              <ti-segmented-control-button class="period-segment"  title="'Daily'" selected></ti-segmented-control-button>
+              <ti-segmented-control-button class="period-segment-nosideborders"  title="'Weekly'"></ti-segmented-control-button>
+              <ti-segmented-control-button class="period-segment"  title="'Monthly'"></ti-segmented-control-button>
+            </ti-segmented-control>
+          </div>
+        </div>
+
+        <!--<div ng-if="chartData" align="center">-->
+            <!--<stacked-columns-chart ng-if="chartData"-->
+                                   <!--options="chartOptions"-->
+                                   <!--data="chartData" class="stacked-chart">-->
+            <!--</stacked-columns-chart>-->
+        <!--</div>-->
+
+      <div class="row">
+        <div align="center" class="col">
+          <div class="rounded-black-box-rates-flex2" id="empEventsCount">
+            <div class="item-heights-title-narrow">
+              <div class="idletime-title uppercase">Total Events</div>
+            </div>
+            <div class="dialValueMetricSmall">{{aggressiveEvents.trip.TripsCount + aggressiveEvents.fall.FallsCount  + aggressiveEvents.fall.FallBackwardsCount || 0}}</div>
+            <div class="dialUnit">&nbsp;</div>
+            <!--<div img ng-if="!aggressiveEventsUnits.slip.SlipRate" class="dialUnit">incidents/minutes</div>-->
+          </div>
+        </div>
+
+      </div>
+
+      <div class="row">
+        <!--<div ng-if="userConfigData.nearMissEvents.slipping" align="center" class="col">-->
+          <!--<div class="rounded-black-box-rates-flex2" id="empSlipsCount">-->
+            <!--<div class="item-heights-title-narrow">-->
+              <!--<div class="idletime-title uppercase">{{strings.SLIPS}}</div>-->
+            <!--</div>-->
+            <!--<div class="dialValueMetricSmall">{{aggressiveEvents.slip.SlipsCount || 0}}</div>-->
+            <!--<div class="dialUnit">Slips</div>-->
+            <!--&lt;!&ndash;<div class="dialValueRate">{{aggressiveEvents.slip.SlipRate || 0}}</div>&ndash;&gt;-->
+            <!--&lt;!&ndash;<div class="dialUnit">{{aggressiveEventsUnits.slip.SlipRate}}</div>&ndash;&gt;-->
+            <!--&lt;!&ndash;<div img ng-if="!aggressiveEventsUnits.slip.SlipRate" class="dialUnit">incidents/minutes</div>&ndash;&gt;-->
+          <!--</div>-->
+        <!--</div>-->
+
+        <div ng-if="userConfigData.nearMissEvents.tripping" align="center" class="col">
+          <div class="rounded-black-box-rates-flex2" id="empTripsCount">
+            <div class="item-heights-title-narrow">
+              <div class="idletime-title uppercase">{{strings.TRIPS}}</div>
+            </div>
+            <div class="dialValueMetricSmall">{{aggressiveEvents.trip.TripsCount || 0}}</div>
+            <div class="dialUnit"> Trips</div>
+            <!--<div class="dialValueRate">{{aggressiveEvents.trip.TripRate || 0}}</div>-->
+            <!--<div class="dialUnit">{{aggressiveEventsUnits.trip.TripRate}}</div>-->
+            <!--<div img ng-if="!aggressiveEventsUnits.trip.TripRate" class="dialUnit">incidents/hours</div>-->
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div ng-if="userConfigData.nearMissEvents.falling" align="center" class="col">
+          <div class="rounded-black-box-rates-flex2" id="empFallForwards">
+            <div class="item-heights-title-narrow">
+              <div class="idletime-title uppercase">{{strings.FALL_FORWARDS}}</div>
+            </div>
+            <div class="dialValueMetricSmall">{{aggressiveEvents.fall.FallForwardsCount || 0}}</div>
+            <div class="dialUnit">Falls</div>
+            <!--<div class="dialValueRate">{{aggressiveEvents.fall.FallForwardsPercentage || 0}}{{aggressiveEventsUnits.fall.FallForwardsPercentage}}</div>-->
+            <!--<div class="dialUnit"></div>-->
+          </div>
+        </div>
+        <div ng-if="userConfigData.nearMissEvents.falling" align="center" class="col">
+          <div class="rounded-black-box-rates-flex2" id="empFallBackwards">
+            <div class="item-heights-title-narrow">
+              <div class="idletime-title uppercase">{{strings.FALL_BACKWARDS}}</div>
+            </div>
+            <div class="dialValueMetricSmall">{{aggressiveEvents.fall.FallBackwardsCount || 0}}</div>
+            <div class="dialUnit"> Falls</div>
+            <!--<div class="dialValueRate">{{aggressiveEvents.fall.FallBackwardsPercentage || 0}}{{aggressiveEventsUnits.fall.FallBackwardsPercentage}}</div>-->
+            <!--<div class="dialUnit"></div>-->
+          </div>
+        </div>
+      </div>
+
+      <!--<div class="row">-->
+        <!--<div ng-if="userConfigData.nearMissEvents.falling" align="center" class="col">-->
+          <!--<div class="rounded-black-box-rates-flex2" id="empFallLefts">-->
+            <!--<div class="item-heights-title-narrow">-->
+              <!--<div class="idletime-title uppercase">{{strings.FALL_LEFT}}</div>-->
+            <!--</div>-->
+            <!--<div class="dialValueMetricSmall">{{aggressiveEvents.fall.FallLeftCount || 0}}</div>-->
+            <!--<div class="dialUnit">Falls</div>-->
+            <!--&lt;!&ndash;<div class="dialValueRate">{{aggressiveEvents.fall.FallSidewaysPercentage || 0}}{{aggressiveEventsUnits.fall.FallSidewaysPercentage}}</div>&ndash;&gt;-->
+            <!--&lt;!&ndash;<div class="dialUnit"></div>&ndash;&gt;-->
+          <!--</div>-->
+        <!--</div>-->
+
+        <!--<div ng-if="userConfigData.nearMissEvents.falling" align="center" class="col">-->
+          <!--<div class="rounded-black-box-rates-flex2" id="empFallRights">-->
+            <!--<div class="item-heights-title-narrow">-->
+              <!--<div class="idletime-title uppercase">{{strings.FALL_RIGHT}}</div>-->
+            <!--</div>-->
+            <!--<div class="dialValueMetricSmall">{{aggressiveEvents.fall.FallRightCount || 0}}</div>-->
+            <!--<div class="dialUnit">Falls</div>-->
+            <!--&lt;!&ndash;<div class="dialValueRate">{{aggressiveEvents.fall.FallSidewaysPercentage || 0}}{{aggressiveEventsUnits.fall.FallSidewaysPercentage}}</div>&ndash;&gt;-->
+            <!--&lt;!&ndash;<div class="dialUnit"></div>&ndash;&gt;-->
+          <!--</div>-->
+        <!--</div>-->
+
+      <!--</div>-->
+      <br><br>
+    </ion-content>
+</ion-view>

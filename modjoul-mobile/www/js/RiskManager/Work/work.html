@@ -1,0 +1,357 @@
+<ion-view view-title="Work">
+    <ion-content class="main-background">
+        <ion-refresher on-refresh="doRefresh()"></ion-refresher>
+        <div align="center" class="period-segment-group">
+            <!--<div class="frequency-tab">-->
+                <!--<ti-segmented-control on-select="segmentClicked($index)">-->
+                    <!--<ti-segmented-control-button class="period-segment" title="'Daily'"-->
+                                                 <!--selected></ti-segmented-control-button>-->
+                    <!--<ti-segmented-control-button class="period-segment-nosideborders"-->
+                                                 <!--title="'Analysis'"></ti-segmented-control-button>-->
+
+                <!--</ti-segmented-control>-->
+            <!--</div>-->
+        </div>
+
+        <!--<div ng-if="selectedType == strings.RISKMANAGERTREND[0]">-->
+            <!--<div class="metrics-heading"> FOUNDATIONS</div>-->
+
+            <!--&lt;!&ndash;<div class="dialset-items-3" align="center">&ndash;&gt;-->
+                <!--&lt;!&ndash;<div class="rounded-black-box-rates-big graph-tip" ng-click="showWorkGraph('work time')">&ndash;&gt;-->
+                    <!--&lt;!&ndash;<div class="item-prod-title-narrow">&ndash;&gt;-->
+                        <!--&lt;!&ndash;<div class="idletime-title">ACTUAL HOURS WORKED</div>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<div>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<div class="dialGroup">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<div class="dialValueMetric">&ndash;&gt;-->
+                                <!--&lt;!&ndash;<duration-format duration="workSummary['work-time'].summary.WorkTime | timeFormatFilter:workSummaryUnits['work-time'].summary.WorkTime || '0:0:0'" is-formatted="true"></duration-format>&ndash;&gt;-->
+
+                            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                            <!--&lt;!&ndash;<div class="dialUnit">&nbsp;</div>&ndash;&gt;-->
+                            <!--&lt;!&ndash;&lt;!&ndash;<div class="dialValueRate">&ndash;&gt;&ndash;&gt;-->
+                            <!--&lt;!&ndash;&lt;!&ndash;{{workSummary['work-time'].summary.WorkTimePercentage.toFixed(2)&ndash;&gt;&ndash;&gt;-->
+                            <!--&lt;!&ndash;&lt;!&ndash;}}{{workSummaryUnits['work-time'].summary.WorkTimePercentage}}&ndash;&gt;&ndash;&gt;-->
+                            <!--&lt;!&ndash;&lt;!&ndash;</div>&ndash;&gt;&ndash;&gt;-->
+                            <!--&lt;!&ndash;<div class="dialUnit"></div>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+            <!--<div class="row">-->
+                <!--&lt;!&ndash;<div class="col" align="center">&ndash;&gt;-->
+
+                    <!--&lt;!&ndash;<div class="rounded-black-box-rates-flex2 graph-tip" ng-click="showWorkGraph('near misses')">&ndash;&gt;-->
+                        <!--&lt;!&ndash;<div class="item-heights-title-narrow">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<div class="idletime-title uppercase">{{strings.NEAR_MISS_EVENTS}}</div>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<div class="dialValueSafety">{{workSummary['near-miss-events'].summary.NearMissWork || 0}}</div>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<div class="dialUnit"> {{workSummaryUnits['near-miss-events'].summary.NearMissWork}}&nbsp;</div>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+                <!--<div class="col" align="center">-->
+
+                    <!--<div class="rounded-black-box-rates-flex2 graph-tip" ng-click="showWorkGraph('work time')">-->
+                        <!--<div class="item-heights-title-narrow">-->
+                            <!--<div class="idletime-title uppercase">ACTUAL HOURS WORKED</div>-->
+                        <!--</div>-->
+                        <!--<div class="dialValueSafety time-text"><duration-format duration="workSummary['work-time'].summary.WorkTime | timeFormatFilter:workSummaryUnits['work-time'].summary.WorkTime || '0:0:0'" is-formatted="true"></duration-format></div>-->
+                        <!--<div class="dialUnit">&nbsp;&nbsp;</div>-->
+                    <!--</div>-->
+
+                <!--</div>-->
+
+                <!--<div class="col" align="center">-->
+
+                    <!--<div class="rounded-black-box-rates-flex2 graph-tip" ng-click="showWorkGraph('idle time')">-->
+                        <!--<div class="item-heights-title-narrow">-->
+                            <!--<div class="idletime-title uppercase">Static Time</div>-->
+                        <!--</div>-->
+                        <!--<div class="dialValueSafety time-text">-->
+                            <!--<duration-format duration="workSummary['work-time']['idle-time'].TotalIdleTime | timeFormatFilter:workSummaryUnits['work-time']['idle-time'].TotalIdleTime || '0:0:0'" is-formatted="true"></duration-format>-->
+
+                        <!--</div>-->
+                        <!--<div class="dialUnit">&nbsp;</div>-->
+
+                    <!--</div>-->
+
+                <!--</div>-->
+            <!--</div>-->
+
+            <!--<div class="metrics-heading"> METRICS</div>-->
+
+            <!--<div class="row">-->
+                <!--<div class="col" align="center">-->
+                    <!--<div class="rounded-black-box-rates-flex2 graph-tip" ng-click="showWorkGraph('work rate')">-->
+                        <!--<div class="item-heights-title-narrow">-->
+                            <!--<div class="idletime-title">NEAR MISS WORK RATE</div>-->
+                        <!--</div>-->
+                        <!--<div class="dialValueSafety">{{workSummary['near-miss-events'].summary.NearMissWorkRate || 0}}-->
+                        <!--</div>-->
+                        <!--<div class="dialUnit">{{workSummaryUnits['near-miss-events'].summary.NearMissWorkRate}}&nbsp;</div>-->
+                    <!--</div>-->
+
+                <!--</div>-->
+
+                <!--<div class="col" align="center">-->
+
+                    <!--<div class="rounded-black-box-rates-flex2 graph-tip" ng-click="showWorkGraph('work hours')">-->
+                        <!--<div class="item-heights-title-narrow">-->
+                            <!--<div class="idletime-title">NEAR MISS WORK (x) HOURS</div>-->
+                        <!--</div>-->
+                        <!--<div class="dialValueSafety  time-text">{{workSummary['near-miss-events'].summary.NearMissWorkXhours || 0}}</div>-->
+                        <!--<div class="dialUnit">{{workSummaryUnits['near-miss-events'].summary.NearMissWorkXhours}}&nbsp;</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+
+
+            <!--<div class="metrics-heading"> COUNTS</div>-->
+
+            <!--<div class="row">-->
+                <!--&lt;!&ndash;<div class="col" align="center">&ndash;&gt;-->
+
+                    <!--&lt;!&ndash;<div class="rounded-black-box-rates-flex2 graph-tip" ng-click="showWorkGraph('slips')">&ndash;&gt;-->
+                        <!--&lt;!&ndash;<div class="item-heights-title-narrow">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<div class="idletime-title uppercase">{{strings.SLIPS}}</div>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<div class="dialValueSafety">{{workSummary['near-miss-events'].slip.SlipsCount || 0}}</div>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<div class="dialUnit">{{workSummaryUnits['near-miss-events'].slip.SlipsCount}}</div>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+
+                <!--<div class="col" align="center">-->
+
+                    <!--<div class="rounded-black-box-rates-flex2 graph-tip" ng-click="showWorkGraph('trips')">-->
+                        <!--<div class="item-heights-title-narrow">-->
+                            <!--<div class="idletime-title uppercase">{{strings.TRIPS}}</div>-->
+                        <!--</div>-->
+                        <!--<div class="dialValueSafety">{{workSummary['near-miss-events'].trip.TripsCount || 0}}</div>-->
+                        <!--<div class="dialUnit">{{workSummaryUnits['near-miss-events'].trip.TripsCount}}&nbsp;</div>-->
+                    <!--</div>-->
+
+                <!--</div>-->
+            <!--</div>-->
+
+            <!--<div class="row">-->
+                <!--<div class="col" align="center">-->
+
+                    <!--<div class="rounded-black-box-rates-flex2 graph-tip" ng-click="showWorkGraph('forwards')">-->
+                        <!--<div class="item-heights-title-narrow">-->
+                            <!--<div class="idletime-title uppercase">{{strings.FALL_FORWARDS}}</div>-->
+                        <!--</div>-->
+                        <!--<div class="dialValueSafety">{{workSummary['near-miss-events'].fall.FallForwardsCount || 0}}-->
+                        <!--</div>-->
+                        <!--<div class="dialUnit">{{workSummaryUnits['near-miss-events'].fall.FallForwardsCount}}&nbsp;</div>-->
+                    <!--</div>-->
+
+                <!--</div>-->
+
+
+                <!--<div class="col" align="center">-->
+
+                    <!--<div class="rounded-black-box-rates-flex2 graph-tip" ng-click="showWorkGraph('backwards')">-->
+                        <!--<div class="item-heights-title-narrow">-->
+                            <!--<div class="idletime-title uppercase">{{strings.FALL_BACKWARDS}}</div>-->
+                        <!--</div>-->
+                        <!--<div class="dialValueSafety">{{workSummary['near-miss-events'].fall.FallBackwardsCount || 0}}-->
+                        <!--</div>-->
+                        <!--<div class="dialUnit"> {{workSummaryUnits['near-miss-events'].fall.FallBackwardsCount}}&nbsp;</div>-->
+                    <!--</div>-->
+
+                <!--</div>-->
+            <!--</div>-->
+
+            <!--&lt;!&ndash;<div class="row">&ndash;&gt;-->
+                <!--&lt;!&ndash;<div class="col" align="center">&ndash;&gt;-->
+
+                    <!--&lt;!&ndash;<div class="rounded-black-box-rates-flex2 graph-tip" ng-click="showWorkGraph('trips')">&ndash;&gt;-->
+                        <!--&lt;!&ndash;<div class="item-heights-title-narrow">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<div class="idletime-title uppercase">{{strings.FALL_LEFT}}</div>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<div class="dialValueSafety">{{workSummary['near-miss-events'].fall.FallLeftCount || 0}}&ndash;&gt;-->
+                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<div class="dialUnit"> {{workSummaryUnits['near-miss-events'].fall.FallLeftCount}}</div>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+                <!--&lt;!&ndash;<div class="col" align="center">&ndash;&gt;-->
+
+                    <!--&lt;!&ndash;<div class="rounded-black-box-rates-flex2 graph-tip" ng-click="showWorkGraph('trips')">&ndash;&gt;-->
+                        <!--&lt;!&ndash;<div class="item-heights-title-narrow">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<div class="idletime-title uppercase">{{strings.FALL_RIGHT}}</div>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<div class="dialValueSafety">{{workSummary['near-miss-events'].fall.FallRightCount || 0}}&ndash;&gt;-->
+                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<div class="dialUnit"> {{workSummaryUnits['near-miss-events'].fall.FallRightCount}}</div>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+
+            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+            <!--<div class="metrics-heading"> HEIGHTS</div>-->
+
+            <!--<div class="row">-->
+                <!--<div class="col" align="center">-->
+                    <!--<div class="rounded-black-box-rates-flex2 graph-tip" ng-click="showWorkGraph('max')">-->
+                        <!--<div class="item-heights-title-narrow">-->
+                            <!--<div class="idletime-title">HIGHEST HEIGHT</div>-->
+                        <!--</div>-->
+                        <!--<div class="dialValueSafety">{{workSummary['working-from-heights'].AltitudeMax || 0}}-->
+                        <!--</div>-->
+                        <!--<div class="dialUnit"> {{workSummaryUnits['working-from-heights'].AltitudeMax}}&nbsp;</div>-->
+
+                    <!--</div>-->
+
+                <!--</div>-->
+
+                <!--&lt;!&ndash;<div class="col" align="center">&ndash;&gt;-->
+                    <!--&lt;!&ndash;<div class="rounded-black-box-rates-flex2 graph-tip" ng-click="showWorkGraph('median')">&ndash;&gt;-->
+                        <!--&lt;!&ndash;<div class="item-heights-title-narrow">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<div class="idletime-title">MEDIAN HEIGHT</div>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<div class="dialValueSafety">{{workSummary['working-from-heights'].summary.AltitudeMean || 0}}&ndash;&gt;-->
+                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<div class="dialUnit">{{workSummaryUnits['working-from-heights'].summary.AltitudeMean}}</div>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                <!--<div class="col" align="center">-->
+
+                    <!--<div class="rounded-black-box-rates-flex2 graph-tip" ng-click="showWorkGraph('height time')">-->
+                        <!--<div class="item-heights-title-narrow">-->
+                            <!--<div class="idletime-title">WORKING HEIGHT TIME</div>-->
+                        <!--</div>-->
+                        <!--<div class="dialValueSafety  time-text">-->
+                            <!--<duration-format duration="workSummary['working-from-heights'].WorkingHeightTime | timeFormatFilter: workSummaryUnits['working-from-heights'].WorkingHeightTime || '0:0:0'" is-formatted="true"></duration-format>-->
+
+                        <!--</div>-->
+                        <!--<div class="dialUnit">&nbsp;</div>-->
+                    <!--</div>-->
+
+                <!--</div>-->
+            <!--</div>-->
+
+            <!--&lt;!&ndash;<div class="row">&ndash;&gt;-->
+                <!--&lt;!&ndash;<div class="col" align="center">&ndash;&gt;-->
+                    <!--&lt;!&ndash;<div class="rounded-black-box-rates-flex2 graph-tip" ng-click="showWorkGraph('min')">&ndash;&gt;-->
+                        <!--&lt;!&ndash;<div class="item-heights-title-narrow">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<div class="idletime-title">LOWEST HEIGHT</div>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<div class="dialValueSafety">{{workSummary['working-from-heights'].summary.AltitudeMin || 0}}&ndash;&gt;-->
+                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<div class="dialUnit"> {{workSummaryUnits['working-from-heights'].summary.AltitudeMin}}</div>&ndash;&gt;-->
+
+                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+                <!--&lt;!&ndash;<div class="col" align="center">&ndash;&gt;-->
+
+                    <!--&lt;!&ndash;<div class="rounded-black-box-rates-flex2 graph-tip" ng-click="showWorkGraph('height time')">&ndash;&gt;-->
+                        <!--&lt;!&ndash;<div class="item-heights-title-narrow">&ndash;&gt;-->
+                            <!--&lt;!&ndash;<div class="idletime-title">WORKING HEIGHT TIME</div>&ndash;&gt;-->
+                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<div class="dialValueSafety  time-text">&ndash;&gt;-->
+                            <!--&lt;!&ndash;{{workSummary['working-from-heights']['working-from-heights'].WorkingHeightTime |&ndash;&gt;-->
+                            <!--&lt;!&ndash;timeFormatFilter:&ndash;&gt;-->
+                            <!--&lt;!&ndash;workSummaryUnits['working-from-heights']['working-from-heights'].WorkingHeightTime || 0}}&ndash;&gt;-->
+                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<div class="dialUnit">&ndash;&gt;-->
+                            <!--&lt;!&ndash;HH:MM:SS&ndash;&gt;-->
+                        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+
+            <!--<div class="dialset-heights-items" align="center">-->
+                <!--<div class="rounded-black-box-height graph-tip" ng-click="showWorkGraph('height count')">-->
+                    <!--<div class="item-heights-title-narrow">-->
+                        <!--<div class="idletime-title"> WORKING HEIGHT COUNT</div>-->
+                    <!--</div>-->
+                    <!--<div class="dialValueSafety">-->
+                        <!--{{workSummary['working-from-heights'].WorkingHeightCount || 0}}-->
+                    <!--</div>-->
+                    <!--<div class="dialUnit">-->
+                        <!--{{workSummaryUnits['working-from-heights'].WorkingHeightCount}}&nbsp;-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+
+        <!--</div>-->
+
+        <div class="trendAnlysisArea">
+
+            <ti-segmented-control on-select="analysisSegmentClicked($index)">
+                <ti-segmented-control-button class="period-segment-nosideborders" selected
+                                             title="'Trend Analysis'"></ti-segmented-control-button>
+
+                <ti-segmented-control-button class="period-segment-nosideborders"
+                                             title="'Job Functions'"></ti-segmented-control-button>
+            </ti-segmented-control>
+
+            <div class="trendAnlysisArea" ng-if="selectedAnalysisType == strings.RISKMANAGERANALYSIS[0]">
+                <br><br>
+
+                <input type="text" name="startDate" ng-model="startDateText" ng-readonly="true" placeholder="Start Date"
+                       ng-click="selectStartDate()"/>
+                <input type="text" name="endDate" ng-model="endDateText" ng-readonly="true" placeholder="End Date"
+                       ng-click="selectEndDate()"/>
+
+                <br> <br>
+                <button class="button button-full button-positive-orange" ng-click="getTrendAnalysis()">View Trend
+                </button>
+                <br>
+                <div class="metrics-heading uppercase">Safety Incidents</div>
+                <br>
+                <div id="trend-chart"></div>
+
+                <br> <br>
+
+                <!--<div class="metrics-heading uppercase">Work Time</div>-->
+                <!--<br>-->
+                <!--<div id="work-trend-chart"></div>-->
+
+            </div>
+
+            <div class="trendAnlysisArea" ng-if="selectedAnalysisType == strings.RISKMANAGERANALYSIS[1]">
+                <br><br>
+                <input type="text" name="startDate" ng-model="jobFunctionStartDateText" ng-readonly="true" placeholder="Start Date"
+                       ng-click="selectJobFunctionStartDate()"/>
+                <input type="text" name="endDate" ng-model="jobFunctionEndDateText" ng-readonly="true" placeholder="End Date"
+                       ng-click="selectJobFunctionEndDate()"/>
+                <br><br><br>
+                <label class="item item-input item-select darklabelfieldItem">
+                    <div class="input-label">
+                        Job Function
+                    </div>
+                    <select name="OrgFunctions" ng-model="orgFunctions" >
+                        <option ng-repeat="jobFunction in jobFunctions" value="{{jobFunction}}">{{jobFunction}}</option>
+                    </select>
+                </label>
+
+                <br> <br>
+                <button class="button button-full button-positive-orange" ng-click="selectJobFunction(orgFunctions)">View Statistics
+                </button>
+
+
+                <br>
+                <div id="job-function-chart"></div>
+            </div>
+
+
+        </div>
+
+        <br> <br>
+    </ion-content>
+</ion-view>

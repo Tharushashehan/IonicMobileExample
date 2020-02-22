@@ -1,0 +1,44 @@
+<ion-modal-view>
+  <ion-header-bar>
+    <h1 class="title">Add Location</h1>
+    <button class="button button-clear button-primary cancel-button" ng-click="modal.hide()">Close</button>
+  </ion-header-bar>
+  <ion-content>
+    <div class="form">
+      <div class="form-element">
+        <input type="text" placeholder="Location Name" ng-model="locationName" maxlength="100" />
+      </div>
+
+      <div class="form-element">
+        <input type="text" placeholder="Location Code" ng-model="locationCode" maxlength="100" />
+      </div>
+
+      <div class="form-element">
+        <input type="text" placeholder="Street Name" ng-model="streetName" maxlength="50" />
+      </div>
+
+      <div class="form-element">
+        <input type="text" placeholder="City" ng-model="cityName" maxlength="50" />
+      </div>
+
+      <div class="form-element">
+        <input type="text" placeholder="State" ng-model="stateName" maxlength="50" />
+      </div>
+
+      <div class="form-element">
+        <input type="text" placeholder="Postal Code" ng-model="postalCode" maxlength="50" />
+      </div>
+
+      <div class="form-element">
+        <input type="text" placeholder="Contact" ng-model="contact" maxlength="50" />
+      </div>
+
+      <div class="form-element">
+        <button class="button btn btn-info" ng-click="addlocation(locationName,locationCode, streetName,cityName,stateName,postalCode,contact)">ADD</button>
+      </div>
+
+      <br><br><br><br>
+
+    </div>
+  </ion-content>
+</ion-modal-view>

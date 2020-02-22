@@ -1,0 +1,48 @@
+<!--
+  Generated template for the PopupMessagesPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+
+<div class="ion-login-modal-controller">
+<ion-header>
+    <ion-title>
+    <ion-label no-margin no-padding no-bounce color="dark" stacked style="position: center"><h4 no-margin>Pop-up message</h4></ion-label>
+    </ion-title>
+</ion-header>
+
+
+<ion-content no-padding no-bounce style="background-color: #fafafa;">
+
+          <div class="compact-details">
+            <div class="col">
+            <img class="warning-img" no-padding  src="assets/icon/warning_img_white.png" >
+          </div>
+            <ion-label text-wrap color="dark" stacked style="position: center"><h6>{{ModalData}}</h6></ion-label>
+            </div>
+
+        <!--<ion-toolbar>
+          <ion-title>
+            Failed
+          </ion-title>
+          <ion-buttons start>
+            <button ion-button (click)="dismiss()">
+              <span ion-text color="primary">Cancel</span>
+            </button>
+          </ion-buttons>
+        </ion-toolbar>-->
+
+</ion-content>
+
+<ion-footer>
+    <ion-toolbar no-margin no-padding >
+    <ion-buttons end >
+    <button ion-button (click)="dismiss()">
+    <ion-icon name="done-all" color="primary"></ion-icon>
+      <span ion-text color="primary">Okay</span>
+    </button>
+  </ion-buttons>
+    </ion-toolbar>
+  </ion-footer>
+</div>

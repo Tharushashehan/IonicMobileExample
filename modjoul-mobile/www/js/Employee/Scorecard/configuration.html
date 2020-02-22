@@ -1,0 +1,31 @@
+<ion-modal-view>
+  <ion-header-bar>
+    <h1 class="title">Configuration</h1>
+    <button class="button button-clear button-primary cancel-button" ng-click="closeConfiguration()"><b>Done</b></button>
+  </ion-header-bar>
+  <ion-content>
+    <div class="form modjoul-form">
+      <br>
+      <div ng-if="configCategories" ng-repeat="configItem in configCategories">
+        <div class = "config-type-title" ng-if="strings.ORG_CONFIG.PRETTY[configItem.title]">{{strings.ORG_CONFIG.PRETTY[configItem.title]}}</div>
+        <div class ="config-box" ng-if="strings.ORG_CONFIG.PRETTY[configItem.title]">
+          <ul  ng-repeat="option in configOptions[configItem.count]">
+
+            <li class="item item-toggle" ng-if="strings.ORG_CONFIG.PRETTY[option]">
+              {{ strings.ORG_CONFIG.PRETTY[option]}}
+              <label class="toggle toggle-energized">
+                <input type="checkbox" ng-model="selected[configItem.title][option]">
+                <div class="track">
+                  <div class="handle"></div>
+                </div>
+              </label>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+<br><br>
+
+  </ion-content>
+</ion-modal-view>

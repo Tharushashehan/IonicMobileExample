@@ -1,0 +1,23 @@
+<ion-view view-title="Device Manufacturers">
+  <ion-nav-buttons side="right">
+    <button class="button button-icon button-clear" ng-click="openAddDeviceManufacturer()">
+      <i class="fa fa-plus" aria-hidden="true"></i>
+    </button>
+  </ion-nav-buttons>
+  <ion-content class="main-background">
+    <ion-refresher on-refresh="doRefresh()"></ion-refresher>
+    <div class="modjoul-list">
+      <ion-list can-swipe="listCanSwipe">
+      <ion-item ng-repeat="deviceManufacturer in deviceManufacturers">
+        <div class="user-fullname">{{deviceManufacturer.firstName}} {{deviceManufacturer.lastName}} </div>
+        <div class="devman-details">Email: {{deviceManufacturer.email}} </div>
+        <ion-option-button class="button-assertive"
+                           ng-click="showDeleteConfirmation(deviceManufacturer)">
+          Delete
+        </ion-option-button>
+      </ion-item>
+      </ion-list>
+    </div>
+  <br>
+  </ion-content>
+</ion-view>

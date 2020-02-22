@@ -1,0 +1,48 @@
+<ion-view view-title="Statistics">
+
+  <ion-content class="main-background" scroll="true">
+    <ion-refresher on-refresh="doRefresh()"></ion-refresher>
+
+
+    <div ng-if="isRiskManager">
+      <div id="org-job-statistics"></div>
+
+      <div class="modjoul-list">
+        <ion-list>
+          <div>
+
+            <ion-item class="no-border-top" ng-repeat="job in jobFunctionCount">
+              <div>
+                <div class="key-field-left" style="float: left;">{{job.name}}</div>
+                <div class="value-field-right" style="float: right">{{job.y}}</div>
+              </div>
+            </ion-item>
+          </div>
+        </ion-list>
+      </div>
+    </div>
+
+    <br>
+    <br>
+
+    <div>
+      <div id="org-location-statistics"></div>
+
+      <div class="modjoul-list">
+        <ion-list>
+          <div>
+
+            <ion-item class="no-border-top" ng-repeat="location in locationCount">
+              <div>
+                <div class="key-field-left" style="float: left;">{{location.name}}</div>
+                <div class="value-field-right" style="float: right">{{location.y}}</div>
+              </div>
+            </ion-item>
+          </div>
+        </ion-list>
+      </div>
+    </div>
+
+    <br>
+  </ion-content>
+</ion-view>

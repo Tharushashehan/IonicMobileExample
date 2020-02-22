@@ -1,0 +1,41 @@
+<ion-view view-title="Locations">
+  <ion-nav-buttons side="right">
+    <button class="button button-icon button-clear" ng-click="openAddLocation()">
+      <img src="img/icons/warehouse-filled-icon.png" width="20" height="20" />
+    </button>
+  </ion-nav-buttons>
+  <ion-content class="main-background">
+    <ion-refresher on-refresh="loadLocations()"></ion-refresher>
+
+    <div class="device-search-bar" ng-if="!locations.length == 0">
+      <label class="item-input-wrapper search">
+        <i class="icon ion-search placeholder-icon"></i>
+        <input placeholder="Search Location" type="text" maxlength="100" ng-model="searchQuery.query"
+               class="search-text-box">
+      </label>
+    </div>
+
+    <div ng-if="locations && locations.length == 0" class="user-item" align="center" >{{messages.NO_DATA_AVAILABLE}}</div>
+    <div class="modjoul-list">
+      <ion-list can-swipe="listCanSwipe">
+        <div >
+
+          <ion-item class="no-border-top" ng-repeat="location in locations | orderBy:'locationName' | filter : filterLocation">
+            <div>
+            <div class="user-fullname">{{location.locationName}} </div>
+            <div class="user-details">Street Name: {{location.streetName}}, </div>
+              <div class="user-details">City: {{location.city}} </div>
+              <div class="user-details">State: {{location.state}} </div>
+              <div class="user-details">Postal Code: {{location.postalCode}} </div>
+              <ion-option-button class="button-assertive"
+                               ng-click="showDeleteConfirmation(location)">
+              Delete
+            </ion-option-button>
+              </div>
+          </ion-item>
+        </div>
+      </ion-list>
+    </div>
+    <br>
+  </ion-content>
+</ion-view>

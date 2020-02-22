@@ -1,0 +1,20 @@
+<ion-view view-title="Blackbox Events">
+
+  <ion-content class="main-background">
+    <ion-refresher on-refresh="doRefresh()"></ion-refresher>
+
+    <div class="user-list">
+      <div class="user-item" ng-repeat="claim in claims" ng-click="onBlackboxEvent(claim)">
+        <div class="user-details">Beneficiary: {{claim.userName}}</div>
+        <div class="user-details">Submitted By: {{claim.supervisorName}}</div>
+        <div class="user-details">Description: {{(claim.reason) || "No message provided"}}</div>
+        <div class="user-details">Status: {{claim.status | uppercase}}</div>
+        <div class="user-details">Date: {{claim.timestamp | date:'yyyy-MM-dd'}}</div>
+        <div class="user-details">Time: {{claim.timestamp | date:'hh:mm'}}</div>
+        <div class="user-details">Message: {{claim.description || "No message provided"}}</div>
+      </div>
+    </div>
+    <br>
+  </ion-content>
+</ion-view>
+

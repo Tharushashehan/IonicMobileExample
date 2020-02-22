@@ -1,0 +1,108 @@
+<ion-view view-title="Device">
+    <ion-content class="main-background">
+        <ion-refresher on-refresh="onRefresh()"></ion-refresher>
+        <div ng-hide="!deviceSensors" class="device-details">
+            <div class="belt-title">SmartBelt</div>
+            <ion-list>
+
+                <p class="item-sensor text-center" ng-if="healthAvailable">
+                    *The health was recorded at {{ deviceDetails.lastHealthReportedTimestamp ?
+                    (deviceDetails.lastHealthReportedTimestamp | amDateFormat:'MMMM DD YYYY hh:mm:ss a' ) : "" }}.
+                </p>
+                <p class="item-sensor text-center" ng-if="!healthAvailable">
+                    *No health information has been reported yet.
+                </p>
+
+                <div ng-if="healthAvailable">
+
+                    <div class="row device-health">
+
+                        <div class="col card-element-left text-center" ng-if="deviceSensors[strings.BELT_SENSORS.ACTUAL.batteryChargePercentage] !== 999">
+                            <img src="{{batteryImage}}"/>
+                            <p class="text-uppercase title">Battery
+                                {{deviceSensors[strings.BELT_SENSORS.ACTUAL.batteryChargePercentage]}}%</p>
+                        </div>
+
+                        <div class="col card-element-left text-center" ng-if="deviceSensors[strings.BELT_SENSORS.ACTUAL.batteryChargePercentage] == 999">
+                            <ion-spinner class="spinner-device-health spinner-energized"></ion-spinner>
+                            <p class="text-uppercase title">Battery</p>
+                        </div>
+
+                        <div class="col card-element-right text-center">
+                            <img src="{{wifiImage}}"/>
+                            <p class="title">{{deviceSensors[strings.BELT_SENSORS.ACTUAL.wifiSignalStrength]}}%</p>
+                        </div>
+                    </div>
+
+
+                    <div class="row device-health">
+                        <div class="col card-element-left text-center">
+                            <img src="{{sdcardImage}}"/>
+                            <p class="text-uppercase title">{{sdcardMessage}}</p>
+
+                        </div>
+
+                        <div class="col card-element-right text-center">
+                            <img src="{{gpsImage}}"/>
+                            <p class="title uppercase">GPS</p>
+                        </div>
+                    </div>
+
+
+                    <div class="row device-health">
+                        <div class="col card-element-left text-center">
+                            <img src="{{sensorsImage}}"/>
+                            <p class="text-uppercase title">Sensors</p>
+
+                        </div>
+
+                        <div class="col card-element-right text-center">
+                            <img src="{{rtcImage}}"/>
+                            <p class="title uppercase">RTC</p>
+                        </div>
+                    </div>
+
+                    <div class="row device-health" ng-if="firmwareVersion">
+                        <div class="col card-element-left text-center">
+                            <p class="text-uppercase title">Firmware</p>
+                            <p class="text-uppercase title">{{firmwareVersion}}</p>
+
+                        </div>
+
+                        <div class="col card-element-right text-center" ng-if="subscription">
+                            <p class="title">Subscription</p>
+                            <p class="title">{{subscription}}</p>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <ion-item class="item-sensor individualSensor">
+                    <!--<ion-toggle ng-click="setupWiFiWizard()" class="configure-wifi" ng-model="wifiStatus.checked" ng-checked="wifiStatus.checked"-->
+                    <!--toggle-class="toggle-calm">Configure Wifi</ion-toggle>-->
+                    <div class="button-config-wifi">
+                        <button class="button button-full button-positive button-blue" ng-click="setupWiFiWizard()">
+                            <i class="fa fa-wifi configure-wifi-icon" aria-hidden="true"></i>
+                            <span class="configure-wifi-title">SmartBelt Setup</span></button>
+                    </div>
+
+                </ion-item>
+
+            </ion-list>
+
+        </div>
+        <div ng-if="!deviceSensors" class="no-deviceSensors">
+            No Data to Display.
+            <br>
+            <ion-item class="item-sensor individualSensor">
+                <div class="button-config-wifi">
+                    <button class="button button-full button-positive button-blue" ng-click="setupWiFiWizard()">
+                        <i class="fa fa-wifi configure-wifi-icon" aria-hidden="true"></i>
+                        <span class="configure-wifi-title">SmartBelt Setup</span></button>
+                </div>
+            </ion-item>
+        </div>
+        <br>
+    </ion-content>
+</ion-view>

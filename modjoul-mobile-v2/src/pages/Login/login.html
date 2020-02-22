@@ -1,0 +1,54 @@
+<ion-content no-bounce padding class="bg-color-modjoul-black">
+
+
+    <div class="col">
+        <img class="logo-center" no-padding  src="assets/imgs/modjoul_logo_white_text.png">
+    </div>
+
+<div class="compact-details">
+    <form #f="ngForm" (ngSubmit)="logForm(f)" novalidate>
+    <ion-label color="light" stacked>Sign In</ion-label>
+    <br/>
+   
+    <ion-item class="login-user-name-input" no-lines color="light">
+        <ion-input no-padding no-margin type="email" id="LoginEmailUserName" name="LoginEmailUserName" [(ngModel)]="Login.email" placeholder="Email"></ion-input>
+    </ion-item>
+    <div class="hr"> </div>
+    <ion-item class="login-user-password-input" no-lines color="light">
+        <ion-input no-padding no-margin [type]="passwordType" id="LoginPassWord" name="LoginPassWord" [(ngModel)]="Login.password" placeholder="Password" clearOnEdit="false"></ion-input>
+    </ion-item>
+<br/>
+<br/>
+
+
+<ion-item no-lines style="background-color :transparent" (click)="hideShowPassword()">
+
+    <!-- <ion-checkbox class="checkbox-square"></ion-checkbox> -->
+    <ion-icon item-start [name]="passwordIcon" style="float: left" class="password-icon"  ></ion-icon>
+    <ion-label item-end color="light" style="float: right;"  stacked >Show Password</ion-label>
+</ion-item>
+
+      <button ion-button type="submit" icon-start block > <ion-icon name="log-in"></ion-icon>Sign In</button>
+
+      <ion-label class="forgot-passWord" stacked (click)="forgotPassWord()">Forgot Password</ion-label>
+    </form>
+    <br/>
+    <br/>
+    <div class="hr"> </div>
+
+    <form #f="ngForm" (ngSubmit)="logForm(f)" novalidate>
+            <ion-label color="light" stacked>OR, Sign In with</ion-label>
+            <br/>
+            
+                   
+                
+            <ion-item class="sso-input" no-lines color="light" >
+                    <ion-icon name="ios-undo"></ion-icon>
+                <ion-input no-padding no-margin type="email" placeholder="Single Sign On"></ion-input>
+                </ion-item>
+                <br/>
+                <br/>
+                <div class="hr"> </div>     
+        </form>
+</div>
+</ion-content>

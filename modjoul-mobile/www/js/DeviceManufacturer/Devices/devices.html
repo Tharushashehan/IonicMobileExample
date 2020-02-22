@@ -1,0 +1,35 @@
+<ion-view view-title="Devices">
+
+  <ion-nav-buttons side="right">
+    <button class="button button-icon button-clear" ng-click="openAddDevice()">
+      <i class="fa fa-user-plus" aria-hidden="true"></i>
+    </button>
+  </ion-nav-buttons>
+
+  <ion-content class="main-background">
+    <ion-refresher on-refresh="doRefresh()"></ion-refresher>
+
+    <div class="form-element">
+      <select class="device-drop-down" ng-model="selectedOrg" ng-change ="changeDeviceTypes(selectedOrg)">
+        <option value="">Select Oraganization</option>
+        <option value="{{org.orgId}}" ng-repeat="org in orgs">{{org.orgName}}</option>
+      </select>
+    </div>
+
+    <div class="form-element" ng-show="deviceTypes.length!=0 ">
+      <select class="device-drop-down" ng-model="selectedDeviceType" ng-change="changeDeviceByType(selectedDeviceType)">
+        <option value="">Select Device Type</option>
+        <option value="{{deviceType.deviceType}}" ng-repeat="deviceType in deviceTypes">{{deviceType.deviceType}}</option>
+      </select>
+    </div>
+
+    <div class="user-list" ng-show="deviceTypes.length!=0">
+      <div class="user-item" ng-repeat="device in dataTypesList">
+        <div class="user-fullname">{{device.title}}</div>
+        <div class="user-details" ng-repeat="metatypeItem in device.metadata"> {{metatypeItem.key + " : " + metatypeItem.value}} </div>
+      </div>
+    </div>
+
+  </ion-content>
+</ion-view>
+

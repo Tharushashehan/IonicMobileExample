@@ -1,0 +1,165 @@
+<ion-view view-title="{{strings.AGGRESSIVE_DRIVING_EVENTS}}">
+    <ion-nav-bar class="bar-positive">
+        <ion-nav-back-button>
+        </ion-nav-back-button>
+        <ion-nav-buttons side="secondary">
+            <calendar-selector></calendar-selector>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-content class="main-background">
+        <ion-refresher on-refresh="doRefresh()"></ion-refresher>
+        <br>
+        <last-activity-time trigger="triggerValue"></last-activity-time>
+        <div class="view-title-dev" align="center">
+        </div>
+        <div align="center" class="period-segment-group">
+            <div class="frequency-tab">
+                <ti-segmented-control on-select="segmentClicked($index)">
+                    <ti-segmented-control-button class="period-segment" title="'Daily'"
+                                                 selected></ti-segmented-control-button>
+                    <ti-segmented-control-button class="period-segment-nosideborders"
+                                                 title="'Weekly'"></ti-segmented-control-button>
+                    <ti-segmented-control-button class="period-segment" title="'Monthly'"></ti-segmented-control-button>
+                </ti-segmented-control>
+            </div>
+        </div>
+        <div>
+            <div class="row" align="center">
+
+                <div class="col" align="center">
+
+                    <div class="rounded-black-box-rates-flex2" id="empDriveEvents">
+                        <div class="item-heights-title-narrow">
+                            <div class="idletime-title uppercase">Driving Events</div>
+                        </div>
+                        <div class="dialValueSafety">
+                            {{aggressiveEvents.driving_safety.AggressiveEventsCount || 0}}
+                        </div>
+                        <div class="dialUnit">
+                            {{aggressiveEventsUnits.driving_safety.AggressiveEventsCount}}&nbsp;
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="col" align="center">
+
+                    <div class="rounded-black-box-rates-flex2" id="empDriveDistance">
+                        <div class="item-heights-title-narrow">
+                            <div class="idletime-title uppercase">Distance Travelled</div>
+                        </div>
+                        <div class="dialValueSafety">
+                            {{aggressiveEvents.summary.DrivingDistance || 0}}
+                        </div>
+                        <div class="dialUnit">
+                            {{ aggressiveEventsUnits.summary.DrivingDistance }}&nbsp;
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col" align="center">
+
+                    <div class="rounded-black-box-rates-flex2" id="empDrivingTime">
+                        <div class="item-heights-title-narrow">
+                            <div class="idletime-title uppercase">Drive Time</div>
+                        </div>
+                        <div class="dialValueSafety time-text">
+                            <duration-format
+                                    duration="aggressiveEvents.summary.DrivingTime  | timeFormatFilter:aggressiveEventsUnits.summary.DrivingTime  || '0:0:0'"
+                                    is-formatted="true"></duration-format>
+
+                        </div>
+                        <div class="attribute-lbl margin-top-5">
+                            &nbsp;
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="row">
+                <div ng-if="userConfigData.aggressiveEvents.hardBrake" align="center" class="col">
+                    <div>
+                        <div align="center" class="col rounded-black-box-narrow-flex" id="empHardBraking">
+                            <div class="item-safety-title-narrow item_safety-text-wrap">
+                                <span class="aggressive-title_1st uppercase">Hard Braking</span>
+                            </div>
+                            <div class="item-safety-value-narrow item_safety-divider">
+                                <span class="attribute-driveValue2">{{aggressiveEvents.BrakeCount || 0}}</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div ng-if="userConfigData.aggressiveEvents.hardCorner" align="center" class="col">
+                    <div>
+                        <div align="center" class="col rounded-black-box-narrow-flex" id="empHardCornering">
+                            <div class="item-safety-title-narrow item_safety-text-wrap">
+                                <span class="aggressive-title_1st uppercase">Hard Cornering</span>
+                            </div>
+                            <div class="item-safety-value-narrow safety-divider">
+                                <span class="attribute-driveValue2">{{aggressiveEvents.HardCornersCount || 0}}</span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div ng-if="userConfigData.aggressiveEvents.swerve" align="center" class="col">
+                    <div>
+                        <div align="center" class="col rounded-black-box-narrow-flex" id="empHardSwerves">
+                            <div class="item-safety-title-narrow item_safety-text-wrap">
+                                <div class="aggressive-title_2nd uppercase">
+                                    Hard Swerving
+                                </div>
+                                <br><br>
+                            </div>
+                            <div class="item-safety-value-narrow item_safety-divider">
+                                <span class="attribute-driveValue2">{{aggressiveEvents.SwervesCount || 0}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div ng-if="userConfigData.aggressiveEvents.hardAcceleration" align="center" class="col">
+                    <div>
+                        <div align="center" class="col rounded-black-box-narrow-flex" id="empHardAccelerations">
+                            <div class="item-safety-title-narrow item_safety-text-wrap">
+                                <span class="aggressive-title_2nd uppercase">Hard Acceleration</span>
+                            </div>
+                            <div class="item-safety-value-narrow item_safety-divider">
+                                <span class="attribute-driveValue2">{{aggressiveEvents.HardAccelerationCount || 0}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div align="center" class="col card-safety-element">
+                <div>
+                    <div align="center" class="col rounded-black-box" id="empOverSpeedLimit">
+                        <div class="item-safety-title item_safety-text-wrap">
+                            <span class="aggressive-title2 uppercase">Time over Speed Limit</span>
+                        </div>
+                        <div class="item-safety-value item_safety-divider">
+                            <!--<span class="attribute-driveValue">{{aggressiveEvents.OverSpeedLimitPercentage || 0}}</span>-->
+                            <span class="attribute-driveValue coming-soon-text">Coming Soon</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+    </ion-content>
+</ion-view>

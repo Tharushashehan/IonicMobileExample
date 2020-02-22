@@ -1,0 +1,69 @@
+<ion-view view-title="Change Details">
+  <ion-content class="padding">
+    <ion-refresher on-refresh="doRefresh()"></ion-refresher>
+
+    <ion-item class="profile-img-item">
+      <img data-ng-src="data:{{organization.logoMimeType}};base64,{{organization.orgLogo}}"
+           alt="{{organization.logoMimeType}}" class="org-img"/>
+    </ion-item>
+
+    <div class="form">
+      <div class="form-element">
+        <input  type="text" placeholder="Organization Name" ng-model="organization.orgName"  maxlength="100" />
+      </div>
+
+      <div class="form-element">
+        <input type="text" placeholder="Organization Address" ng-model="organization.address" maxlength="50" />
+      </div>
+
+      <div class="form-element">
+        <input type="text" placeholder="Phone No" ng-model="organization.contact" maxlength="50" />
+      </div>
+
+      <div class="form-element">
+        <button class="button btn btn-image" ng-click="upload()">Select organization logo</button>
+      </div>
+
+      <div class="form-element">
+      <div class="title2">Job Function</div>
+      </div>
+
+      <div class="list">
+        <div>
+          <div class="preview-selction" ng-show="showEditPrompt">
+            <div class="row">
+              <div class="col col-75 text-center" ng-click="closePrompt()">
+                <div>{{currentSelection}}</div>
+              </div>
+              <div class="col col-25 text-center" ng-click="removeJobFunction()">
+                <div class="close-area">X</div>
+              </div>
+            </div>
+          </div>
+          <span class="pill-tag pill-selected" ng-repeat="item in enteredJobfunctions" ng-click="editJobFunction(item)" >{{item}}</span>
+          <!--<span class="pill-tag pill-selected" ng-repeat="item in jobFunctionsList" ng-click="editJobFunction(item)">{{item}}</span>-->
+        </div>
+      </div>
+
+
+      <div class="form-element">
+
+      <div class="list">
+        <input type="text" ng-keydown="keyDown($event)" placeholder='Type job function at a time and press "Enter/Go"' ng-model="jobFunctionField" />
+      </div>
+
+      </div>
+
+
+      <div class="form-element">
+        <button class="button btn btn-image" ng-click="upload()">Select organization logo</button>
+      </div>
+
+      <div class="form-element">
+        <button class="button btn btn-info" ng-click="changeOrgDetails(organization.address, organization.contact)">Change Details</button>
+      </div>
+    </div>
+    <div><br><br><br><br></div>
+  </ion-content>
+</ion-view>
+

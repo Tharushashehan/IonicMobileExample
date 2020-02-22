@@ -1,0 +1,16 @@
+<div>
+    <div ng-if="isFormatted">
+        <span class="duration-value" ng-if="durationElements[0] > 0">{{durationElements[0]}}</span><span ng-if="durationElements[0] > 0 && durationElements[0]==1" class="duration-unit">hr</span><span ng-if="durationElements[0] > 0 && durationElements[0]!=1" class="duration-unit">hrs</span>&nbsp;
+        <span class="duration-value">{{durationElements[1]}}</span><span ng-if="durationElements[1] ==1" class="duration-unit">min</span><span ng-if="durationElements[1] !=1" class="duration-unit">mins</span>&nbsp;
+        <span class="duration-value" ng-if="durationElements[0] == 0">{{durationElements[2]}}</span><span ng-if="durationElements[0] == 0 && durationElements[2] == 1" class="duration-unit">sec</span><span ng-if="durationElements[0] == 0 && durationElements[2] != 1" class="duration-unit">secs</span>
+    </div>
+
+    <div ng-if="!isFormatted">
+        <div ng-if="durationElements[0]> 0">
+            {{durationElements[0]}}<span ng-if="durationElements[0]==1">hr</span><span ng-if="durationElements[0]!=1">hrs</span> {{durationElements[1]}}<span ng-if="durationElements[1] ==1">min</span><span ng-if="durationElements[1] !=1">mins</span>
+        </div>
+        <div ng-if="durationElements[0]== 0">
+            {{durationElements[1]}}<span ng-if="durationElements[1]==1">min</span><span ng-if="durationElements[1]!=1">mins</span> {{durationElements[2]}}<span ng-if="durationElements[2] ==1">sec</span><span ng-if="durationElements[2] !=1">secs</span>
+        </div>
+    </div>
+</div>

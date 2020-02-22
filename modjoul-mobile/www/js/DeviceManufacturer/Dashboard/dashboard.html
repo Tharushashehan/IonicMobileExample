@@ -1,0 +1,181 @@
+<ion-view view-title="Dashboard">
+
+    <ion-nav-buttons side="right">
+        <!--<button class="button button-icon button-clear" ng-click="openAddDevice()">-->
+        <!--<i class="fa fa-plus" aria-hidden="true"></i>-->
+        <!--</button>-->
+    </ion-nav-buttons>
+
+    <ion-content class="main-background">
+        <ion-refresher on-refresh="doRefresh(orgId)"></ion-refresher>
+
+        <div class="cover-box">
+            <div class="rounded-device-summary-box">
+                <div class="info-box-icon"><i class="icon ion-pie-graph"></i></div>
+                <div class="info-content">
+                    <div class="text-center"><b>Device Statistics</b></div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="text-center">Created</div>
+                            <div class="text-center">{{orgDeviceStatistics[strings.DEVICE_STATES.CREATED] || 0}}</div>
+                        </div>
+                        <div class="col">
+                            <div class="text-center">Assigned</div>
+                            <div class="text-center">{{orgDeviceStatistics[strings.DEVICE_STATES.ASSIGNED] || 0}}</div>
+                        </div>
+                        <div class="col">
+                            <div class="text-center">Available</div>
+                            <div class="text-center">{{orgDeviceStatistics[strings.DEVICE_STATES.AVAILABLE] || 0}}</div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="text-center">Allocated</div>
+                            <div class="text-center">{{orgDeviceStatistics[strings.DEVICE_STATES.ALLOCATED] || 0}}</div>
+                        </div>
+                        <div class="col">
+                            <div class="text-center">Deleted</div>
+                            <div class="text-center">{{orgDeviceStatistics[strings.DEVICE_STATES.DELETED] || 0}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cover-box">
+            <div class="rounded-device-summary-box">
+                <div class="info-box-icon"><i class="icon ion-stats-bars"></i></div>
+                <div class="info-content">
+                    <div>
+                        <span class="info-box-text">Organization: </span>
+                        <span class="info-box-number">{{selectedOrgName}}</span>
+                    </div>
+                    <div>
+                        <span class="info-box-text">Assigned Devices: </span>
+                        <span class="info-box-number">{{deviceStatistics[strings.DEVICE_STATES.ASSIGNED] || 0}}</span>
+                    </div>
+                    <div>
+                        <span class="info-box-text">Available Devices: </span>
+                        <span class="info-box-number">{{deviceStatistics[strings.DEVICE_STATES.AVAILABLE] || 0}}</span>
+                    </div>
+                    <div>
+                        <span class="info-box-text">Allocated Devices: </span>
+                        <span class="info-box-number">{{deviceStatistics[strings.DEVICE_STATES.ALLOCATED] || 0}}</span>
+                    </div>
+                    <div>
+                        <span class="info-box-text">Deleted Devices: </span>
+                        <span class="info-box-number">{{deviceStatistics[strings.DEVICE_STATES.DELETED] || 0}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="form modjoul-form2">
+            <div class="list">
+
+                <label class="item item-input item-select">
+                    <div class="input-label">
+                        <div class="x">Organization</div>
+                    </div>
+                    <select class="device-drop-down" ng-model="selectedOrg.orgId"
+                            ng-change="loadOrgDetails(selectedOrg.orgId)">
+                        <option value="{{org.orgId}}" ng-repeat="org in orgs">{{org.orgName ? org.orgName : org.name
+                            }}
+                        </option>
+                    </select>
+                </label>
+
+            </div>
+
+            <div class="list">
+
+                <label class="item item-input">
+                    <div class="input-label">
+                        <div class="x">Serial Number</div>
+                    </div>
+                    <input type="text" ng-model="deviceId" maxlength="100"/>
+                </label>
+
+            </div>
+
+
+            <div class="dashboard-form-element">
+                <button class="button btn btn-info" ng-click="displayDetails(selectedOrg.orgId,deviceId)">Search
+                </button>
+            </div>
+
+        </div>
+
+        <br>
+
+        <div class="cover-box" ng-if="deviceInfo">
+
+            <div>
+
+                <div>
+                    <div class="rounded-device-dashboard-box">
+                        <div class="info-box-icon"><i class="icon ion-pricetags"></i></div>
+                        <div class="info-content">
+                            <div>
+                                <span class="info-box-text">Device Serial Number: </span>
+                                <span class="info-box-number">{{deviceInfo.deviceId}}</span>
+                            </div>
+                            <div>
+                                <span class="info-box-text">Org Name: </span>
+                                <span class="info-box-number">{{getOrgName(deviceInfo.orgId)}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!--<div class="rounded-device-dashboard-box">-->
+                    <!--<div class="info-box-icon"><i class="icon ion-locked"></i></div>-->
+                    <!--<div class="info-content">-->
+
+                    <!--<div>-->
+                    <!--<span class="info-box-text">Suspended: </span>-->
+                    <!--<span class="info-box-number">{{deviceInfo.isSuspend ? "Yes" : "No"}}</span>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <div class="rounded-device-dashboard-box">
+                        <div class="info-box-icon"><i class="icon ion-upload"></i></div>
+                        <div class="info-content">
+                            <div>
+                                <span class="info-box-text">Health Reported at: </span>
+                                <span class="info-box-number">{{deviceInfo.lastHealthReportedTimestamp ? (deviceInfo.lastHealthReportedTimestamp | amDateFormat:'YYYY-MM-DD hh:mm:ss') : "" }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rounded-device-dashboard-box">
+                        <div class="info-box-icon"><i class="icon ion-information-circled"></i></div>
+                        <div class="info-content">
+                            <div>
+                                <span class="info-box-text">State: </span>
+                                <span class="info-box-number">{{deviceInfo.state }}</span>
+                            </div>
+                            <div>
+                                <span class="info-box-text">Suspended: </span>
+                                <span class="info-box-number">{{ deviceInfo.isSuspend ? "Yes" : "No" }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div ng-if="healthStatusData" ng-repeat="(key, value) in healthStatusData">
+                <div class="{{getClassForHealth(value)}}">
+                    <div class="shape">
+                        <div class="shape-text">{{getTextForHealth(value)}}</div>
+                    </div>
+                    <div class="offer-content text-center">
+                        {{key}}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <br><br>
+
+
+    </ion-content>
+</ion-view>

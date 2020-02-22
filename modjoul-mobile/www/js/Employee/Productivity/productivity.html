@@ -1,0 +1,48 @@
+<ion-view view-title="Work Time">
+  <ion-content class="main-background">
+    <div class="view-title-dev" align="center">
+      <div class="row1">
+
+        <div ng-if="userConfigData.workTime.pulling || userConfigData.workTime.pushing || userConfigData.workTime.running ||
+            userConfigData.workTime.scrubbing || userConfigData.workTime.walking || userConfigData.workTime.walkingDownStairs ||
+            userConfigData.workTime.walkingUpStairs" class="col" >
+            <div>
+              <div align="center" class="col rounded-box_card_buttons" ng-click="navWorkTime()">
+                <div class="button_card_icon"><img src="img/icons/walking.png" width="70" height="70" /></div>
+                <div class="item-cardButton item-cardButton-text-wrap">
+                  <span class="aggressive-title_buttons">Work</span>
+                </div>
+              </div>
+            </div>
+        </div>
+        <div ng-if="userConfigData.driveTime.driving" class="col" >
+          <div>
+            <div align="center" class="col rounded-box_card_buttons" ng-click="navDriveTime()">
+              <div class="button_card_icon"><img src="img/icons/driving-light.png" width="70" height="70" /></div>
+              <div class="item-cardButton item-cardButton-text-wrap">
+                <span class="aggressive-title_buttons">Drive Time</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row1">
+        <div ng-if="userConfigData.idleTime.idleDriving || userConfigData.idleTime.lying || userConfigData.idleTime.sitting ||
+            userConfigData.idleTime.standing || userConfigData.idleTime.timeToExitVehicle" class="col" >
+          <div>
+            <div align="center" class="col rounded-box_card_buttons" ng-click="navIdleTime()">
+              <div class="button_card_icon"><img src="img/icons/idletime-light.png" width="70" height="70" /></div>
+              <div class="item-cardButton item-cardButton-text-wrap">
+                <span class="aggressive-title_buttons">Static Time</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+
+    </div>
+    <div class="menu-container"></div>
+    <div class="idleTImeArea"></div>
+  </ion-content>
+</ion-view>

@@ -1,0 +1,263 @@
+<ion-view view-title="Employee overview">
+    <ion-content class="main-background">
+        <ion-refresher on-refresh="doRefresh()"></ion-refresher>
+
+
+        <div class="accordionTitle" ng-click="toggleGroup('card1')">Rankings
+            <span><i class="fa fa-angle-down" aria-hidden="true" ng-show="!isAccordionShown('card1')"></i>
+                <i class="fa fa-angle-up" aria-hidden="true" ng-show="isAccordionShown('card1')"></i>
+            </span>
+        </div>
+        <div class="leaderboard accordion-body" ng-show="isAccordionShown('card1')">
+            <!--<div class="leaderboard accordion-body" >-->
+            <!--<div align="center" class="period-segment-group">-->
+                <!--<div class="frequency-tab">-->
+                    <!--<ti-segmented-control on-select="rankingSegmentClicked($index)">-->
+                        <!--<ti-segmented-control-button class="period-segment" title="'Work Time'"-->
+                                                     <!--selected></ti-segmented-control-button>-->
+                        <!--<ti-segmented-control-button class="period-segment"-->
+                                                     <!--title="'Drive Time'"></ti-segmented-control-button>-->
+                    <!--</ti-segmented-control>-->
+                <!--</div>-->
+            <!--</div>-->
+            <div class="leaderboard-rankings" ng-if="selectedRankType == strings.RANKSEGMENTS[0]">
+                <!--<div ng-if="leaderboardWorkTimeList" class="employee-ranking-header">Work Time Rankings</div>-->
+                <!--<div class="pill-section">-->
+                    <!--<span class="pill-tag" ng-class="{'pill-selected': selectedItem == 'work-time' }" ng-click="fetchLeadership('work-time')">Working</span>-->
+                <!--</div>-->
+
+                <div class="pill-section">
+                    <span class="pill-tag" ng-class="{ 'pill-selected': selectedItem == item.id }" ng-click="fetchLeadership(item.id)" ng-repeat="item in strings.LEADERBOARD_WORK_ACTIVITIES">{{item.name}}</span>
+
+                </div>
+
+                <div class="feed-item" ng-repeat="feedItem in leaderboardWorkTimeList">
+                    <div class="leaderboard-photo">
+                        <img ng-if="feedItem.profilePhoto" class="timeline-profile-photo" width="50" height="50" onerror="this.src='img/icons/fa_user.png'"
+                             data-ng-src="data:{{feedItem.profileMimeType}};base64,{{feedItem.profilePhoto}}"/>
+                        <div class="supervisor-leaderboard-profile-name-initials text-center" ng-if="!feedItem.profilePhoto">
+                            {{feedItem.initials}}
+                        </div>
+                    </div>
+                    <div class="user-details">{{feedItem.name}}</div>
+                    <div class="user-details leaderboard-rank-value"><duration-format duration="feedItem.value | timeFormatFilter: 'minutes'" is-formatted="true"></duration-format></div>
+                    <div class="leaderboard-rank">{{feedItem.rank}}</div>
+                </div>
+            </div>
+            <div class="leaderboard-rankings" ng-if="selectedRankType == strings.RANKSEGMENTS[1]">
+                <!--<div ng-if="leaderboardDriveTimeList" class="employee-ranking-header">Drive Time Rankings</div>-->
+                <div class="feed-item" ng-repeat="feedItem in leaderboardDriveTimeList">
+                    <div class="leaderboard-photo">
+                        <img ng-if="feedItem.profilePhoto" class="timeline-profile-photo" width="50" height="50"
+                             data-ng-src="data:{{feedItem.profileMimeType}};base64,{{feedItem.profilePhoto}}"/>
+                        <img ng-if="!feedItem.profilePhoto" src="img/icons/fa_user.png" class="timeline-profile-photo" width="50" height="50"/>
+                    </div>
+                    <div class="user-details">{{feedItem.name}}</div>
+                    <div class="user-details leaderboard-rank-value">{{feedItem.value.toFixed(2)}}</div>
+                    <div class="leaderboard-rank">{{feedItem.rank}}</div>
+                </div>
+            </div>
+
+        </div>
+
+        <br>
+
+        <div class="accordionTitle" ng-click="toggleGroup('card2')">Metrics
+            <span>
+            <i class="fa fa-angle-down" aria-hidden="true" ng-show="!isAccordionShown('card2')"></i>
+            <i class="fa fa-angle-up" aria-hidden="true" ng-show="isAccordionShown('card2')"></i>
+            </span>
+        </div>
+        <div class="leaderboard accordion-body" ng-show="isAccordionShown('card2')">
+
+            <!--<div class="text-center title"><h2>Employee</h2></div>-->
+            <div class="text-center">
+                <img ng-if="selectedEmployeeProfile.profilePhoto" data-ng-src="data:{{selectedEmployeeProfile.profileMimeType}};base64,{{selectedEmployeeProfile.profilePhoto}}"
+                     alt="{{selectedEmployeeProfile.orgName}}" class="timeline-profile-photo" width="80" height="80" />
+                <div class="supervisor-employee-profile-name-initials" ng-if="!selectedEmployeeProfile.profilePhoto">
+                    {{selectedEmployeeProfile.firstName.charAt(0)}}{{selectedEmployeeProfile.lastName.charAt(0)}}
+                </div>
+            </div>
+            <div class="text-center title"><h4>{{selectedEmployeeName}}</h4></div>
+
+            <!--<div class="leaderboard accordion-body">-->
+            <div align="center" class="period-segment-group">
+                <div class="frequency-tab">
+                    <ti-segmented-control on-select="segmentClicked($index)">
+                        <ti-segmented-control-button class="period-segment" title="'Daily'"
+                                                     selected></ti-segmented-control-button>
+                        <ti-segmented-control-button class="period-segment-nosideborders"
+                                                     title="'Weekly'"></ti-segmented-control-button>
+                        <ti-segmented-control-button class="period-segment"
+                                                     title="'Monthly'"></ti-segmented-control-button>
+                    </ti-segmented-control>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div align="center" class="col card-safety-element">
+                    <div>
+                        <div align="center" class="col rounded-black-box no-height">
+                            <div class="item-safety-title item_safety-text-wrap">
+                                <span class="aggressive-title2 uppercase">Active Time</span>
+                            </div>
+                            <div class="row">
+                                <div class="col item-safety-value item_safety-divider">
+                                    <div>
+                                        <span class="aggressive-title2 uppercase">Walking</span>
+                                    </div>
+                                    <div class="dialValueMetric">
+                                        <duration-format duration="scorecardValues[strings.ACTIVITIES_MAPPING.WORK_TIME_PARENT].walking.HowLong | timeFormatFilter: scorecardUnits[strings.ACTIVITIES_MAPPING.WORK_TIME_PARENT].walking.HowLong" is-formatted="true"></duration-format>
+                                    </div>
+                                </div>
+                                <div class="col item-safety-value item_safety-divider">
+                                    <div>
+                                        <span class="aggressive-title2 uppercase">Bending</span>
+                                    </div>
+                                    <div class="dialValueMetric">
+                                        <duration-format duration="scorecardValues[strings.ACTIVITIES_MAPPING.WORK_TIME_PARENT][strings.ACTIVITIES_MAPPING.BENDING_PARENT][strings.ACTIVITIES_MAPPING.HOW_LONG] | timeFormatFilter: scorecardUnits[strings.ACTIVITIES_MAPPING.WORK_TIME_PARENT][strings.ACTIVITIES_MAPPING.BENDING_PARENT][strings.ACTIVITIES_MAPPING.HOW_LONG]" is-formatted="true"></duration-format>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col item-safety-value item_safety-divider">
+                                    <div><span class="aggressive-title2 uppercase">Twisting</span></div>
+                                    <br>
+                                    <div>
+                                        <div class="dialValueMetric">
+                                            <duration-format duration="scorecardValues[strings.ACTIVITIES_MAPPING.WORK_TIME_PARENT][strings.ACTIVITIES_MAPPING.TWISTING_PARENT][strings.ACTIVITIES_MAPPING.HOW_LONG] | timeFormatFilter: scorecardUnits[strings.ACTIVITIES_MAPPING.WORK_TIME_PARENT][strings.ACTIVITIES_MAPPING.TWISTING_PARENT][strings.ACTIVITIES_MAPPING.HOW_LONG]" is-formatted="true"></duration-format>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div align="center" class="col card-safety-element">
+                    <div>
+                        <div align="center" class="col rounded-black-box no-height">
+                            <div class="item-safety-title item_safety-text-wrap">
+                                <span class="aggressive-title2 uppercase">Static Time</span>
+                            </div>
+
+                            <div class="row">
+                                <div class="col item-safety-value item_safety-divider">
+                                    <div>
+                                        <span class="aggressive-title2 uppercase">Sitting/Standing</span>
+                                    </div>
+                                    <br>
+                                    <div class="dialValueMetric">
+                                        <duration-format duration="scorecardValues[strings.ACTIVITIES_MAPPING.WORK_TIME_PARENT][strings.ACTIVITIES_MAPPING.IDLE_TIME_PARENT][strings.ACTIVITIES_MAPPING.IDLE_TIME_STANDING] | timeFormatFilter: scorecardUnits[strings.ACTIVITIES_MAPPING.WORK_TIME_PARENT][strings.ACTIVITIES_MAPPING.IDLE_TIME_PARENT][strings.ACTIVITIES_MAPPING.IDLE_TIME_STANDING]" is-formatted="true"></duration-format>
+                                    </div>
+                                </div>
+
+                                <div class="col item-safety-value item_safety-divider">
+                                    <div><span class="aggressive-title2 uppercase">Lying</span></div>
+                                    <br>
+                                    <div>
+                                        <div class="dialValueMetric">
+                                            <duration-format duration="scorecardValues[strings.ACTIVITIES_MAPPING.WORK_TIME_PARENT][strings.ACTIVITIES_MAPPING.IDLE_TIME_PARENT][strings.ACTIVITIES_MAPPING.IDLE_TIME_LYING] | timeFormatFilter: scorecardUnits[strings.ACTIVITIES_MAPPING.WORK_TIME_PARENT][strings.ACTIVITIES_MAPPING.IDLE_TIME_PARENT][strings.ACTIVITIES_MAPPING.IDLE_TIME_LYING]" is-formatted="true"></duration-format>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dialset-items-3" align="center">
+                <div class="rounded-black-box-rates-big " >
+                    <div class="item-prod-title-narrow">
+                        <div class="idletime-title uppercase">DRIVE TIME</div>
+                    </div>
+                    <div>
+                        <div class="dialGroup">
+                            <div class="dialValueMetric">
+                                <duration-format duration="scorecardValues[strings.ACTIVITIES_MAPPING.WORK_TIME_PARENT][strings.ACTIVITIES_MAPPING.DRIVING_PARENT].DrivingTime | timeFormatFilter:scorecardUnits[strings.ACTIVITIES_MAPPING.WORK_TIME_PARENT][strings.ACTIVITIES_MAPPING.DRIVING_PARENT].DrivingTime" is-formatted="true"></duration-format>
+
+                            </div>
+                            <div class="dialUnit">&nbsp;</div>
+                            <!--<div img ng-if="!productivityEmployeeRankingIdleTimeUnits.TotalIdleTime"-->
+                            <!--class="dialSteps">mins-->
+                            <!--</div>-->
+                            <!--<div class="dialValueRate">{{productivityEmployeeRankingIdleTime.TotalIdleTimePercentage-->
+                            <!--|| 0}}{{productivityEmployeeRankingIdleTimeUnits.TotalIdleTimePercentage}}-->
+                            <!--</div>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div align="center" class="col card-safety-element">
+                    <div>
+                        <div align="center" class="col rounded-black-box no-height" id="empOverSpeedLimit">
+                            <div class="item-safety-title item_safety-text-wrap">
+                                <span class="aggressive-title2 uppercase">Safety</span>
+                            </div>
+                            <div class="row">
+                                <div class="col item-safety-value item_safety-divider">
+                                    <div>
+                                        <span class="aggressive-title2 uppercase">Trips</span>
+                                    </div>
+                                    <div>
+                                        <span class="attribute-driveValue">{{scorecardValues[strings.ACTIVITIES_MAPPING.NEAR_MISS_WORK_PARENT][strings.ACTIVITIES_MAPPING.TRIP_PARENT][strings.ACTIVITIES_MAPPING.TRIPS] || 0}}</span>
+                                    </div>
+                                </div>
+                                <div class="col item-safety-value item_safety-divider">
+                                    <div>
+                                        <span class="aggressive-title2 uppercase">Falls</span>
+                                    </div>
+                                    <div>
+                                        <span class="attribute-driveValue">{{ fallCounts || 0 }}</span>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col item-safety-value item_safety-divider">
+                                    <div><span class="aggressive-title2 uppercase">Bends</span></div>
+                                    <br>
+                                    <div>
+                                        <div class="dialValueMetric"><duration-format duration="scorecardValues[strings.ACTIVITIES_MAPPING.BENDING_PARENT][strings.ACTIVITIES_MAPPING.BENDING_PARENT2][strings.ACTIVITIES_MAPPING.BENDING_HOW_LONG_80] + scorecardValues[strings.ACTIVITIES_MAPPING.BENDING_PARENT][strings.ACTIVITIES_MAPPING.BENDING_PARENT2][strings.ACTIVITIES_MAPPING.BENDING_HOW_LONG_100] || 0 | timeFormatFilter: scorecardUnits[strings.ACTIVITIES_MAPPING.BENDING_PARENT][strings.ACTIVITIES_MAPPING.BENDING_PARENT2][strings.ACTIVITIES_MAPPING.BENDING_HOW_LONG_80]" is-formatted="true"></duration-format></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <p class="last-activity col text-center" ng-if="lastActivityTime">Last activity reported at {{lastActivityTime | amDateFormat:"MMMM DD YYYY hh:mm:ss a"}} </p>
+
+            </div>
+
+            <div class="row">
+                <button class="button btn btn-activate" ng-show="employees.length!=0" ng-click="loadBreadcrumb()">Breadcrumb</button>
+                &nbsp;
+                <button class="button btn btn-activate" ng-show="employees.length!=0" ng-click="loadEmployeeDetails()">Details</button>
+            </div>
+
+        </div>
+
+        <br>
+        <br>
+
+    </ion-content>
+</ion-view>

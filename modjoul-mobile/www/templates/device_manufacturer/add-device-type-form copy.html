@@ -1,0 +1,45 @@
+<ion-modal-view>
+  <ion-header-bar>
+    <h1 class="title">Add Device Type</h1>
+    <button class="button button-clear button-primary cancel-button" ng-click="modal.hide()">Cancel</button>
+  </ion-header-bar>
+  <ion-content>
+    <div class="form">
+      <div class="form-element">
+        <input type="text" placeholder="Name" ng-model="deviceTypeNameField" maxlength="100" />
+      </div>
+
+
+      <div class="form-element">
+        <select class="drop-down" ng-model="selectedOrg" >
+          <option value="">Select oraganization</option>
+          <option value="{{org.orgId}}" ng-repeat="org in orgs">{{org.orgName}}</option>
+        </select>
+      </div>
+
+      <div class="form-element">
+        <h4 style="color:#ffffff;">Metadata</h4>
+      </div>
+
+
+
+      <fieldset  data-ng-repeat="field in fields">
+        <div class="form-element form-element-key-value">
+          <input type="text" class="key-value" placeholder="Key" ng-model="field.key" maxlength="50" />
+          <input type="text" class="key-value" placeholder="Value" ng-model="field.value" maxlength="50" />
+        </div>
+        <button class="remove" ng-show="$last" ng-click="removeField()">-</button>
+      </fieldset>
+
+      <div class="form-element">
+          <button class="button btn btn-info" ng-click="addField()">Add metadata field</button>
+      </div>
+
+      <br>
+      <div class="form-element">
+        <button class="button btn btn-info" ng-click="addDeviceType(deviceTypeNameField,selectedOrg)">ADD</button>
+      </div>
+
+    </div>
+  </ion-content>
+</ion-modal-view>

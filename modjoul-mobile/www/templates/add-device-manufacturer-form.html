@@ -1,0 +1,50 @@
+<ion-modal-view>
+  <ion-header-bar>
+    <h1 class="title">Add Device Manufacturer</h1>
+    <button class="button button-clear button-primary cancel-button" ng-click="modal.hide()">Close</button>
+  </ion-header-bar>
+  <ion-content>
+    <div class="form">
+
+      <div class="list">
+
+        <label class="item item-input ">
+          <div class="input-label">
+            Email Address
+          </div>
+          <input type="email" ng-model="email" maxlength="100" />
+        </label>
+
+      </div>
+
+      <div class="list">
+
+        <label class="item item-input ">
+          <div class="input-label">
+            First Name
+          </div>
+          <input type="text" ng-model="firstName" maxlength="50" />
+        </label>
+
+      </div>
+
+      <div class="list">
+
+        <label class="item item-input ">
+          <div class="input-label">
+            Last Name
+          </div>
+          <input type="text" ng-model="lastName" maxlength="50" />
+        </label>
+
+      </div>
+
+
+      <div class="form-element">
+        <button class="button btn btn-info" ng-click="addDeviceManufacturer(email,firstName,lastName)">ADD</button>
+      </div>
+
+    </div>
+  </ion-content>
+</ion-modal-view>
+

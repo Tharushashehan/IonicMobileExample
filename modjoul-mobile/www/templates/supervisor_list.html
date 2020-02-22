@@ -1,0 +1,36 @@
+<ion-modal-view>
+  <ion-header-bar>
+    <h1 class="title">Replacing Supervisor</h1>
+    <button class="button button-clear button-primary cancel-button" ng-click="supervisorModal.hide()">Cancel</button>
+  </ion-header-bar>
+  <ion-content class="main-background">
+
+    <div class="device-search-bar" ng-if="!supervisorList.length == 0">
+      <label class="item-input-wrapper search">
+        <i class="icon ion-search placeholder-icon"></i>
+        <input placeholder="Search Supervisors" type="text" maxlength="100" ng-model="searchQuery.query"
+               class="search-text-box">
+      </label>
+    </div>
+
+    <div ng-if="supervisorList && supervisorList.length == 0" class="user-item" align="center" >{{messages.NO_DATA_AVAILABLE}}</div>
+    <div class="modjoul-list">
+      <ion-list can-swipe="listCanSwipe">
+        <div>
+
+          <ion-item class="no-border-top" ng-repeat="user in supervisorList | filter: {userId: '!' + selectedSupervisor.userId}">
+            <div ng-click="selectSupervisor(user)">
+              <div class="user-fullname2">{{user.firstName}} {{user.lastName}}</div>
+
+            </div>
+          </ion-item>
+        </div>
+      </ion-list>
+      <ion-infinite-scroll ng-if="moreDataCanBeLoaded"
+              on-infinite="getMoreSupervisors()"
+              distance="2%">
+      </ion-infinite-scroll>
+    </div>
+    <br>
+  </ion-content>
+</ion-modal-view>

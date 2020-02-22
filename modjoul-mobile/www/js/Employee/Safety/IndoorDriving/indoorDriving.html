@@ -1,0 +1,112 @@
+<ion-view view-title="{{strings.INDOOR_DRIVING}}">
+    <ion-nav-bar class="bar-positive">
+        <ion-nav-back-button>
+        </ion-nav-back-button>
+        <ion-nav-buttons side="secondary">
+            <calendar-selector></calendar-selector>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-content class="main-background">
+        <ion-refresher on-refresh="doRefresh()"></ion-refresher>
+        <br>
+        <last-activity-time trigger="triggerValue"></last-activity-time>
+        <div class="view-title-dev" align="center">
+        </div>
+        <div align="center" class="period-segment-group">
+            <div class="frequency-tab">
+                <ti-segmented-control on-select="segmentClicked($index)">
+                    <ti-segmented-control-button class="period-segment" title="'Daily'"
+                                                 selected></ti-segmented-control-button>
+                    <ti-segmented-control-button class="period-segment-nosideborders"
+                                                 title="'Weekly'"></ti-segmented-control-button>
+                    <ti-segmented-control-button class="period-segment" title="'Monthly'"></ti-segmented-control-button>
+                </ti-segmented-control>
+            </div>
+        </div>
+        <div>
+            <div class="row" align="center">
+
+                <div class="col" align="center">
+
+                    <div class="rounded-black-box-rates-flex2" id="empDriveEvents">
+                        <div class="item-heights-title-narrow">
+                            <div class="idletime-title uppercase">Total Incidents</div>
+                        </div>
+                        <div class="dialValueSafety">
+                            {{indoorDriving.summary.IndoorDrivingSafety || 0}}
+                        </div>
+                        <div class="dialUnit">
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="row">
+                <div align="center" class="col">
+                    <div>
+                        <div align="center" class="col rounded-black-box-narrow-flex">
+                            <div class="item-safety-title-narrow item_safety-text-wrap">
+                                <span class="aggressive-title_1st uppercase">Hard Braking</span>
+                            </div>
+                            <div class="item-safety-value-narrow safety-divider">
+                                <span class="attribute-driveValue2">{{indoorDriving.summary.IndoorDrivingHardBrakes || 0}}</span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div align="center" class="col">
+                    <div>
+                        <div align="center" class="col rounded-black-box-narrow-flex">
+                            <div class="item-safety-title-narrow item_safety-text-wrap">
+                                <span class="aggressive-title_1st uppercase">Hard Maneuver</span>
+                            </div>
+                            <div class="item-safety-value-narrow safety-divider">
+                                <span class="attribute-driveValue2">{{indoorDriving.summary.IndoorDrivingHardManeuvers || 0}}</span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div align="center" class="col">
+                    <div>
+                        <div align="center" class="col rounded-black-box-narrow-flex">
+                            <div class="item-safety-title-narrow item_safety-text-wrap">
+                                <span class="aggressive-title_1st uppercase">Hard Impacts</span>
+                            </div>
+                            <div class="item-safety-value-narrow safety-divider">
+                                <span class="attribute-driveValue2">{{indoorDriving.summary.IndoorDrivingHardImpacts || 0}}</span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div align="center" class="col">
+                    <div>
+                        <div align="center" class="col rounded-black-box-narrow-flex">
+                            <div class="item-safety-title-narrow item_safety-text-wrap">
+                                <span class="aggressive-title_1st uppercase">Soft Impacts</span>
+                            </div>
+                            <div class="item-safety-value-narrow safety-divider">
+                                <span class="attribute-driveValue2">{{indoorDriving.summary.IndoorDrivingSoftImpacts || 0}}</span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <br>
+    </ion-content>
+</ion-view>

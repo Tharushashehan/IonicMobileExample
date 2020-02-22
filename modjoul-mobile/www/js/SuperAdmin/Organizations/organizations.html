@@ -1,0 +1,24 @@
+<ion-view view-title="Organizations">
+    <ion-nav-buttons side="right">
+        <button class="button button-icon button-clear" ng-click="openAddOrganization()">
+            <i class="fa fa-plus" aria-hidden="true"></i>
+        </button>
+    </ion-nav-buttons>
+    <ion-content class="main-background">
+        <ion-refresher on-refresh="doRefresh()"></ion-refresher>
+        <div class="feed-item row" ng-repeat="organization in organizations" ng-click="navOrgAdmins(organization)">
+            <div class="org-photo">
+                <img class="timeline-profile-photo" width="80" height="80" onerror="this.src='img/icons/company.png'"
+                     data-ng-src="data:{{organization.logoMimeType}};base64,{{organization.orgLogo}}"/>
+            </div>
+            <div class="org-details">
+                <div class="org-details"><b>{{organization.orgName ? organization.orgName : organization.name }}</b></div>
+                <div class="org-details">{{ isString(organization.address) ? organization.address : organization.address.streetName +
+                    " " + organization.address.city + " " + organization.address.state + " " + organization.address.postalCode}}</div>
+                <div class="org-details">Contact: {{organization.contact}}</div>
+            </div>
+        </div>
+        <br>
+    </ion-content>
+</ion-view>
+
